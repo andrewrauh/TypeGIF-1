@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AXCGiphy.h>
+#import <FLAnimatedImage/FLAnimatedImage.h>
+#import "AXCCollectionViewCell.h"
 
 @interface FirstViewController : UIViewController  <UITextFieldDelegate>
 

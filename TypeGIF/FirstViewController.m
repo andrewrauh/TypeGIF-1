@@ -7,8 +7,6 @@
 //
 
 #import "FirstViewController.h"
-#import "AXCGiphy.h"
-//#import "AXCCollectionViewCell.h"
 
 
 @interface FirstViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
@@ -31,7 +29,7 @@
     self.resultsCollectionView.delegate = self;
     self.resultsCollectionView.dataSource = self;
     
-    [self.resultsCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.resultsCollectionView registerClass:[AXCCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
 
     [AXCGiphy setGiphyAPIKey:kGiphyPublicAPIKey];
     
@@ -72,15 +70,28 @@
 }
 
 #pragma mark - UICollectionView delegate Methods
-- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (AXCCollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    AXCCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     AXCGiphy * gif = self.resultsArray[indexPath.item];
     NSURLRequest * request = [NSURLRequest requestWithURL:gif.originalImage.url];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        UIImage * image = [UIImage imageWithData:data];
+//        UIImage * image = [UIImage imageWithData:data];
+        FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:data];
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            cell.backgroundColor = [UIColor colorWithPatternImage:image];
+//            cell.backgroundColor = [UIColor colorWithPatternImage:image];
+
+            cell.imageView.animatedImage = image;
+            cell.imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
+//            [cell.cont addSubview:cell.imageView];
+
+//            FLAnimatedImageView *imageView = [[FLAnimatedImageView alloc] init];
+//            imageView.animatedImage = image;
+//            imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
+//            [self.view addSubview:imageView];
+
+        
+        
         }];
     }] resume];
     return cell;

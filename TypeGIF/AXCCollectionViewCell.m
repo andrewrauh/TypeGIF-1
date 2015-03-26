@@ -10,19 +10,26 @@
 
 @implementation AXCCollectionViewCell
 
+//
+//- (FLAnimatedImageView *) imageView
+//{
+//    if (!_imageView) {
+//        _imageView = [[FLAnimatedImageView alloc] initWithFrame:self.contentView.bounds];
+//        [self.contentView addSubview:_imageView];
+//    }
+//    return _imageView;
+//}
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+-(void)layoutSubviews {
+    self.imageView = [[FLAnimatedImageView alloc]initWithFrame:self.contentView.frame];
+    [self.contentView addSubview:self.imageView];
+    
 }
 
 - (void) prepareForReuse
 {
     [super prepareForReuse];
+//    [self.imageView removeFromSuperview];
     self.imageView.image = nil;
 }
 
