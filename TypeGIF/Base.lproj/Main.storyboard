@@ -101,6 +101,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
                     <connections>
+                        <outlet property="blurView" destination="VkL-3X-XkT" id="s0O-Ah-a11"/>
                         <outlet property="resultsCollectionView" destination="4Cr-be-cjE" id="Mdv-hJ-SD4"/>
                         <outlet property="searchTextField" destination="6TT-Fw-Wvg" id="DDM-Hy-w8w"/>
                     </connections>

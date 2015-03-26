@@ -20,6 +20,11 @@
     return self;
 }
 
+-(void)layoutSubviews {
+        self.imageView = [[FLAnimatedImageView alloc]initWithFrame:self.contentView.frame];
+        [self.contentView addSubview:self.imageView];
+        
+}
 - (void) prepareForReuse
 {
     [super prepareForReuse];

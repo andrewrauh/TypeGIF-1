@@ -15,10 +15,13 @@
 
 @interface FirstViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate>
 
+@property BOOL imageSelected;
 @property (nonatomic, strong) NSMutableArray *resultsArray;
 @property (nonatomic, strong) IBOutlet UICollectionView* resultsCollectionView;
 @property (nonatomic, strong) UIPanGestureRecognizer* dragG;
 @property (nonatomic, strong) UIImageView* movingCell;
+@property (nonatomic, strong) IBOutlet UIVisualEffectView* blurView;
+
 
 -(IBAction)didHoldImage:(id)sender;
 -(void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
@@ -39,8 +42,7 @@
     self.resultsCollectionView.delegate = self;
     self.resultsCollectionView.dataSource = self;
     
-    [self.resultsCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
-
+    [self.resultsCollectionView registerClass:[AXCCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     [AXCGiphy setGiphyAPIKey:kGiphyPublicAPIKey];
     
     [self.searchTextField setPlaceholder:@"search here"];
@@ -50,6 +52,12 @@
     [self.resultsCollectionView addGestureRecognizer:self.dragG];
     
     self.dragG.delegate = self;
+    self.imageSelected = NO;
+    UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
+    
+    
+    [self.blurView setHidden:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,7 +80,7 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     
-    [AXCGiphy searchGiphyWithTerm:textField.text limit:20 offset:0 completion:^(NSArray *results, NSError *error) {
+    [AXCGiphy searchGiphyWithTerm:textField.text limit:30 offset:0 completion:^(NSArray *results, NSError *error) {
         self.resultsArray = [NSMutableArray arrayWithArray:results];
         NSLog(@"results : %@", results);
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -83,15 +91,17 @@
 }
 
 #pragma mark - UICollectionView delegate Methods
-- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+
+- (AXCCollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    AXCCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     AXCGiphy * gif = self.resultsArray[indexPath.item];
     NSURLRequest * request = [NSURLRequest requestWithURL:gif.originalImage.url];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        UIImage * image = [UIImage imageWithData:data];
+        FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:data];
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            cell.backgroundColor = [UIColor colorWithPatternImage:image];
+            cell.imageView.animatedImage = image;
+            cell.imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
         }];
     }] resume];
     return cell;
@@ -110,6 +120,18 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     // TODO: Select Item
+    AXCCollectionViewCell* curCell = (AXCCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+//    curCell.imageView.dealloc
+//    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://fc05.deviantart.net/fs37/f/2008/283/a/b/KaleidoCoils_animated__gif_by_1389AD.gif"]];
+    
+    UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
+    
+    [pasteBoard setData:curCell.imageView.animatedImage.data
+      forPasteboardType:@"com.compuserve.gif"];
+    NSLog(@"copied %@", [pasteBoard dataForPasteboardType:@"com.compuserve.gif"]);
+    
+    
+    
 }
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     // TODO: Deselect item
@@ -127,8 +149,10 @@
 -(void)handlePan:(UIPanGestureRecognizer *)panRecognizer {
     
     CGPoint locationPoint = [panRecognizer locationInView:self.resultsCollectionView];
+    self.imageSelected = YES;
     
     if (panRecognizer.state == UIGestureRecognizerStateBegan) {
+        [self.blurView setHidden:NO];
         
         NSIndexPath *indexPathOfMovingCell = [self.resultsCollectionView indexPathForItemAtPoint:locationPoint];
         UICollectionViewCell *cell = [self.resultsCollectionView cellForItemAtIndexPath:indexPathOfMovingCell];
@@ -147,15 +171,29 @@
         [UIView animateWithDuration:0.1 animations:^{
             self.movingCell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1);
         }];
+        
+        
     }
     
     if (panRecognizer.state == UIGestureRecognizerStateChanged) {
         [self.movingCell setCenter:locationPoint];
         [self.view bringSubviewToFront:self.movingCell];
+        BOOL methodB = CGRectIntersectsRect(self.movingCell.frame, self.blurView.frame);
+        NSLog(@"here1");
+        
+        if (methodB) {
+            [self.movingCell setCenter:self.blurView.center];
+            [self.view addSubview:self.movingCell];
+            [self.view bringSubviewToFront:self.movingCell];
+            NSLog(@"here");
+            [self.blurView setHidden:YES];
+            
+        }
+
     }
-    
     if (panRecognizer.state == UIGestureRecognizerStateEnded) {
-        [self.movingCell removeFromSuperview];
+//        [self.movingCell removeFromSuperview];
+        self.imageSelected = NO;
         
     }
 }
@@ -167,16 +205,11 @@
 }
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-//    NSLog(@"%i, %i", gestureRecognizer.state,  otherGestureRecognizer.state);
     
-//    if (gestureRecognizer.state == UIGestureRecognizerStateEnded || otherGestureRecognizer.state == UIGestureRecognizerStateEnded) {
-//        return YES;
-//    }
-//    else  {
-//        return NO;
-//        
-//    }
-    return YES; 
+    if (self.imageSelected) {
+        return NO;
+    }
+    return YES;
 }
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {

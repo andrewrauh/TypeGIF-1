@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FLAnimatedImage/FLAnimatedImage.h>
 
 @interface AXCCollectionViewCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIImageView * imageView;
+@property (strong, nonatomic) IBOutlet FLAnimatedImageView * imageView;
 
 @end
