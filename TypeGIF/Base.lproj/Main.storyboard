@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4Cr-be-cjE">
-                                <rect key="frame" x="0.0" y="134" width="600" height="409"/>
+                                <rect key="frame" x="0.0" y="134" width="600" height="265"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eAl-aS-bo8">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -28,20 +28,28 @@
                                 <cells/>
                             </collectionView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6TT-Fw-Wvg">
-                                <rect key="frame" x="84" y="39" width="456" height="30"/>
+                                <rect key="frame" x="16" y="89" width="568" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xhq-B6-zyB">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Search Gifs" id="X5t-7b-L1C"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6TT-Fw-Wvg" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="68" id="Dq1-4V-mW2"/>
-                            <constraint firstAttribute="trailing" secondItem="4Cr-be-cjE" secondAttribute="trailing" id="F7O-Sh-RS6"/>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="4Cr-be-cjE" secondAttribute="bottom" constant="8" symbolic="YES" id="R6G-Zh-2Je"/>
-                            <constraint firstItem="4Cr-be-cjE" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="dCI-9f-XCM"/>
-                            <constraint firstItem="4Cr-be-cjE" firstAttribute="top" secondItem="6TT-Fw-Wvg" secondAttribute="bottom" constant="65" id="fCW-16-vlD"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="6TT-Fw-Wvg" secondAttribute="trailing" constant="44" id="ghx-bl-BZB"/>
-                            <constraint firstItem="6TT-Fw-Wvg" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="19" id="leB-7f-Yqn"/>
+                            <constraint firstItem="4Cr-be-cjE" firstAttribute="trailing" secondItem="Xhq-B6-zyB" secondAttribute="trailing" id="3Dp-AO-bir"/>
+                            <constraint firstItem="6TT-Fw-Wvg" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="4cm-xE-8uC"/>
+                            <constraint firstAttribute="trailing" secondItem="4Cr-be-cjE" secondAttribute="trailing" id="FfP-IK-fbj"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="4Cr-be-cjE" secondAttribute="bottom" constant="152" id="JC4-Fv-ysA"/>
+                            <constraint firstItem="6TT-Fw-Wvg" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="69" id="XuT-nH-ipN"/>
+                            <constraint firstItem="4Cr-be-cjE" firstAttribute="top" secondItem="6TT-Fw-Wvg" secondAttribute="bottom" constant="15" id="igb-UI-hKM"/>
+                            <constraint firstItem="4Cr-be-cjE" firstAttribute="centerX" secondItem="6TT-Fw-Wvg" secondAttribute="centerX" id="o5d-eT-Jkc"/>
+                            <constraint firstItem="4Cr-be-cjE" firstAttribute="leading" secondItem="Xhq-B6-zyB" secondAttribute="leading" id="qg2-p8-u5q"/>
+                            <constraint firstItem="4Cr-be-cjE" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="wHn-xQ-eKR"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
