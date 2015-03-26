@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>GifKeyBoard.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>TypeGIF.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,11 @@
 			<true/>
 		</dict>
 		<key>EDE6486A1AC45F7E002939A0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F963E72E1AC46FC800A74FC6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
