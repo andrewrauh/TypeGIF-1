@@ -71,13 +71,10 @@
 
 }
 
-
 #pragma mark - UICollectionView delegate Methods
-
 - (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-
     AXCGiphy * gif = self.resultsArray[indexPath.item];
     NSURLRequest * request = [NSURLRequest requestWithURL:gif.originalImage.url];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -86,7 +83,6 @@
             cell.backgroundColor = [UIColor colorWithPatternImage:image];
         }];
     }] resume];
-    
     return cell;
 }
 
@@ -113,10 +109,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     //You may want to create a divider to scale the size by the way..
-    return CGSizeMake(100,100);
+    return CGSizeMake(150,100);
 }
-
-
-
 
 @end

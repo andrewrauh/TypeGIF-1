@@ -17,6 +17,8 @@
 		EDE648661AC45F7E002939A0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDE648641AC45F7E002939A0 /* LaunchScreen.xib */; };
 		EDE648721AC45F7E002939A0 /* TypeGIFTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE648711AC45F7E002939A0 /* TypeGIFTests.m */; };
 		F963E72A1AC468DC00A74FC6 /* AXCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */; };
+		F963E7351AC46FC900A74FC6 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E7341AC46FC900A74FC6 /* KeyboardViewController.m */; };
+		F963E7381AC46FC900A74FC6 /* GifKeyBoard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F963E72F1AC46FC800A74FC6 /* GifKeyBoard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,7 +29,28 @@
 			remoteGlobalIDString = EDE6484E1AC45F7E002939A0;
 			remoteInfo = TypeGIF;
 		};
+		F963E7361AC46FC900A74FC6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EDE648471AC45F7E002939A0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F963E72E1AC46FC800A74FC6;
+			remoteInfo = GifKeyBoard;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F963E73C1AC46FC900A74FC6 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F963E7381AC46FC900A74FC6 /* GifKeyBoard.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		060B2D11CC0631635CEF6B50 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -50,6 +73,10 @@
 		EDE648711AC45F7E002939A0 /* TypeGIFTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TypeGIFTests.m; sourceTree = "<group>"; };
 		F963E7281AC468DC00A74FC6 /* AXCCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXCCollectionViewCell.h; sourceTree = "<group>"; };
 		F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXCCollectionViewCell.m; sourceTree = "<group>"; };
+		F963E72F1AC46FC800A74FC6 /* GifKeyBoard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GifKeyBoard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F963E7321AC46FC900A74FC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F963E7331AC46FC900A74FC6 /* KeyboardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardViewController.h; sourceTree = "<group>"; };
+		F963E7341AC46FC900A74FC6 /* KeyboardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyboardViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +89,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EDE648681AC45F7E002939A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F963E72C1AC46FC800A74FC6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -93,6 +127,7 @@
 			children = (
 				EDE648511AC45F7E002939A0 /* TypeGIF */,
 				EDE6486E1AC45F7E002939A0 /* TypeGIFTests */,
+				F963E7301AC46FC900A74FC6 /* GifKeyBoard */,
 				EDE648501AC45F7E002939A0 /* Products */,
 				86082045FA02A56E71B01D5F /* Pods */,
 				3C91D7E02F6DBC2C1E846DCF /* Frameworks */,
@@ -104,6 +139,7 @@
 			children = (
 				EDE6484F1AC45F7E002939A0 /* TypeGIF.app */,
 				EDE6486B1AC45F7E002939A0 /* TypeGIFTests.xctest */,
+				F963E72F1AC46FC800A74FC6 /* GifKeyBoard.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,6 +189,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F963E7301AC46FC900A74FC6 /* GifKeyBoard */ = {
+			isa = PBXGroup;
+			children = (
+				F963E7331AC46FC900A74FC6 /* KeyboardViewController.h */,
+				F963E7341AC46FC900A74FC6 /* KeyboardViewController.m */,
+				F963E7311AC46FC900A74FC6 /* Supporting Files */,
+			);
+			path = GifKeyBoard;
+			sourceTree = "<group>";
+		};
+		F963E7311AC46FC900A74FC6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F963E7321AC46FC900A74FC6 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -165,10 +219,12 @@
 				EDE6484C1AC45F7E002939A0 /* Frameworks */,
 				EDE6484D1AC45F7E002939A0 /* Resources */,
 				24A22C8AD95F58B7315CB975 /* Copy Pods Resources */,
+				F963E73C1AC46FC900A74FC6 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F963E7371AC46FC900A74FC6 /* PBXTargetDependency */,
 			);
 			name = TypeGIF;
 			productName = TypeGIF;
@@ -193,6 +249,23 @@
 			productReference = EDE6486B1AC45F7E002939A0 /* TypeGIFTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		F963E72E1AC46FC800A74FC6 /* GifKeyBoard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F963E7391AC46FC900A74FC6 /* Build configuration list for PBXNativeTarget "GifKeyBoard" */;
+			buildPhases = (
+				F963E72B1AC46FC800A74FC6 /* Sources */,
+				F963E72C1AC46FC800A74FC6 /* Frameworks */,
+				F963E72D1AC46FC800A74FC6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GifKeyBoard;
+			productName = GifKeyBoard;
+			productReference = F963E72F1AC46FC800A74FC6 /* GifKeyBoard.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -208,6 +281,9 @@
 					EDE6486A1AC45F7E002939A0 = {
 						CreatedOnToolsVersion = 6.1.1;
 						TestTargetID = EDE6484E1AC45F7E002939A0;
+					};
+					F963E72E1AC46FC800A74FC6 = {
+						CreatedOnToolsVersion = 6.2;
 					};
 				};
 			};
@@ -226,6 +302,7 @@
 			targets = (
 				EDE6484E1AC45F7E002939A0 /* TypeGIF */,
 				EDE6486A1AC45F7E002939A0 /* TypeGIFTests */,
+				F963E72E1AC46FC800A74FC6 /* GifKeyBoard */,
 			);
 		};
 /* End PBXProject section */
@@ -242,6 +319,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EDE648691AC45F7E002939A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F963E72D1AC46FC800A74FC6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -304,6 +388,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F963E72B1AC46FC800A74FC6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F963E7351AC46FC900A74FC6 /* KeyboardViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -311,6 +403,11 @@
 			isa = PBXTargetDependency;
 			target = EDE6484E1AC45F7E002939A0 /* TypeGIF */;
 			targetProxy = EDE6486C1AC45F7E002939A0 /* PBXContainerItemProxy */;
+		};
+		F963E7371AC46FC900A74FC6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F963E72E1AC46FC800A74FC6 /* GifKeyBoard */;
+			targetProxy = F963E7361AC46FC900A74FC6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -466,6 +563,33 @@
 			};
 			name = Release;
 		};
+		F963E73A1AC46FC900A74FC6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GifKeyBoard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		F963E73B1AC46FC900A74FC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				INFOPLIST_FILE = GifKeyBoard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -495,6 +619,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		F963E7391AC46FC900A74FC6 /* Build configuration list for PBXNativeTarget "GifKeyBoard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F963E73A1AC46FC900A74FC6 /* Debug */,
+				F963E73B1AC46FC900A74FC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
