@@ -61,7 +61,7 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     
-    [AXCGiphy searchGiphyWithTerm:textField.text limit:10 offset:0 completion:^(NSArray *results, NSError *error) {
+    [AXCGiphy searchGiphyWithTerm:textField.text limit:20 offset:0 completion:^(NSArray *results, NSError *error) {
         self.resultsArray = [NSMutableArray arrayWithArray:results];
         NSLog(@"results : %@", results);
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -109,7 +109,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     //You may want to create a divider to scale the size by the way..
-    return CGSizeMake(150,100);
+    return CGSizeMake(100,100);
 }
 
 @end
