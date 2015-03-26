@@ -7,6 +7,8 @@
 //
 
 #import "FirstViewController.h"
+#import "AXCGiphy.h"
+
 
 @interface FirstViewController ()
 
@@ -17,6 +19,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+   __block NSArray *giphyResults = [[NSMutableArray alloc]init];
+    
+    [AXCGiphy setGiphyAPIKey:kGiphyPublicAPIKey];
+    
+    [AXCGiphy searchGiphyWithTerm:@"frogs" limit:10 offset:0 completion:^(NSArray *results, NSError *error) {
+        giphyResults = results;
+        
+        NSLog(@"results : %@", giphyResults);
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//            [self.collectionView reloadData];
+        }];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
