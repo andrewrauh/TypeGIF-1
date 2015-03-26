@@ -9,12 +9,20 @@
 #import "FirstViewController.h"
 #import "AXCGiphy.h"
 //#import "AXCCollectionViewCell.h"
+@import QuartzCore;
 
 
-@interface FirstViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+
+@interface FirstViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *resultsArray;
 @property (nonatomic, strong) IBOutlet UICollectionView* resultsCollectionView;
+@property (nonatomic, strong) UIPanGestureRecognizer* dragG;
+@property (nonatomic, strong) UIImageView* movingCell;
+
+-(IBAction)didHoldImage:(id)sender;
+-(void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
+
 
 @end
 
@@ -38,7 +46,10 @@
     [self.searchTextField setPlaceholder:@"search here"];
     [self.resultsCollectionView setBackgroundColor:[UIColor clearColor]];
     
+    self.dragG = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
+    [self.resultsCollectionView addGestureRecognizer:self.dragG];
     
+    self.dragG.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -112,4 +123,63 @@
     return CGSizeMake(100,100);
 }
 
+
+-(void)handlePan:(UIPanGestureRecognizer *)panRecognizer {
+    
+    CGPoint locationPoint = [panRecognizer locationInView:self.resultsCollectionView];
+    
+    if (panRecognizer.state == UIGestureRecognizerStateBegan) {
+        
+        NSIndexPath *indexPathOfMovingCell = [self.resultsCollectionView indexPathForItemAtPoint:locationPoint];
+        UICollectionViewCell *cell = [self.resultsCollectionView cellForItemAtIndexPath:indexPathOfMovingCell];
+        
+        UIGraphicsBeginImageContext(cell.bounds.size);
+        [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *cellImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        self.movingCell = [[UIImageView alloc] initWithImage:cellImage];
+        [self.movingCell setCenter:locationPoint];
+        [self.movingCell setAlpha:0.9f];
+        [self.view addSubview:self.movingCell];
+        [self.view bringSubviewToFront:self.movingCell];
+        
+        [UIView animateWithDuration:0.1 animations:^{
+            self.movingCell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1);
+        }];
+    }
+    
+    if (panRecognizer.state == UIGestureRecognizerStateChanged) {
+        [self.movingCell setCenter:locationPoint];
+        [self.view bringSubviewToFront:self.movingCell];
+    }
+    
+    if (panRecognizer.state == UIGestureRecognizerStateEnded) {
+        [self.movingCell removeFromSuperview];
+        
+    }
+}
+
+
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    NSLog(@"got here");
+    
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+//    NSLog(@"%i, %i", gestureRecognizer.state,  otherGestureRecognizer.state);
+    
+//    if (gestureRecognizer.state == UIGestureRecognizerStateEnded || otherGestureRecognizer.state == UIGestureRecognizerStateEnded) {
+//        return YES;
+//    }
+//    else  {
+//        return NO;
+//        
+//    }
+    return YES; 
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return YES;
+}
 @end

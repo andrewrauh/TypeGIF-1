@@ -38,6 +38,20 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="jmD-DC-iRp">
                                     <rect key="frame" x="0.0" y="0.0" width="606" height="116"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drag Here to Save! " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ar-Pl-fc6">
+                                            <rect key="frame" x="69" y="8" width="469" height="100"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                            <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="1ar-Pl-fc6" firstAttribute="bottom" secondItem="jmD-DC-iRp" secondAttribute="bottomMargin" id="8Fc-NW-0kf"/>
+                                        <constraint firstItem="1ar-Pl-fc6" firstAttribute="leading" secondItem="jmD-DC-iRp" secondAttribute="leading" constant="69" id="YlH-Tr-XmG"/>
+                                        <constraint firstItem="1ar-Pl-fc6" firstAttribute="top" secondItem="jmD-DC-iRp" secondAttribute="topMargin" id="Zct-XJ-Ser"/>
+                                        <constraint firstItem="1ar-Pl-fc6" firstAttribute="centerX" secondItem="jmD-DC-iRp" secondAttribute="centerX" id="dyb-2E-6Yj"/>
+                                    </constraints>
                                 </view>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="116" id="Hcp-cS-SEx"/>
