@@ -19,6 +19,7 @@
 		F963E72A1AC468DC00A74FC6 /* AXCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */; };
 		F963E7351AC46FC900A74FC6 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E7341AC46FC900A74FC6 /* KeyboardViewController.m */; };
 		F963E7381AC46FC900A74FC6 /* GifKeyBoard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F963E72F1AC46FC800A74FC6 /* GifKeyBoard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F963E73F1AC5AD4700A74FC6 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E73E1AC5AD4700A74FC6 /* DatabaseManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,8 @@
 		F963E7321AC46FC900A74FC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F963E7331AC46FC900A74FC6 /* KeyboardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardViewController.h; sourceTree = "<group>"; };
 		F963E7341AC46FC900A74FC6 /* KeyboardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyboardViewController.m; sourceTree = "<group>"; };
+		F963E73D1AC5AD4700A74FC6 /* DatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
+		F963E73E1AC5AD4700A74FC6 /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +162,8 @@
 				EDE648521AC45F7E002939A0 /* Supporting Files */,
 				F963E7281AC468DC00A74FC6 /* AXCCollectionViewCell.h */,
 				F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */,
+				F963E73D1AC5AD4700A74FC6 /* DatabaseManager.h */,
+				F963E73E1AC5AD4700A74FC6 /* DatabaseManager.m */,
 			);
 			path = TypeGIF;
 			sourceTree = "<group>";
@@ -376,6 +381,7 @@
 				EDE6485E1AC45F7E002939A0 /* SecondViewController.m in Sources */,
 				EDE648581AC45F7E002939A0 /* AppDelegate.m in Sources */,
 				EDE6485B1AC45F7E002939A0 /* FirstViewController.m in Sources */,
+				F963E73F1AC5AD4700A74FC6 /* DatabaseManager.m in Sources */,
 				EDE648551AC45F7E002939A0 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -627,6 +633,7 @@
 				F963E73B1AC46FC900A74FC6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

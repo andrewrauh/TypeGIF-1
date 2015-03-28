@@ -12,6 +12,7 @@
 @import QuartzCore;
 
 
+//https://gist.github.com/codeswimmer/4437535
 
 @interface FirstViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate>
 
@@ -54,6 +55,8 @@
     self.dragG.delegate = self;
     self.imageSelected = NO;
     UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
+    NSLog(@"%@", [pasteBoard pasteboardTypes] );
+    
     
     
     [self.blurView setHidden:YES];
