@@ -57,7 +57,12 @@
     UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
     NSLog(@"%@", [pasteBoard pasteboardTypes] );
     
-    
+//    
+//    NSURL *fileURL = [NSURL URLWithString:@"http://www.website.com/video.mp4"];
+//    MPMoviePlayerController *moviePlayerController = [[MPMoviePlayerController alloc] initWithContentURL:fileURL];
+//    [moviePlayerController play];
+//    [self.view addSubview:_moviePlayerController.view];
+//    
     
     [self.blurView setHidden:YES];
 
