@@ -57,13 +57,6 @@
     UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
     NSLog(@"%@", [pasteBoard pasteboardTypes] );
     
-//    
-//    NSURL *fileURL = [NSURL URLWithString:@"http://www.website.com/video.mp4"];
-//    MPMoviePlayerController *moviePlayerController = [[MPMoviePlayerController alloc] initWithContentURL:fileURL];
-//    [moviePlayerController play];
-//    [self.view addSubview:_moviePlayerController.view];
-//    
-    
     [self.blurView setHidden:YES];
 
 }
@@ -88,10 +81,15 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.labelText = @"Loading";
+    
     [AXCGiphy searchGiphyWithTerm:textField.text limit:30 offset:0 completion:^(NSArray *results, NSError *error) {
         self.resultsArray = [NSMutableArray arrayWithArray:results];
         NSLog(@"results : %@", results);
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [hud hide:YES];
             [self.resultsCollectionView reloadData];
         }];
     }];
@@ -135,18 +133,19 @@
 {
     // TODO: Select Item
     AXCCollectionViewCell* curCell = (AXCCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-//    curCell.imageView.dealloc
-//    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://fc05.deviantart.net/fs37/f/2008/283/a/b/KaleidoCoils_animated__gif_by_1389AD.gif"]];
     
     UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
     
     [pasteBoard setData:curCell.imageView.animatedImage.data
       forPasteboardType:@"com.compuserve.gif"];
-    NSLog(@"copied %@", [pasteBoard dataForPasteboardType:@"com.compuserve.gif"]);
     
-    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeCustomView;
+    hud.labelText = @"Copied to Clipboard!";
+    [hud hide:YES afterDelay:1.0f];
     
 }
+
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     // TODO: Deselect item
 }
