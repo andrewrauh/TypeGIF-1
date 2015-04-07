@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AXCCollectionViewCell.h"
 
 @interface SecondViewController : UIViewController
 
-
+@property (nonatomic, strong) IBOutlet UICollectionView* favoritesCollectionView;
 
 @end
 
