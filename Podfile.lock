@@ -8,17 +8,25 @@ PODS:
     - FMDB/common
   - Giphy-iOS (0.1.1):
     - AFNetworking/Serialization (~> 2.3.1)
+  - MBProgressHUD (0.9.1)
+  - MMWormhole (1.1.1):
+    - MMWormhole/Core (= 1.1.1)
+  - MMWormhole/Core (1.1.1)
 
 DEPENDENCIES:
   - AFNetworking/Serialization (~> 2.3.1)
   - FLAnimatedImage (~> 1.0)
   - FMDB
   - Giphy-iOS
+  - MBProgressHUD (~> 0.9.1)
+  - MMWormhole (~> 1.1.1)
 
 SPEC CHECKSUMS:
   AFNetworking: 05b9f6e3aa5ac45bc383b4bb108ef338080a26c7
   FLAnimatedImage: f9422f796135aff80d8c00b2afc48015bb746e24
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   Giphy-iOS: 95ce787749b73435524f40f700f026db5dfe251b
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MMWormhole: 941cd168b4afd6073f883b82944d6eded4e00203
 
 COCOAPODS: 0.35.0
