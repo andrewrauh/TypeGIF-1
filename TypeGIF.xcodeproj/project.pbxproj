@@ -10,6 +10,7 @@
 		42AFB7E8E2679A8F19FB6071 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3FB4F5D63C11865A6D5494 /* libPods.a */; };
 		817000D71AD48269006F8C4C /* GIFCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 817000D51AD48269006F8C4C /* GIFCollectionCell.m */; };
 		817000D81AD48269006F8C4C /* GIFCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 817000D61AD48269006F8C4C /* GIFCollectionCell.xib */; };
+		817000DB1AD48BAC006F8C4C /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 817000DA1AD48BAC006F8C4C /* ThirdViewController.m */; };
 		EDE648551AC45F7E002939A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE648541AC45F7E002939A0 /* main.m */; };
 		EDE648581AC45F7E002939A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE648571AC45F7E002939A0 /* AppDelegate.m */; };
 		EDE6485B1AC45F7E002939A0 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE6485A1AC45F7E002939A0 /* FirstViewController.m */; };
@@ -60,6 +61,8 @@
 		817000D41AD48269006F8C4C /* GIFCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIFCollectionCell.h; sourceTree = "<group>"; };
 		817000D51AD48269006F8C4C /* GIFCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GIFCollectionCell.m; sourceTree = "<group>"; };
 		817000D61AD48269006F8C4C /* GIFCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GIFCollectionCell.xib; sourceTree = "<group>"; };
+		817000D91AD48BAC006F8C4C /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
+		817000DA1AD48BAC006F8C4C /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
 		CB3FB4F5D63C11865A6D5494 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCCEB3E2B58B874238F7B84C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EDE6484F1AC45F7E002939A0 /* TypeGIF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TypeGIF.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +164,8 @@
 				EDE6485A1AC45F7E002939A0 /* FirstViewController.m */,
 				EDE6485C1AC45F7E002939A0 /* SecondViewController.h */,
 				EDE6485D1AC45F7E002939A0 /* SecondViewController.m */,
+				817000D91AD48BAC006F8C4C /* ThirdViewController.h */,
+				817000DA1AD48BAC006F8C4C /* ThirdViewController.m */,
 				EDE6485F1AC45F7E002939A0 /* Main.storyboard */,
 				817000D41AD48269006F8C4C /* GIFCollectionCell.h */,
 				817000D51AD48269006F8C4C /* GIFCollectionCell.m */,
@@ -388,6 +393,7 @@
 			files = (
 				F963E72A1AC468DC00A74FC6 /* AXCCollectionViewCell.m in Sources */,
 				EDE6485E1AC45F7E002939A0 /* SecondViewController.m in Sources */,
+				817000DB1AD48BAC006F8C4C /* ThirdViewController.m in Sources */,
 				EDE648581AC45F7E002939A0 /* AppDelegate.m in Sources */,
 				817000D71AD48269006F8C4C /* GIFCollectionCell.m in Sources */,
 				EDE6485B1AC45F7E002939A0 /* FirstViewController.m in Sources */,

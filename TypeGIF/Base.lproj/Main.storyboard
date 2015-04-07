@@ -166,10 +166,10 @@
             </objects>
             <point key="canvasLocation" x="750" y="578"/>
         </scene>
-        <!--View Controller-->
+        <!--Third View Controller-->
         <scene sceneID="PST-Ja-WG5">
             <objects>
-                <viewController id="l9d-mc-SVR" sceneMemberID="viewController">
+                <viewController id="l9d-mc-SVR" customClass="ThirdViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XKe-1F-oWw"/>
                         <viewControllerLayoutGuide type="bottom" id="j7i-K9-He6"/>
@@ -197,10 +197,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="favoritesCollectionView" destination="Alw-bi-BZW" id="8El-UK-pwh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DhO-dh-tlJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1561" y="360"/>
+            <point key="canvasLocation" x="1592" y="578"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">

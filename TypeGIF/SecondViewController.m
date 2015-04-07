@@ -25,9 +25,9 @@
 //    self.favoritesCollectionView.delegate = self;
 //    self.favoritesCollectionView.dataSource = self;
     
-    [self.favoritesCollectionView registerClass:[AXCCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
-    
-    [self.favoritesCollectionView setBackgroundColor:[UIColor clearColor]];
+//    [self.favoritesCollectionView registerClass:[AXCCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+//    
+//    [self.favoritesCollectionView setBackgroundColor:[UIColor clearColor]];
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"GIFCollectionCell" bundle:nil] forCellReuseIdentifier:@"myCustomCell"];
     
