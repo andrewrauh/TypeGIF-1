@@ -7,24 +7,67 @@
 //
 
 #import "SecondViewController.h"
+#import "GIFCollectionCell.h"
 
-@interface SecondViewController ()
+@interface SecondViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @end
 
+
 @implementation SecondViewController
+@synthesize myTableView, tableData;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-    self.favoritesCollectionView.delegate = self;
-    self.favoritesCollectionView.dataSource = self;
+//    
+//    self.favoritesCollectionView.delegate = self;
+//    self.favoritesCollectionView.dataSource = self;
     
     [self.favoritesCollectionView registerClass:[AXCCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     
     [self.favoritesCollectionView setBackgroundColor:[UIColor clearColor]];
     
+    [self.myTableView registerNib:[UINib nibWithNibName:@"GIFCollectionCell" bundle:nil] forCellReuseIdentifier:@"myCustomCell"];
+    
+    self.myTableView.delegate = self;
+    self.myTableView.dataSource = self;
+    
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *cellIdentifier = @"myCustomCell";
+    
+    GIFCollectionCell *cell = (GIFCollectionCell *)[myTableView dequeueReusableCellWithIdentifier:cellIdentifier];
+
+    return cell;
+}
+
+
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 5;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10.; // you can have your own choice, of course
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = [UIColor clearColor];
+    return headerView;
 }
 
 - (void)didReceiveMemoryWarning {

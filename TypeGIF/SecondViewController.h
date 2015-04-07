@@ -12,6 +12,8 @@
 @interface SecondViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UICollectionView* favoritesCollectionView;
+@property (nonatomic, strong) IBOutlet UITableView *myTableView;
+@property (nonatomic, retain) NSMutableArray *tableData;
 
 @end
 
