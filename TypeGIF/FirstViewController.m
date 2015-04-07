@@ -104,14 +104,20 @@
 {
     AXCCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     AXCGiphy * gif = self.resultsArray[indexPath.item];
-    NSURLRequest * request = [NSURLRequest requestWithURL:gif.originalImage.url];
-    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
+        NSURLRequest * request = [NSURLRequest requestWithURL:gif.originalImage.url];
+        NSURLResponse *response;
+        NSError *Jerror = nil;
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&Jerror];
         FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:data];
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        //Background Thread
+        dispatch_async(dispatch_get_main_queue(), ^(void){
             cell.imageView.animatedImage = image;
             cell.imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
-        }];
-    }] resume];
+        });
+    });
+    
     return cell;
 }
 
