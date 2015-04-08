@@ -172,7 +172,7 @@
                         <outlet property="addCollectionButton" destination="YkP-xO-15x" id="S7z-Jq-DM4"/>
                         <outlet property="collectionsTableView" destination="tCy-yd-Jlh" id="ASy-0E-bNc"/>
                         <outlet property="favoritesCollectionView" destination="Alw-bi-BZW" id="QXq-RS-COd"/>
-                        <segue destination="l9d-mc-SVR" kind="show" id="i6N-ql-oVz"/>
+                        <segue destination="l9d-mc-SVR" kind="show" identifier="CollectionSegue" id="i6N-ql-oVz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>

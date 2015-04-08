@@ -39,8 +39,6 @@
     return cell;
 }
 
-
-
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 5;
 }
@@ -62,6 +60,12 @@
     UIView *headerView = [[UIView alloc] init];
     headerView.backgroundColor = [UIColor clearColor];
     return headerView;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"didSelectRowAtIndexPath()");
+    [self performSegueWithIdentifier:@"CollectionSegue" sender:self];
 }
 
 - (void)didReceiveMemoryWarning {
