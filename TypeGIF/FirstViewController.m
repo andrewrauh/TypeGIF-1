@@ -38,13 +38,11 @@
 @synthesize resultsCollectionView;
 
 - (void)setupGestureRecognizers {
-    self.dragG = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
     self.longPressRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
     
     self.doubleTapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleDoubleTap:)];
     
     [self.doubleTapRecognizer setNumberOfTapsRequired:2];
-    [self.resultsCollectionView addGestureRecognizer:self.dragG];
     [self.resultsCollectionView addGestureRecognizer:self.longPressRecognizer];
     [self.resultsCollectionView  addGestureRecognizer:self.doubleTapRecognizer];
     
@@ -70,13 +68,14 @@
     
     [self setupGestureRecognizers];
     
-    
-    
     [self.blurView setHidden:YES];
     
     self.movingCell = [[UIImageView alloc]init];
     [self.movingCell setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.movingCell];
+    
+    UIAlertView *intro = [[UIAlertView alloc]initWithTitle:@"Hello!" message:@"To save a gif to a collection, double tap. To save to clipboard, hold down for a second" delegate:self cancelButtonTitle:@"Go away" otherButtonTitles:@"Okay", nil];
+    [intro show];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -120,7 +119,8 @@
 {
     AXCCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     AXCGiphy * gif = self.resultsArray[indexPath.item];
-
+    [cell setBackgroundColor:[UIColor grayColor]];
+    
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
         NSURLRequest * request = [NSURLRequest requestWithURL:gif.originalImage.url];
         NSURLResponse *response;
@@ -129,13 +129,10 @@
         FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:data];
         //Background Thread
         dispatch_async(dispatch_get_main_queue(), ^(void){
-
             cell.imageView.animatedImage = image;
             cell.imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
         });
     });
-    
-
     return cell;
 }
 
@@ -149,22 +146,6 @@
 }
 
 #pragma mark - UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    // TODO: Select Item
-//    AXCCollectionViewCell* curCell = (AXCCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-//    
-//    UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
-//    
-//    [pasteBoard setData:curCell.imageView.animatedImage.data
-//      forPasteboardType:@"com.compuserve.gif"];
-//    
-//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    hud.mode = MBProgressHUDModeCustomView;
-//    hud.labelText = @"Copied to Clipboard!";
-//    [hud hide:YES afterDelay:1.0f];
-//    
-}
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     // TODO: Deselect item
@@ -273,6 +254,14 @@
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     NSLog(@"got here");
     
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    //TODO
+//    locate the scrollview which is in the centre
+//    CGPoint centerPoint = CGPointMake(self.collectionView.frame.size.width / 2 + scrollView.contentOffset.x, self.collectionView.frame.size.height /2 + scrollView.contentOffset.y);
+//    NSIndexPath *indexPathOfCentralCell = [self.collectionView indexPathForItemAtPoint:centerPoint];
+
 }
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
