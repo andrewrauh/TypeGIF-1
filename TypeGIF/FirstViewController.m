@@ -192,13 +192,14 @@
         UIGraphicsEndImageContext();
 
         dispatch_async(dispatch_get_main_queue(), ^(void){
-            if (self.movingCell) {
+            [self.view addSubview:self.movingCell];
+
+            if (self.movingCell.image != nil) {
                 self.movingCell = [[UIImageView alloc] initWithImage:cellImage];
             }
             else{
                 [self.movingCell setImage:cellImage];
             }
-            [self.view addSubview:self.movingCell];
             
             [self.movingCell setCenter:locationPoint];
             [self.movingCell setAlpha:0.9f];
