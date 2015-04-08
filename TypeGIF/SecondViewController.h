@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) IBOutlet UITableView *collectionsTableView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *addCollectionButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *editCollectionsButton;
 @property (nonatomic, retain) NSMutableArray *tableData;
 
 @end
