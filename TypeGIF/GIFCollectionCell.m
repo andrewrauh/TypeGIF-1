@@ -7,11 +7,14 @@
 //
 
 #import "GIFCollectionCell.h"
+@import QuartzCore;
+
 
 @implementation GIFCollectionCell
 
 - (void)awakeFromNib {
     // Initialization code
+    self.layer.cornerRadius = 10.0f;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

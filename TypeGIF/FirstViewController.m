@@ -161,10 +161,11 @@
 
 -(void)handlePan:(UIPanGestureRecognizer *)panRecognizer {
     
-    CGPoint locationPoint = [panRecognizer locationInView:self.resultsCollectionView];
+    CGPoint locationPoint = [panRecognizer locationInView:self.view];
     self.imageSelected = YES;
     
     if (panRecognizer.state == UIGestureRecognizerStateBegan) {
+        
         [self.blurView setHidden:NO];
         
         NSIndexPath *indexPathOfMovingCell = [self.resultsCollectionView indexPathForItemAtPoint:locationPoint];
@@ -191,21 +192,26 @@
     if (panRecognizer.state == UIGestureRecognizerStateChanged) {
         [self.movingCell setCenter:locationPoint];
         [self.view bringSubviewToFront:self.movingCell];
-        BOOL methodB = CGRectIntersectsRect(self.movingCell.frame, self.blurView.frame);
+        
+        CGRect intersection = CGRectMake(self.blurView.frame.origin.x, self.blurView.frame.origin.y, self.blurView.frame.size.width, self.blurView.frame.size.height-100);
+        
+        BOOL methodB = CGRectIntersectsRect(self.movingCell.frame, intersection);
         NSLog(@"here1");
         
         if (methodB) {
+            NSLog(@"%f, %f", self.movingCell.center.x, self.movingCell.center.y);
             [self.movingCell setCenter:self.blurView.center];
-            [self.view addSubview:self.movingCell];
             [self.view bringSubviewToFront:self.movingCell];
-            NSLog(@"here");
+            [self.blurView.contentView addSubview:self.movingCell];
             [self.blurView setHidden:YES];
+
+
+            NSLog(@"here");
             
         }
 
     }
     if (panRecognizer.state == UIGestureRecognizerStateEnded) {
-//        [self.movingCell removeFromSuperview];
         self.imageSelected = NO;
         
     }
