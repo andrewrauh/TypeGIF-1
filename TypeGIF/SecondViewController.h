@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AXCCollectionViewCell.h"
+#import "GIFCollectionCell.h"
 
 @interface SecondViewController : UIViewController
 
-@property (nonatomic, strong) IBOutlet UITableView *myTableView;
+@property (nonatomic, strong) IBOutlet UITableView *collectionsTableView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *addCollectionButton;
 @property (nonatomic, retain) NSMutableArray *tableData;
 
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "SecondViewController.h"
-#import "GIFCollectionCell.h"
 
 @interface SecondViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -15,27 +14,27 @@
 
 
 @implementation SecondViewController
-@synthesize myTableView, tableData;
+@synthesize collectionsTableView, tableData;
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.myTableView registerNib:[UINib nibWithNibName:@"GIFCollectionCell" bundle:nil] forCellReuseIdentifier:@"myCustomCell"];
+    [self.collectionsTableView registerNib:[UINib nibWithNibName:@"GIFCollectionCell" bundle:nil] forCellReuseIdentifier:@"CollectionCell"];
     
-    self.myTableView.delegate = self;
-    self.myTableView.dataSource = self;
+    self.collectionsTableView.delegate = self;
+    self.collectionsTableView.dataSource = self;
     //formatting of the view
-    [self.myTableView setBackgroundColor:[UIColor blackColor]];
+    [self.collectionsTableView setBackgroundColor:[UIColor blackColor]];
     
     
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *cellIdentifier = @"myCustomCell";
+    static NSString *cellIdentifier = @"CollectionCell";
     
-    GIFCollectionCell *cell = (GIFCollectionCell *)[myTableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    GIFCollectionCell *cell = (GIFCollectionCell *)[collectionsTableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
     return cell;
 }
@@ -68,36 +67,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - UICollectionView delegate Methods
-
-- (AXCCollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    AXCCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    
-    return cell;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    return 3;
-}
-
-- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
-    return 1;
-}
-
-#pragma mark - UICollectionViewDelegate
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    // TODO: Select Item
-    AXCCollectionViewCell* curCell = (AXCCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-    
-    
-}
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: Deselect item
 }
 
 
