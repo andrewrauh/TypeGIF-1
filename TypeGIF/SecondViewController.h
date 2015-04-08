@@ -12,6 +12,7 @@
 @interface SecondViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UITableView *myTableView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *addCollectionButton;
 @property (nonatomic, retain) NSMutableArray *tableData;
 
 @end
