@@ -21,6 +21,7 @@
 @property (nonatomic, strong) IBOutlet UICollectionView* resultsCollectionView;
 @property (nonatomic, strong) UIPanGestureRecognizer* dragG;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer* doubleTapRecognizer;
 @property (nonatomic, strong) UIImageView* movingCell;
 @property (nonatomic, strong) IBOutlet UIVisualEffectView* blurView;
 
@@ -28,7 +29,7 @@
 -(IBAction)didHoldImage:(id)sender;
 -(void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
 -(void) handleLongPress:(UILongPressGestureRecognizer *)longPressRecog;
-
+-(void) handleDoubleTap:(UITapGestureRecognizer*) tapRecognizer;
 
 
 @end
@@ -36,13 +37,28 @@
 @implementation FirstViewController
 @synthesize resultsCollectionView;
 
+- (void)setupGestureRecognizers {
+    self.dragG = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
+    self.longPressRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
+    
+    self.doubleTapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleDoubleTap:)];
+    
+    [self.doubleTapRecognizer setNumberOfTapsRequired:2];
+    [self.resultsCollectionView addGestureRecognizer:self.dragG];
+    [self.resultsCollectionView addGestureRecognizer:self.longPressRecognizer];
+    [self.resultsCollectionView  addGestureRecognizer:self.doubleTapRecognizer];
+    
+    self.dragG.delegate = self;
+    self.imageSelected = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
     self.resultsArray = [[NSMutableArray alloc]init];
-    self.searchTextField.delegate = self;
     
+    self.searchTextField.delegate = self;
     self.resultsCollectionView.delegate = self;
     self.resultsCollectionView.dataSource = self;
     
@@ -52,24 +68,15 @@
     [self.searchTextField setPlaceholder:@"search here"];
     [self.resultsCollectionView setBackgroundColor:[UIColor clearColor]];
     
-    self.dragG = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
-    self.longPressRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
+    [self setupGestureRecognizers];
     
     
-    [self.resultsCollectionView addGestureRecognizer:self.dragG];
-    [self.resultsCollectionView addGestureRecognizer:self.longPressRecognizer];
-
-    self.dragG.delegate = self;
-    self.imageSelected = NO;
-    UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
-    NSLog(@"%@", [pasteBoard pasteboardTypes] );
     
     [self.blurView setHidden:YES];
+    
     self.movingCell = [[UIImageView alloc]init];
-    [self.movingCell setBackgroundColor:[UIColor redColor]];
+    [self.movingCell setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.movingCell];
-
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -122,6 +129,7 @@
         FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:data];
         //Background Thread
         dispatch_async(dispatch_get_main_queue(), ^(void){
+
             cell.imageView.animatedImage = image;
             cell.imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
         });
@@ -144,18 +152,18 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     // TODO: Select Item
-    AXCCollectionViewCell* curCell = (AXCCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-    
-    UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
-    
-    [pasteBoard setData:curCell.imageView.animatedImage.data
-      forPasteboardType:@"com.compuserve.gif"];
-    
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeCustomView;
-    hud.labelText = @"Copied to Clipboard!";
-    [hud hide:YES afterDelay:1.0f];
-    
+//    AXCCollectionViewCell* curCell = (AXCCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+//    
+//    UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
+//    
+//    [pasteBoard setData:curCell.imageView.animatedImage.data
+//      forPasteboardType:@"com.compuserve.gif"];
+//    
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    hud.mode = MBProgressHUDModeCustomView;
+//    hud.labelText = @"Copied to Clipboard!";
+//    [hud hide:YES afterDelay:1.0f];
+//    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -174,44 +182,8 @@
 
 
 -(void)handleLongPress:(UILongPressGestureRecognizer *)longPressRecog {
-    //make copy of image
-    //scale copy of image
 
-    [self.blurView setHidden:NO];
-    CGPoint locationPoint = [longPressRecog locationInView:self.view];
-
-    NSIndexPath *indexPathOfMovingCell = [self.resultsCollectionView indexPathForItemAtPoint:locationPoint];
-    
-    UICollectionViewCell *cell = [self.resultsCollectionView cellForItemAtIndexPath:indexPathOfMovingCell];
-
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
-        
-        UIGraphicsBeginImageContext(cell.bounds.size);
-        [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
-        UIImage *cellImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            [self.view addSubview:self.movingCell];
-
-            if (self.movingCell.image != nil) {
-                self.movingCell = [[UIImageView alloc] initWithImage:cellImage];
-            }
-            else{
-                [self.movingCell setImage:cellImage];
-            }
-            
-            [self.movingCell setCenter:locationPoint];
-            [self.movingCell setAlpha:0.9f];
-            [self.view bringSubviewToFront:self.movingCell];
-            
-            [UIView animateWithDuration:0.1 animations:^{
-                self.movingCell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1);
-            }];
-
-        });
-    });
-
+  
 
 }
 
@@ -265,6 +237,84 @@
     }
 }
 
+-(void) animateShowBlurView {
+    CGRect oldFrame = self.blurView.frame;
+    
+    [self.blurView setFrame:CGRectMake(0, self.view.frame.size.height+self.blurView.frame.size.height, self.blurView.frame.size.width, self.blurView.frame.size.height)];
+    [self.blurView setHidden:NO];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.blurView setFrame:oldFrame];
+    }
+    completion:^(BOOL finished) {
+        
+    }];
+}
+
+
+- (void) animateHideBlurView {
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.blurView setFrame:CGRectMake(0, self.view.frame.size.height+self.blurView.frame.size.height, self.blurView.frame.size.width, self.blurView.frame.size.height)];
+
+    } completion:^(BOOL finished) {
+        
+    } ];
+}
+
+-(void)handleDoubleTap:(UITapGestureRecognizer *)tapRecognizer {
+    NSLog(@"got here");
+    
+    [self animateShowBlurView];
+    
+    CGPoint locationPoint = [tapRecognizer locationInView:self.view];
+    
+    NSIndexPath *indexOfClickedCell = [self.resultsCollectionView indexPathForItemAtPoint:locationPoint];
+    
+    UICollectionViewCell *cell = [self.resultsCollectionView cellForItemAtIndexPath:indexOfClickedCell];
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
+        
+        UIGraphicsBeginImageContext(cell.bounds.size);
+        [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *cellImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            
+            if (self.movingCell.image != nil) {
+                self.movingCell = [[UIImageView alloc] initWithImage:cellImage];
+            }
+            else{
+                [self.movingCell setImage:cellImage];
+            }
+            
+            [self.movingCell setCenter:locationPoint];
+            
+            [self.movingCell setAlpha:0.9f];
+            [self.view bringSubviewToFront:self.movingCell];
+            [self.movingCell setFrame:cell.frame];
+            
+            [UIView animateWithDuration:0.1 animations:^{
+                self.movingCell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1);
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.6f delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    [self.movingCell setCenter:self.blurView.center];
+
+                } completion:^(BOOL finished) {
+                    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    hud.mode = MBProgressHUDModeCustomView;
+                    hud.labelText = @"Saved to Favorites!";
+                    [hud hide:YES afterDelay:1.0f];
+                    [self.blurView setHidden:YES];
+                    [self.movingCell setImage:nil];
+                    
+                }];
+                
+            }];
+        });
+    });
+}
 
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     NSLog(@"got here");
