@@ -8,12 +8,8 @@
 
 #import "FirstViewController.h"
 #import "AXCGiphy.h"
-//#import "AXCCollectionViewCell.h"
 @import QuartzCore;
 #import "DatabaseManager.h"
-
-
-//https://gist.github.com/codeswimmer/4437535
 
 @interface FirstViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate>
 
@@ -27,13 +23,11 @@
 @property (nonatomic, strong) IBOutlet UIVisualEffectView* blurView;
 @property (nonatomic, strong) DatabaseManager *db;
 
-
 -(IBAction)didHoldImage:(id)sender;
--(void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
+-(void) handlePan:(UIPanGestureRecognizer *)panRecognizer;
 -(void) handleLongPress:(UILongPressGestureRecognizer *)longPressRecog;
 -(void) handleDoubleTap:(UITapGestureRecognizer*) tapRecognizer;
 -(void) writeGifToDisk:(NSData * )gif withName:(NSString* ) name;
-
 
 @end
 
@@ -51,6 +45,11 @@
     
     self.dragG.delegate = self;
     self.imageSelected = NO;
+}
+
+- (void)showAlertView {
+    UIAlertView *intro = [[UIAlertView alloc]initWithTitle:@"Hello!" message:@"To save a gif to a collection, double tap. To save to clipboard, hold down for a second" delegate:self cancelButtonTitle:@"Go away" otherButtonTitles:@"Okay", nil];
+    [intro show];
 }
 
 - (void)viewDidLoad {
@@ -77,10 +76,8 @@
     [self.movingCell setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.movingCell];
     
-    UIAlertView *intro = [[UIAlertView alloc]initWithTitle:@"Hello!" message:@"To save a gif to a collection, double tap. To save to clipboard, hold down for a second" delegate:self cancelButtonTitle:@"Go away" otherButtonTitles:@"Okay", nil];
-    [intro show];
+    [self showAlertView];
     self.db = [DatabaseManager createDatabaseInstance];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -109,7 +106,7 @@
     
     [AXCGiphy searchGiphyWithTerm:textField.text limit:30 offset:0 completion:^(NSArray *results, NSError *error) {
         self.resultsArray = [NSMutableArray arrayWithArray:results];
-        NSLog(@"results : %@", results);
+        
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [hud hide:YES];
             [self.resultsCollectionView reloadData];
@@ -124,7 +121,9 @@
 {
     AXCCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     AXCGiphy * gif = self.resultsArray[indexPath.item];
+    
     [cell setBackgroundColor:[UIColor grayColor]];
+    [cell setImageView:nil];
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
         
@@ -140,7 +139,6 @@
         myGif = [NSData dataWithContentsOfFile:dataPath];
         
         if (myGif.length == 0) {
-            NSLog(@"nothing found in cache for %@", fileName);
             NSURLRequest * request = [NSURLRequest requestWithURL:gif.originalImage.url];
             NSURLResponse *response;
             NSError *Jerror = nil;
@@ -149,10 +147,7 @@
             NSString *str = [NSString stringWithFormat:@"%@", gif.originalImage.url];
             [self writeGifToDisk:myGif withName:str];
         }
-        else {
-            NSLog(@"read from file! for %@", fileName);
-        }
-        
+
         FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:myGif];
         
         dispatch_async(dispatch_get_main_queue(), ^(void){
@@ -175,7 +170,7 @@
         NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
         NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
         [gif writeToFile:dataPath atomically:YES];
-        NSLog(@"wrote to %@", dataPath);
+//        NSLog(@"wrote to %@", dataPath);
         
     });
 }
@@ -206,7 +201,7 @@
 
 -(void)handleLongPress:(UILongPressGestureRecognizer *)longPressRecog {
     
-    CGPoint locationPoint = [longPressRecog locationInView:self.view];
+    CGPoint locationPoint = [longPressRecog locationInView:self.resultsCollectionView];
     NSIndexPath *indexOfClickedCell = [self.resultsCollectionView indexPathForItemAtPoint:locationPoint];
     UICollectionViewCell *cell = [self.resultsCollectionView cellForItemAtIndexPath:indexOfClickedCell];
     AXCCollectionViewCell *curCell = (AXCCollectionViewCell*)cell;
@@ -248,9 +243,9 @@
     NSLog(@"got here");
     
     [self animateShowBlurView];
-    
-    CGPoint locationPoint = [tapRecognizer locationInView:self.view];
-    
+    CGPoint locationPoint = [tapRecognizer locationInView:self.resultsCollectionView];
+    CGPoint animationPoint = [tapRecognizer locationInView:self.view];
+    animationPoint = CGPointMake(animationPoint.x, animationPoint.y-100);
     NSIndexPath *indexOfClickedCell = [self.resultsCollectionView indexPathForItemAtPoint:locationPoint];
     
     UICollectionViewCell *cell = [self.resultsCollectionView cellForItemAtIndexPath:indexOfClickedCell];
@@ -269,12 +264,13 @@
                 [self.movingCell setImage:cellImage];
             }
             
-            [self.movingCell setCenter:locationPoint];
+//            [self.movingCell setCenter:animationPoint];
             
             [self.movingCell setAlpha:0.9f];
             [self.view bringSubviewToFront:self.movingCell];
             [self.movingCell setFrame:cell.frame];
-            
+            [self.movingCell setFrame:CGRectMake(cell.frame.origin.x, cell.frame.origin.y+100, cell.frame.size.width, cell.frame.size.height)];
+
             [UIView animateWithDuration:0.1 animations:^{
                 self.movingCell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1);
             } completion:^(BOOL finished) {

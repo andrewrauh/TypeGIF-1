@@ -16,6 +16,5 @@
 
 @property (nonatomic, strong) IBOutlet UITextField* searchTextField;
 
-
 @end
 

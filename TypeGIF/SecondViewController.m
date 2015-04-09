@@ -19,15 +19,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self.collectionsTableView registerNib:[UINib nibWithNibName:@"GIFCollectionCell" bundle:nil] forCellReuseIdentifier:@"CollectionCell"];
-    
     self.collectionsTableView.delegate = self;
     self.collectionsTableView.dataSource = self;
     //formatting of the view
     [self.collectionsTableView setBackgroundColor:[UIColor blackColor]];
-    
-    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
