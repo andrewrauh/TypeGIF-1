@@ -10,6 +10,7 @@
 #import "AXCGiphy.h"
 //#import "AXCCollectionViewCell.h"
 @import QuartzCore;
+#import "DatabaseManager.h"
 
 
 //https://gist.github.com/codeswimmer/4437535
@@ -24,12 +25,14 @@
 @property (nonatomic, strong) UITapGestureRecognizer* doubleTapRecognizer;
 @property (nonatomic, strong) UIImageView* movingCell;
 @property (nonatomic, strong) IBOutlet UIVisualEffectView* blurView;
+@property (nonatomic, strong) DatabaseManager *db;
 
 
 -(IBAction)didHoldImage:(id)sender;
 -(void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
 -(void) handleLongPress:(UILongPressGestureRecognizer *)longPressRecog;
 -(void) handleDoubleTap:(UITapGestureRecognizer*) tapRecognizer;
+-(void) writeGifToDisk:(NSData * )gif withName:(NSString* ) name;
 
 
 @end
@@ -76,6 +79,8 @@
     
     UIAlertView *intro = [[UIAlertView alloc]initWithTitle:@"Hello!" message:@"To save a gif to a collection, double tap. To save to clipboard, hold down for a second" delegate:self cancelButtonTitle:@"Go away" otherButtonTitles:@"Okay", nil];
     [intro show];
+    self.db = [DatabaseManager createDatabaseInstance];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -122,12 +127,34 @@
     [cell setBackgroundColor:[UIColor grayColor]];
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
-        NSURLRequest * request = [NSURLRequest requestWithURL:gif.originalImage.url];
-        NSURLResponse *response;
-        NSError *Jerror = nil;
-        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&Jerror];
-        FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:data];
-        //Background Thread
+        
+        NSData *myGif;
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+        NSString *str = [NSString stringWithFormat:@"%@", gif.originalImage.url];
+        NSString *trimmedReplacement = [[str componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
+        NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
+        NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
+        
+        myGif = [NSData dataWithContentsOfFile:dataPath];
+        
+        if (myGif.length == 0) {
+            NSLog(@"nothing found in cache for %@", fileName);
+            NSURLRequest * request = [NSURLRequest requestWithURL:gif.originalImage.url];
+            NSURLResponse *response;
+            NSError *Jerror = nil;
+            myGif = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&Jerror];
+            
+            NSString *str = [NSString stringWithFormat:@"%@", gif.originalImage.url];
+            [self writeGifToDisk:myGif withName:str];
+        }
+        else {
+            NSLog(@"read from file! for %@", fileName);
+        }
+        
+        FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:myGif];
+        
         dispatch_async(dispatch_get_main_queue(), ^(void){
             cell.imageView.animatedImage = image;
             cell.imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
@@ -136,6 +163,22 @@
     return cell;
 }
 
+
+
+-(void) writeGifToDisk:(NSData * )gif withName:(NSString* ) name {
+    // Use GCD's background queue
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+        NSString *trimmedReplacement = [[name componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
+        NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
+        NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
+        [gif writeToFile:dataPath atomically:YES];
+        NSLog(@"wrote to %@", dataPath);
+        
+    });
+}
 // 1
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
     return [self.resultsArray count];

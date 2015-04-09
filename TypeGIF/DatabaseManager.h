@@ -17,8 +17,8 @@
 
 +(instancetype)createDatabaseInstance;
 
-- (void) addGifToDatabaseWithIdentifier:(NSString*)identifier andPath:(NSString*)url;
-- (NSString*) getPhotoURLForIdentifier:(NSString*)identifier;
+- (void) addGifToDatabaseWithIdentifier:(NSString*)identifier andPath:(NSString*)path;
+- (NSData*) _retrieveGifDataWithAssetURL:(NSString*) url;
 
 
 
