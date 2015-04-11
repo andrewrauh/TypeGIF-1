@@ -16,6 +16,29 @@
 @implementation SecondViewController
 @synthesize collectionsTableView, tableData;
 
+- (IBAction)addCollectionAction:(id)sender {
+    NSLog(@"touched the button");///
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add New Collection"
+                                                    message:nil
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"Save", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"clicked button at: %ld", (long)buttonIndex);///
+
+    if (buttonIndex == 1) {
+        NSString *name = [alertView textFieldAtIndex:0].text;
+
+        [tableData addObject:name];
+        [collectionsTableView reloadData];
+    }
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,23 +47,32 @@
     self.collectionsTableView.dataSource = self;
     //formatting of the view
     [self.collectionsTableView setBackgroundColor:[UIColor blackColor]];
+
+    tableData = [NSMutableArray arrayWithObjects:@"test1",@"test2",@"test3", nil];///
+    [collectionsTableView reloadData];///
+    NSLog(@"after reload -- size is: %lu", (unsigned long)[tableData count]);///
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(GIFCollectionCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSLog(@"setting cell for row: %ld", (long)indexPath.row);///
     
     static NSString *cellIdentifier = @"CollectionCell";
-    
     GIFCollectionCell *cell = (GIFCollectionCell *)[collectionsTableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    
+            NSLog(@"inside set cell -- size is: %lu", (unsigned long)[tableData count]);///
+    cell.nameLabel.text = tableData[indexPath.row];
 
     return cell;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return 1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return [self.tableData count];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -60,7 +92,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"didSelectRowAtIndexPath()");
     [self performSegueWithIdentifier:@"CollectionSegue" sender:self];
 }
 
@@ -68,6 +99,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end

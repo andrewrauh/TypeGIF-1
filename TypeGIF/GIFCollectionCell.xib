@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GIFCollectionCell"/>
@@ -13,16 +14,24 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Favorites" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nu3-T0-Igs">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JpG-aX-tOa">
                         <rect key="frame" x="8" y="21" width="304" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="JpG-aX-tOa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="MjR-aC-ecU"/>
+                    <constraint firstItem="JpG-aX-tOa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="13" id="YXv-K1-MPX"/>
+                    <constraint firstItem="JpG-aX-tOa" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="hCI-5n-MEi"/>
+                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.62077809343434343" green="0.62077809343434343" blue="0.62077809343434343" alpha="1" colorSpace="calibratedRGB"/>
-            <point key="canvasLocation" x="262" y="216"/>
+            <connections>
+                <outlet property="nameLabel" destination="JpG-aX-tOa" id="bO6-7s-Thd"/>
+            </connections>
+            <point key="canvasLocation" x="262" y="212"/>
         </tableViewCell>
     </objects>
 </document>

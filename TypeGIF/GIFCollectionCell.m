@@ -9,7 +9,6 @@
 #import "GIFCollectionCell.h"
 @import QuartzCore;
 
-
 @implementation GIFCollectionCell
 
 - (void)awakeFromNib {

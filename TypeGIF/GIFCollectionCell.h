@@ -10,4 +10,6 @@
 
 @interface GIFCollectionCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+
 @end
