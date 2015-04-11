@@ -17,8 +17,6 @@
 @synthesize collectionsTableView, tableData;
 
 - (IBAction)addCollectionAction:(id)sender {
-    NSLog(@"touched the button");///
-
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add New Collection"
                                                     message:nil
                                                    delegate:self
@@ -29,11 +27,10 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSLog(@"clicked button at: %ld", (long)buttonIndex);///
-
     if (buttonIndex == 1) {
         NSString *name = [alertView textFieldAtIndex:0].text;
 
+        // TODO : save new collection name to backend
         [tableData addObject:name];
         [collectionsTableView reloadData];
     }
@@ -45,25 +42,19 @@
     [self.collectionsTableView registerNib:[UINib nibWithNibName:@"GIFCollectionCell" bundle:nil] forCellReuseIdentifier:@"CollectionCell"];
     self.collectionsTableView.delegate = self;
     self.collectionsTableView.dataSource = self;
+
     //formatting of the view
     [self.collectionsTableView setBackgroundColor:[UIColor blackColor]];
 
-    tableData = [NSMutableArray arrayWithObjects:@"test1",@"test2",@"test3", nil];///
-    [collectionsTableView reloadData];///
-    NSLog(@"after reload -- size is: %lu", (unsigned long)[tableData count]);///
+    // TODO : populate tableData with user's saved collection names
+    tableData = [NSMutableArray arrayWithObjects:@"test1",@"test2",@"test3", nil];
 }
 
 -(GIFCollectionCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSLog(@"setting cell for row: %ld", (long)indexPath.row);///
-    
     static NSString *cellIdentifier = @"CollectionCell";
     GIFCollectionCell *cell = (GIFCollectionCell *)[collectionsTableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
-    
-            NSLog(@"inside set cell -- size is: %lu", (unsigned long)[tableData count]);///
     cell.nameLabel.text = tableData[indexPath.row];
-
     return cell;
 }
 
