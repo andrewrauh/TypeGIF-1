@@ -119,7 +119,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="cPa-gy-q4n"/>
                     <navigationItem key="navigationItem" title="Favorite GIFs" id="kHC-hc-hU2">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="YgF-uI-VEg"/>
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="YgF-uI-VEg">
+                            <connections>
+                                <action selector="editCollectionsAction:" destination="8rJ-Kc-sve" id="9Cf-4b-0Ic"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="92J-md-a75">
                             <connections>
                                 <action selector="addCollectionAction:" destination="8rJ-Kc-sve" id="64a-c1-DkP"/>

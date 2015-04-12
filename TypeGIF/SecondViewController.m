@@ -16,6 +16,22 @@
 @implementation SecondViewController
 @synthesize collectionsTableView, tableData;
 
+- (IBAction)editCollectionsAction:(id)sender {
+    BOOL editing = !self.collectionsTableView.editing;
+    self.addCollectionButton.enabled = !editing;
+
+    if (editing) {
+        [self.editCollectionsButton setTitle:@"Done"];
+        [self.editCollectionsButton setStyle:UIBarButtonItemStyleDone];
+    }
+    else{
+        [self.editCollectionsButton setTitle:@"Edit"];
+        [self.editCollectionsButton setStyle:UIBarButtonItemStylePlain];
+    }
+
+    [self.collectionsTableView setEditing:editing animated:YES];
+}
+
 - (IBAction)addCollectionAction:(id)sender {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add New Collection"
                                                     message:nil
