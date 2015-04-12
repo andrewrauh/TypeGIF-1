@@ -52,7 +52,6 @@
     }
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.collectionsTableView registerNib:[UINib nibWithNibName:@"GIFCollectionCell" bundle:nil] forCellReuseIdentifier:@"CollectionCell"];
@@ -100,6 +99,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"CollectionSegue" sender:self];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.tableData removeObjectAtIndex:indexPath.row];
+        [self.collectionsTableView reloadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
