@@ -122,7 +122,6 @@ static DatabaseManager *databaseInstance = nil;
 }
 
 - (NSArray*) photoUrlsForCollection:(NSString*) collectionName{
-    
     NSMutableArray *photoUrls = [[NSMutableArray alloc]init];
     __block NSString *gifData = [[NSString alloc]init];
     

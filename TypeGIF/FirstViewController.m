@@ -47,7 +47,7 @@
     [self.doubleTapRecognizer setNumberOfTapsRequired:2];
     [self.resultsCollectionView addGestureRecognizer:self.longPressRecognizer];
     [self.resultsCollectionView  addGestureRecognizer:self.doubleTapRecognizer];
-    [self.resultsCollectionView  addGestureRecognizer:self.singleTap];
+//    [self.resultsCollectionView  addGestureRecognizer:self.singleTap];
 
     
     self.dragG.delegate = self;
@@ -271,7 +271,7 @@
     animationPoint = CGPointMake(animationPoint.x, animationPoint.y-100);
     NSIndexPath *indexOfClickedCell = [self.resultsCollectionView indexPathForItemAtPoint:locationPoint];
     
-    UICollectionViewCell *cell = [self.resultsCollectionView cellForItemAtIndexPath:indexOfClickedCell];
+    AXCCollectionViewCell *cell = (AXCCollectionViewCell*)[self.resultsCollectionView cellForItemAtIndexPath:indexOfClickedCell];
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
         UIGraphicsBeginImageContext(cell.bounds.size);
