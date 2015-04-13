@@ -62,13 +62,12 @@
     [self.collectionsTableView setBackgroundColor:[UIColor blackColor]];
 
     // TODO : populate tableData with user's saved collection names
-    tableData = [NSMutableArray arrayWithObjects:@"test1",@"test2",@"test3", nil];
+    tableData = [NSMutableArray arrayWithObjects:@"Trending",@"test2",@"test3", nil];
 }
 
 -(GIFCollectionCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"CollectionCell";
     GIFCollectionCell *cell = (GIFCollectionCell *)[collectionsTableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
     cell.nameLabel.text = tableData[indexPath.row];
     return cell;
 }
@@ -99,7 +98,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"CollectionSegue" sender:self];
+    
 }
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSLog(@"prepare for seque called");
+    
+}
+
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
