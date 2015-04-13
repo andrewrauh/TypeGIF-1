@@ -63,6 +63,13 @@ static DatabaseManager *databaseInstance = nil;
                 isSuccess = NO;
                 NSLog(@"Failed to create table a");
             }
+            
+            sql_stmt =
+            "create table if not exists COLLECTION (collection_name text, photo_url text, UNIQUE(collection_name))";
+            if (sqlite3_exec(database, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
+                isSuccess = NO;
+                NSLog(@"Failed to create table b");
+            }
 
             sqlite3_close(database);
         }
@@ -86,11 +93,9 @@ static DatabaseManager *databaseInstance = nil;
 - (NSString*) _retrieveGifDataWithAssetURL:(NSString*) url {
     __block NSString *gifData = [[NSString alloc]init];
     
-    
     if (!_dataBasePath) return nil;
     
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
-    
     
     [queue inDatabase:^(FMDatabase *db) {
         NSString *qs = [NSString stringWithFormat:@"select * from GIF where photo_url='%@'", url];
@@ -107,6 +112,37 @@ static DatabaseManager *databaseInstance = nil;
     return gifData;
 }
 
+- (void) addGifToCollection:(NSString *)collectionName and:(NSString *)photoUrl {
+    if (!_dataBasePath) return;
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"INSERT OR REPLACE INTO COLLECTION VALUES (?, ?)", collectionName, photoUrl];
+    }];
+
+}
+
+- (NSArray*) photoUrlsForCollection:(NSString*) collectionName{
+    
+    NSMutableArray *photoUrls = [[NSMutableArray alloc]init];
+    __block NSString *gifData = [[NSString alloc]init];
+    
+    if (!_dataBasePath) return nil;
+    
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
+    
+    [queue inDatabase:^(FMDatabase *db) {
+        NSString *qs = [NSString stringWithFormat:@"select * from COLLECTION where collection_name='%@'", collectionName];
+        
+        FMResultSet *rs = [db executeQuery:qs];
+        if (rs == nil) NSLog(@"result set nil");
+        
+        while ([rs next]) {
+            gifData = [rs objectForColumnIndex:1];
+            [photoUrls addObject:gifData];
+        }
+    }];
+    return [NSArray arrayWithArray:photoUrls];
+}
 
 
 

@@ -19,15 +19,17 @@
 @property (nonatomic, strong) UIPanGestureRecognizer* dragG;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer* doubleTapRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer* singleTap;
 @property (nonatomic, strong) UIImageView* movingCell;
 @property (nonatomic, strong) IBOutlet UIVisualEffectView* blurView;
 @property (nonatomic, strong) DatabaseManager *db;
 
 -(IBAction)didHoldImage:(id)sender;
--(void) handlePan:(UIPanGestureRecognizer *)panRecognizer;
 -(void) handleLongPress:(UILongPressGestureRecognizer *)longPressRecog;
 -(void) handleDoubleTap:(UITapGestureRecognizer*) tapRecognizer;
+-(void) handleSingleTap:(UITapGestureRecognizer*) tapRecognizer;
 -(void) writeGifToDisk:(NSData * )gif withName:(NSString* ) name;
+
 
 @end
 
@@ -38,10 +40,15 @@
     self.longPressRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
     
     self.doubleTapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleDoubleTap:)];
+    self.singleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleSingleTap:)];
+    [self.singleTap setNumberOfTapsRequired:1];
+    
     
     [self.doubleTapRecognizer setNumberOfTapsRequired:2];
     [self.resultsCollectionView addGestureRecognizer:self.longPressRecognizer];
     [self.resultsCollectionView  addGestureRecognizer:self.doubleTapRecognizer];
+    [self.resultsCollectionView  addGestureRecognizer:self.singleTap];
+
     
     self.dragG.delegate = self;
     self.imageSelected = NO;
@@ -65,7 +72,9 @@
     [self.resultsCollectionView registerClass:[AXCCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     [AXCGiphy setGiphyAPIKey:kGiphyPublicAPIKey];
     
-    [self.searchTextField setPlaceholder:@"search here"];
+    [self.searchTextField setPlaceholder:@"Search here or look below for trending gifs!"];
+    [self.searchTextField setTextAlignment:NSTextAlignmentCenter];
+    
     [self.resultsCollectionView setBackgroundColor:[UIColor clearColor]];
     
     [self setupGestureRecognizers];
@@ -78,6 +87,20 @@
     
     [self showAlertView];
     self.db = [DatabaseManager createDatabaseInstance];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.labelText = @"Loading";
+    
+    [AXCGiphy trendingGIFsWithlimit:30 offset:0 completion:^(NSArray *results, NSError *error) {
+        self.resultsArray = [NSMutableArray arrayWithArray:results];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [hud hide:YES];
+            [self.resultsCollectionView reloadData];
+        }];
+    }];
+    
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -264,8 +287,6 @@
                 [self.movingCell setImage:cellImage];
             }
             
-//            [self.movingCell setCenter:animationPoint];
-            
             [self.movingCell setAlpha:0.9f];
             [self.view bringSubviewToFront:self.movingCell];
             [self.movingCell setFrame:cell.frame];
@@ -285,6 +306,43 @@
                     [self.blurView setHidden:YES];
                     [self.movingCell setImage:nil];
                 }];
+            }];
+        });
+    });
+}
+
+-(void) handleSingleTap:(UITapGestureRecognizer*) tapRecognizer {
+    
+    CGPoint locationPoint = [tapRecognizer locationInView:self.resultsCollectionView];
+    CGPoint animationPoint = [tapRecognizer locationInView:self.view];
+    animationPoint = CGPointMake(animationPoint.x, animationPoint.y-100);
+    NSIndexPath *indexOfClickedCell = [self.resultsCollectionView indexPathForItemAtPoint:locationPoint];
+    
+    UICollectionViewCell *cell = [self.resultsCollectionView cellForItemAtIndexPath:indexOfClickedCell];
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
+        UIGraphicsBeginImageContext(cell.bounds.size);
+        [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *cellImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            
+            if (self.movingCell.image != nil) {
+                self.movingCell = [[UIImageView alloc] initWithImage:cellImage];
+            }
+            else{
+                [self.movingCell setImage:cellImage];
+            }
+            
+            [self.view bringSubviewToFront:self.movingCell];
+            [self.movingCell setFrame:cell.frame];
+            [self.movingCell setFrame:CGRectMake(cell.frame.origin.x, cell.frame.origin.y+100, cell.frame.size.width, cell.frame.size.height)];
+            
+            [UIView animateWithDuration:1.1 animations:^{
+                self.movingCell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 2.0, 2.0);
+                [self.movingCell setCenter:self.view.center];
+            } completion:^(BOOL finished) {
+
             }];
         });
     });

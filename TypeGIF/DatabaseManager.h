@@ -20,6 +20,8 @@
 - (void) addGifToDatabaseWithIdentifier:(NSString*)identifier andPath:(NSString*)path;
 - (NSData*) _retrieveGifDataWithAssetURL:(NSString*) url;
 
+- (void) addGifToCollection:(NSString *)collectionName and:(NSString *)photoUrl;
+- (NSArray*) photoUrlsForCollection:(NSString*) collectionName;
 
 
 

@@ -19,6 +19,7 @@
 		EDE648631AC45F7E002939A0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDE648621AC45F7E002939A0 /* Images.xcassets */; };
 		EDE648661AC45F7E002939A0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDE648641AC45F7E002939A0 /* LaunchScreen.xib */; };
 		EDE648721AC45F7E002939A0 /* TypeGIFTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE648711AC45F7E002939A0 /* TypeGIFTests.m */; };
+		F9343BE61ADB578500D38762 /* Keyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9343BE51ADB578500D38762 /* Keyboard.xib */; };
 		F963E72A1AC468DC00A74FC6 /* AXCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */; };
 		F963E7351AC46FC900A74FC6 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E7341AC46FC900A74FC6 /* KeyboardViewController.m */; };
 		F963E7381AC46FC900A74FC6 /* GifKeyBoard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F963E72F1AC46FC800A74FC6 /* GifKeyBoard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -80,6 +81,7 @@
 		EDE6486B1AC45F7E002939A0 /* TypeGIFTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TypeGIFTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE648701AC45F7E002939A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDE648711AC45F7E002939A0 /* TypeGIFTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TypeGIFTests.m; sourceTree = "<group>"; };
+		F9343BE51ADB578500D38762 /* Keyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Keyboard.xib; sourceTree = "<group>"; };
 		F963E7281AC468DC00A74FC6 /* AXCCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXCCollectionViewCell.h; sourceTree = "<group>"; };
 		F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXCCollectionViewCell.m; sourceTree = "<group>"; };
 		F963E72F1AC46FC800A74FC6 /* GifKeyBoard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GifKeyBoard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,6 +215,7 @@
 				F963E7331AC46FC900A74FC6 /* KeyboardViewController.h */,
 				F963E7341AC46FC900A74FC6 /* KeyboardViewController.m */,
 				F963E7311AC46FC900A74FC6 /* Supporting Files */,
+				F9343BE51ADB578500D38762 /* Keyboard.xib */,
 			);
 			path = GifKeyBoard;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9343BE61ADB578500D38762 /* Keyboard.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
