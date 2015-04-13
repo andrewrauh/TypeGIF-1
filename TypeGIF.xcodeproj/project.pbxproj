@@ -11,6 +11,7 @@
 		817000D71AD48269006F8C4C /* GIFCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 817000D51AD48269006F8C4C /* GIFCollectionCell.m */; };
 		817000D81AD48269006F8C4C /* GIFCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 817000D61AD48269006F8C4C /* GIFCollectionCell.xib */; };
 		817000DB1AD48BAC006F8C4C /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 817000DA1AD48BAC006F8C4C /* ThirdViewController.m */; };
+		81D1A8D31ADC7C7D0012B5ED /* Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D1A8D21ADC7C7D0012B5ED /* Keyboard.m */; };
 		EDE648551AC45F7E002939A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE648541AC45F7E002939A0 /* main.m */; };
 		EDE648581AC45F7E002939A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE648571AC45F7E002939A0 /* AppDelegate.m */; };
 		EDE6485B1AC45F7E002939A0 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE6485A1AC45F7E002939A0 /* FirstViewController.m */; };
@@ -64,6 +65,8 @@
 		817000D61AD48269006F8C4C /* GIFCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GIFCollectionCell.xib; sourceTree = "<group>"; };
 		817000D91AD48BAC006F8C4C /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
 		817000DA1AD48BAC006F8C4C /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
+		81D1A8D11ADC7C7D0012B5ED /* Keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keyboard.h; sourceTree = "<group>"; };
+		81D1A8D21ADC7C7D0012B5ED /* Keyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keyboard.m; sourceTree = "<group>"; };
 		CB3FB4F5D63C11865A6D5494 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCCEB3E2B58B874238F7B84C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EDE6484F1AC45F7E002939A0 /* TypeGIF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TypeGIF.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -216,6 +219,8 @@
 				F963E7341AC46FC900A74FC6 /* KeyboardViewController.m */,
 				F963E7311AC46FC900A74FC6 /* Supporting Files */,
 				F9343BE51ADB578500D38762 /* Keyboard.xib */,
+				81D1A8D11ADC7C7D0012B5ED /* Keyboard.h */,
+				81D1A8D21ADC7C7D0012B5ED /* Keyboard.m */,
 			);
 			path = GifKeyBoard;
 			sourceTree = "<group>";
@@ -418,6 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81D1A8D31ADC7C7D0012B5ED /* Keyboard.m in Sources */,
 				F963E7351AC46FC900A74FC6 /* KeyboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
