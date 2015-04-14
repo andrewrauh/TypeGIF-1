@@ -100,8 +100,6 @@
 //            // parse the JSON etc
 //        
         
-            NSLog(@"myGif is: %@", myGif);
-            
             if (myGif.length == 0) {
                 
             NSLog(@"here 2");///
