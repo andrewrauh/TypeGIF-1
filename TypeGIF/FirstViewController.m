@@ -10,8 +10,9 @@
 #import "AXCGiphy.h"
 @import QuartzCore;
 #import "DatabaseManager.h"
+#import "ChangeCollectionViewController.h"
 
-@interface FirstViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate>
+@interface FirstViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate, ChangeDelegate>
 
 @property BOOL imageSelected;
 @property (nonatomic, strong) NSMutableArray *resultsArray;
@@ -386,6 +387,22 @@
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     return YES;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"YOUR_SEGUE_NAME_HERE"])
+    {
+        // Get reference to the destination view controller
+        ChangeCollectionViewController *vc = [segue destinationViewController];
+        vc.delegate = self;
+        // Pass any objects to the view controller here, like...
+    }
+}
+
+#pragma mark - Change Collection Delegate Method
+// Implement the delegate methods for ChildViewControllerDelegate
+- (void)childViewController:(ChangeCollectionViewController *)viewController didChooseCollection:(NSString *)collection {
+    //hey
 }
 
 /* Experimental Drag + Drop Code */

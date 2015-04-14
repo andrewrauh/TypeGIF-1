@@ -4,7 +4,7 @@
 //
 //  Created by Andrew Rauh on 4/13/15.
 //  Copyright (c) 2015 EECS493. All rights reserved.
-//
+//http://stackoverflow.com/questions/6168919/how-do-i-set-up-a-simple-delegate-to-communicate-between-two-view-controllers
 
 #import "ChangeCollectionViewController.h"
 #import "DatabaseManager.h"
@@ -26,11 +26,20 @@
     self.collectionsTableView.delegate = self;
     self.collectionsTableView.dataSource = self;
     self.db = [DatabaseManager createDatabaseInstance];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)didPressClose:(id)sender {
+    id<ChangeDelegate> strongDelegate = self.delegate;
+    if ([strongDelegate respondsToSelector:@selector(childViewController:didChooseCollection:)]) {
+        [strongDelegate childViewController:self didChooseCollection:[self.collections objectAtIndex:self.selectedRow]];
+    }
+
 }
 
 #pragma mark - UITableView Methods
@@ -68,9 +77,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-    [selectedCell setAccessoryType:UITableViewCellAccessoryCheckmark];
-    
+    if (indexPath.row == self.selectedRow) {
+        UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+        [selectedCell setAccessoryType:UITableViewCellAccessoryNone];
+
+    }
+    else {
+        UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+        [selectedCell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    }
 }
 
 /*
