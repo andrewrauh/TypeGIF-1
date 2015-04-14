@@ -102,8 +102,6 @@
             [self.resultsCollectionView reloadData];
         }];
     }];
-    
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -406,7 +404,15 @@
 - (void)childViewController:(ChangeCollectionViewController *)viewController didChooseCollection:(NSString *)collection {
     //hey
     self.selectedCollectionName = collection;
-    [self.tabBarItem setTitle:collection];
+    [self.collectionButton setTitle:collection];
+//    self.tabBarItem = [[UIBarButtonItem alloc] initWithTitle:collection
+//                                     style:UIBarButtonItemStylePlain
+//                                    target:self
+//                                    action:@selector(editButtonPressed:)];
+//
+//    
+    NSLog(@"%@",self.tabBarItem.title);
+    
 }
 
 /* Experimental Drag + Drop Code */
