@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
-#import "FMDatabase.h"
+#import <FMDatabase.h>
 
 
 @interface DatabaseManager : NSObject {
@@ -19,10 +19,10 @@
 
 - (void) addGifToDatabaseWithIdentifier:(NSString*)identifier andPath:(NSString*)path;
 - (NSData*) _retrieveGifDataWithAssetURL:(NSString*) url;
-
+//Gif --> Collection
 - (void) addGifToCollection:(NSString *)collectionName and:(NSString *)photoUrl;
 - (NSArray*) photoUrlsForCollection:(NSString*) collectionName;
-
+- (NSArray*) getAllCollections;
 
 
 @end

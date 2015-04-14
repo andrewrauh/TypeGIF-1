@@ -144,5 +144,22 @@ static DatabaseManager *databaseInstance = nil;
 }
 
 
+- (NSArray*) getAllCollections {
+    NSMutableArray *allCollections = [[NSMutableArray alloc]init];
+    __block NSString *collectionName = [[NSString alloc]init];
+    if (!_dataBasePath) return nil;
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
+    [queue inDatabase:^(FMDatabase *db) {
+        NSString *qs = [NSString stringWithFormat:@"select * from COLLECTION"];
+        FMResultSet *rs = [db executeQuery:qs];
+        if (rs == nil) NSLog(@"result set nil");
+        while ([rs next]) {
+            collectionName = [rs objectForColumnIndex:0];
+            [allCollections addObject:collectionName];
+        }
+    }];
+    return [NSArray arrayWithArray:allCollections];
+}
+
 
 @end

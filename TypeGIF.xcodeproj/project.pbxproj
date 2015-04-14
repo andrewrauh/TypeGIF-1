@@ -11,7 +11,6 @@
 		817000D71AD48269006F8C4C /* GIFCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 817000D51AD48269006F8C4C /* GIFCollectionCell.m */; };
 		817000D81AD48269006F8C4C /* GIFCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 817000D61AD48269006F8C4C /* GIFCollectionCell.xib */; };
 		817000DB1AD48BAC006F8C4C /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 817000DA1AD48BAC006F8C4C /* ThirdViewController.m */; };
-		81D1A8D31ADC7C7D0012B5ED /* Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D1A8D21ADC7C7D0012B5ED /* Keyboard.m */; };
 		EDE648551AC45F7E002939A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE648541AC45F7E002939A0 /* main.m */; };
 		EDE648581AC45F7E002939A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE648571AC45F7E002939A0 /* AppDelegate.m */; };
 		EDE6485B1AC45F7E002939A0 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE6485A1AC45F7E002939A0 /* FirstViewController.m */; };
@@ -20,6 +19,7 @@
 		EDE648631AC45F7E002939A0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDE648621AC45F7E002939A0 /* Images.xcassets */; };
 		EDE648661AC45F7E002939A0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDE648641AC45F7E002939A0 /* LaunchScreen.xib */; };
 		EDE648721AC45F7E002939A0 /* TypeGIFTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE648711AC45F7E002939A0 /* TypeGIFTests.m */; };
+		F90CAFB11ADCAFED00053916 /* ChangeCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F90CAFB01ADCAFED00053916 /* ChangeCollectionViewController.m */; };
 		F9343BE61ADB578500D38762 /* Keyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9343BE51ADB578500D38762 /* Keyboard.xib */; };
 		F963E72A1AC468DC00A74FC6 /* AXCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */; };
 		F963E7351AC46FC900A74FC6 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E7341AC46FC900A74FC6 /* KeyboardViewController.m */; };
@@ -84,6 +84,8 @@
 		EDE6486B1AC45F7E002939A0 /* TypeGIFTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TypeGIFTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE648701AC45F7E002939A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDE648711AC45F7E002939A0 /* TypeGIFTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TypeGIFTests.m; sourceTree = "<group>"; };
+		F90CAFAF1ADCAFED00053916 /* ChangeCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangeCollectionViewController.h; path = ../GifKeyBoard/ChangeCollectionViewController.h; sourceTree = "<group>"; };
+		F90CAFB01ADCAFED00053916 /* ChangeCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangeCollectionViewController.m; path = ../GifKeyBoard/ChangeCollectionViewController.m; sourceTree = "<group>"; };
 		F9343BE51ADB578500D38762 /* Keyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Keyboard.xib; sourceTree = "<group>"; };
 		F963E7281AC468DC00A74FC6 /* AXCCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXCCollectionViewCell.h; sourceTree = "<group>"; };
 		F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXCCollectionViewCell.m; sourceTree = "<group>"; };
@@ -163,6 +165,8 @@
 		EDE648511AC45F7E002939A0 /* TypeGIF */ = {
 			isa = PBXGroup;
 			children = (
+				F90CAFAF1ADCAFED00053916 /* ChangeCollectionViewController.h */,
+				F90CAFB01ADCAFED00053916 /* ChangeCollectionViewController.m */,
 				EDE648561AC45F7E002939A0 /* AppDelegate.h */,
 				EDE648571AC45F7E002939A0 /* AppDelegate.m */,
 				EDE648591AC45F7E002939A0 /* FirstViewController.h */,
@@ -404,6 +408,7 @@
 				EDE6485E1AC45F7E002939A0 /* SecondViewController.m in Sources */,
 				817000DB1AD48BAC006F8C4C /* ThirdViewController.m in Sources */,
 				EDE648581AC45F7E002939A0 /* AppDelegate.m in Sources */,
+				F90CAFB11ADCAFED00053916 /* ChangeCollectionViewController.m in Sources */,
 				817000D71AD48269006F8C4C /* GIFCollectionCell.m in Sources */,
 				EDE6485B1AC45F7E002939A0 /* FirstViewController.m in Sources */,
 				F963E73F1AC5AD4700A74FC6 /* DatabaseManager.m in Sources */,
@@ -423,7 +428,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81D1A8D31ADC7C7D0012B5ED /* Keyboard.m in Sources */,
 				F963E7351AC46FC900A74FC6 /* KeyboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -31,7 +31,11 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="Search GIFs" id="X5t-7b-L1C">
-                                        <barButtonItem key="rightBarButtonItem" title="Favorites" id="EgD-9V-KLi"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Favorites" id="EgD-9V-KLi">
+                                            <connections>
+                                                <segue destination="Lod-bb-uJ5" kind="presentation" id="QT5-8c-9FN"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -93,6 +97,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="750" y="-419"/>
+        </scene>
+        <!--Change Collection View Controller-->
+        <scene sceneID="9cM-mR-qwX">
+            <objects>
+                <viewController id="Lod-bb-uJ5" customClass="ChangeCollectionViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KNm-rS-P6D"/>
+                        <viewControllerLayoutGuide type="bottom" id="nXq-kc-Pjv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wcU-VJ-kfc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="I3Q-0p-PON">
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZpN-xe-wcH">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Pick a Collection" id="jOK-2m-zUA"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZpN-xe-wcH" firstAttribute="top" secondItem="wcU-VJ-kfc" secondAttribute="top" id="DFb-P7-AYP"/>
+                            <constraint firstItem="I3Q-0p-PON" firstAttribute="leading" secondItem="ZpN-xe-wcH" secondAttribute="leading" id="Jpa-wt-cNO"/>
+                            <constraint firstItem="I3Q-0p-PON" firstAttribute="leading" secondItem="wcU-VJ-kfc" secondAttribute="leading" id="TFi-Lt-cva"/>
+                            <constraint firstItem="I3Q-0p-PON" firstAttribute="bottom" secondItem="nXq-kc-Pjv" secondAttribute="top" id="VH9-qV-uUZ"/>
+                            <constraint firstItem="I3Q-0p-PON" firstAttribute="top" secondItem="ZpN-xe-wcH" secondAttribute="bottom" id="fWa-hR-e31"/>
+                            <constraint firstItem="I3Q-0p-PON" firstAttribute="trailing" secondItem="ZpN-xe-wcH" secondAttribute="trailing" id="pTZ-V2-pcU"/>
+                            <constraint firstAttribute="trailing" secondItem="I3Q-0p-PON" secondAttribute="trailing" id="vNw-2N-Ffp"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="collectionsTableView" destination="I3Q-0p-PON" id="Yzo-sd-n3t"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4pm-95-HVv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1462" y="-619"/>
         </scene>
         <!--Favorite GIFs-->
         <scene sceneID="wg7-f3-ORb">

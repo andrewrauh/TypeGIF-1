@@ -65,6 +65,8 @@
     tableData = [NSMutableArray arrayWithObjects:@"Trending",@"test2",@"test3", nil];
 }
 
+#pragma mark - UITableViewCell 
+
 -(GIFCollectionCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"CollectionCell";
     GIFCollectionCell *cell = (GIFCollectionCell *)[collectionsTableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -100,7 +102,6 @@
     [self performSegueWithIdentifier:@"CollectionSegue" sender:self];
     
 }
-
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

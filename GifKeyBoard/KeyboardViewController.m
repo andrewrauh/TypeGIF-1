@@ -7,13 +7,13 @@
 //
 
 #import "KeyboardViewController.h"
-#import "Keyboard.h"
+//#import "Keyboard.h"
 //#import "AXCGiphy.h"
 
 
 @interface KeyboardViewController ()
 
-@property (strong, nonatomic) Keyboard *keyboard;
+//@property (strong, nonatomic) Keyboard *keyboard;
 
 @end
 
@@ -28,9 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.keyboard = [[[NSBundle mainBundle] loadNibNamed:@"Keyboard" owner:nil options:nil] objectAtIndex:0];
+//    self.keyboard = [[[NSBundle mainBundle] loadNibNamed:@"Keyboard" owner:nil options:nil] objectAtIndex:0];
     [self addGesturesToKeyboard];
-    self.inputView = self.keyboard;
+//    self.inputView = self.keyboard;
     
     
 }
@@ -58,7 +58,7 @@
 #pragma mark Keyboards
 - (void)addGesturesToKeyboard {
     // Change to next keyboard
-    [self.keyboard.nextKey addTarget:self action:@selector(advanceToNextInputMode) forControlEvents:UIControlEventTouchUpInside];
+//    [self.keyboard.nextKey addTarget:self action:@selector(advanceToNextInputMode) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
