@@ -25,6 +25,7 @@
 		F963E7351AC46FC900A74FC6 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E7341AC46FC900A74FC6 /* KeyboardViewController.m */; };
 		F963E7381AC46FC900A74FC6 /* GifKeyBoard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F963E72F1AC46FC800A74FC6 /* GifKeyBoard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F963E73F1AC5AD4700A74FC6 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E73E1AC5AD4700A74FC6 /* DatabaseManager.m */; };
+		F9DA9EEC1ADD6EFE0018C41A /* NSCountedSet+NSCountedSet_Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DA9EEB1ADD6EFE0018C41A /* NSCountedSet+NSCountedSet_Additions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,8 @@
 		F963E7341AC46FC900A74FC6 /* KeyboardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyboardViewController.m; sourceTree = "<group>"; };
 		F963E73D1AC5AD4700A74FC6 /* DatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
 		F963E73E1AC5AD4700A74FC6 /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
+		F9DA9EEA1ADD6EFE0018C41A /* NSCountedSet+NSCountedSet_Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCountedSet+NSCountedSet_Additions.h"; sourceTree = "<group>"; };
+		F9DA9EEB1ADD6EFE0018C41A /* NSCountedSet+NSCountedSet_Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCountedSet+NSCountedSet_Additions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +189,8 @@
 				F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */,
 				F963E73D1AC5AD4700A74FC6 /* DatabaseManager.h */,
 				F963E73E1AC5AD4700A74FC6 /* DatabaseManager.m */,
+				F9DA9EEA1ADD6EFE0018C41A /* NSCountedSet+NSCountedSet_Additions.h */,
+				F9DA9EEB1ADD6EFE0018C41A /* NSCountedSet+NSCountedSet_Additions.m */,
 			);
 			path = TypeGIF;
 			sourceTree = "<group>";
@@ -405,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F963E72A1AC468DC00A74FC6 /* AXCCollectionViewCell.m in Sources */,
+				F9DA9EEC1ADD6EFE0018C41A /* NSCountedSet+NSCountedSet_Additions.m in Sources */,
 				EDE6485E1AC45F7E002939A0 /* SecondViewController.m in Sources */,
 				817000DB1AD48BAC006F8C4C /* ThirdViewController.m in Sources */,
 				EDE648581AC45F7E002939A0 /* AppDelegate.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "DatabaseManager.h"
 #import "FMDatabaseQueue.h"
+#import "NSCountedSet+NSCountedSet_Additions.h"
 
 static sqlite3 *database = nil;
 static DatabaseManager *databaseInstance = nil;
@@ -113,6 +114,7 @@ static DatabaseManager *databaseInstance = nil;
 }
 
 - (void) addGifToCollection:(NSString *)collectionName and:(NSString *)photoUrl {
+    NSLog(@"saving to %@", collectionName);
     
     if (!_dataBasePath) return;
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
@@ -144,6 +146,7 @@ static DatabaseManager *databaseInstance = nil;
 }
 
 
+
 - (NSArray*) getAllCollections {
     NSLog(@"was called");
     NSMutableArray *allCollections = [[NSMutableArray alloc]init];
@@ -151,7 +154,7 @@ static DatabaseManager *databaseInstance = nil;
     if (!_dataBasePath) return nil;
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
     [queue inDatabase:^(FMDatabase *db) {
-        NSString *qs = [NSString stringWithFormat:@"select * from COLLECTION"];
+        NSString *qs = [NSString stringWithFormat:@"select collection_name from COLLECTION"];
         FMResultSet *rs = [db executeQuery:qs];
         if (rs == nil) NSLog(@"result set nil");
         while ([rs next]) {
@@ -159,7 +162,8 @@ static DatabaseManager *databaseInstance = nil;
             [allCollections addObject:collectionName];
         }
     }];
-    return [NSArray arrayWithArray:allCollections];
+    NSArray *finalArray = [[NSSet setWithArray:allCollections] allObjects];
+    return [NSArray arrayWithArray:finalArray];
 }
 
 - (void) addNewCollectionWithName:(NSString*) collectionName {
