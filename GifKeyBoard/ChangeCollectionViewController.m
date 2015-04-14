@@ -10,7 +10,7 @@
 #import "ChangeCollectionViewController.h"
 #import "DatabaseManager.h"
 
-@interface ChangeCollectionViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ChangeCollectionViewController () <UITableViewDataSource, UITableViewDelegate, ChangeDelegate>
 @property (nonatomic, strong) DatabaseManager *db;
 @property int selectedRow;
 @end
@@ -20,13 +20,17 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     self.collections = [NSMutableArray arrayWithArray:[self.db getAllCollections]];
+    [self.collectionsTableView reloadData];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.collectionsTableView.delegate = self;
     self.collectionsTableView.dataSource = self;
+    self.collections = [NSMutableArray new];
     self.db = [DatabaseManager createDatabaseInstance];
+    self.selectedRow = 0;
 
 }
 
@@ -51,6 +55,8 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    [cell.textLabel setText:[self.collections objectAtIndex:indexPath.row]];
+    
     return cell;
 }
 
@@ -81,12 +87,19 @@
     if (indexPath.row == self.selectedRow) {
         UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
         [selectedCell setAccessoryType:UITableViewCellAccessoryNone];
-
     }
     else {
+        NSLog(@"cell checkmark");
         UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
         [selectedCell setAccessoryType:UITableViewCellAccessoryCheckmark];
     }
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        id<ChangeDelegate> strongDelegate = self.delegate;
+        if ([strongDelegate respondsToSelector:@selector(childViewController:didChooseCollection:)]) {
+            [strongDelegate childViewController:self didChooseCollection:(NSString*)[self.collections objectAtIndex:self.selectedRow]];
+        }
+    }];
 }
 
 /*

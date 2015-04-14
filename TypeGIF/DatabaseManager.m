@@ -144,6 +144,7 @@ static DatabaseManager *databaseInstance = nil;
 
 
 - (NSArray*) getAllCollections {
+    NSLog(@"was called");
     NSMutableArray *allCollections = [[NSMutableArray alloc]init];
     __block NSString *collectionName = [[NSString alloc]init];
     if (!_dataBasePath) return nil;
@@ -164,7 +165,7 @@ static DatabaseManager *databaseInstance = nil;
     if (!_dataBasePath) return;
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
     [queue inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"INSERT OR REPLACE INTO COLLECTION VALUES (?)", collectionName];
+        [db executeUpdate:@"INSERT OR REPLACE INTO COLLECTION VALUES (?, ?)", collectionName, nil];
     }];
 }
 

@@ -20,7 +20,7 @@
 // 3. Definition of the delegate's interface
 @protocol ChangeDelegate <NSObject>
 
-- (void)childViewController:(ChangeCollectionViewController*)viewController
-             didChooseCollection:(NSString*)collection;
+- (void)childViewController:(ChangeCollectionViewController *)viewController didChooseCollection:(NSString *)collection;
 
 @end
+

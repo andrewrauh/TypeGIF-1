@@ -53,6 +53,8 @@
     
     self.dragG.delegate = self;
     self.imageSelected = NO;
+    self.selectedCollectionName = [NSString new];
+    
 }
 
 - (void)showAlertView {
@@ -390,7 +392,7 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"YOUR_SEGUE_NAME_HERE"])
+    if ([[segue identifier] isEqualToString:@"collections_segue"])
     {
         // Get reference to the destination view controller
         ChangeCollectionViewController *vc = [segue destinationViewController];
@@ -403,6 +405,8 @@
 // Implement the delegate methods for ChildViewControllerDelegate
 - (void)childViewController:(ChangeCollectionViewController *)viewController didChooseCollection:(NSString *)collection {
     //hey
+    self.selectedCollectionName = collection;
+    [self.tabBarItem setTitle:collection];
 }
 
 /* Experimental Drag + Drop Code */

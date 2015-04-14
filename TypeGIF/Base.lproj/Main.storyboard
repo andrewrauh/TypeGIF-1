@@ -33,7 +33,7 @@
                                     <navigationItem title="Search GIFs" id="X5t-7b-L1C">
                                         <barButtonItem key="rightBarButtonItem" title="Favorites" id="EgD-9V-KLi">
                                             <connections>
-                                                <segue destination="Lod-bb-uJ5" kind="presentation" id="QT5-8c-9FN"/>
+                                                <segue destination="Lod-bb-uJ5" kind="presentation" identifier="collections_segue" id="QT5-8c-9FN"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -90,6 +90,7 @@
                     <tabBarItem key="tabBarItem" systemItem="search" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="blurView" destination="VkL-3X-XkT" id="s0O-Ah-a11"/>
+                        <outlet property="collectionButton" destination="EgD-9V-KLi" id="Elp-a2-85i"/>
                         <outlet property="resultsCollectionView" destination="4Cr-be-cjE" id="Mdv-hJ-SD4"/>
                         <outlet property="searchTextField" destination="6TT-Fw-Wvg" id="DDM-Hy-w8w"/>
                     </connections>
