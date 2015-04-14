@@ -65,9 +65,10 @@
     [self.collectionsTableView setBackgroundColor:[UIColor blackColor]];
 
     // TODO : populate tableData with user's saved collection names
-    tableData = [NSMutableArray arrayWithObjects:@"Trending",@"test2",@"test3", nil];
+//    tableData = [NSMutableArray arrayWithObjects:@"Trending",@"test2",@"test3", nil];
     self.db   = [DatabaseManager createDatabaseInstance];
-    //tableData = [self.db getAllCollections];
+    tableData = [NSMutableArray arrayWithArray:[self.db getAllCollections]];
+    [self.collectionsTableView reloadData];
 }
 
 #pragma mark - UITableViewCell 
