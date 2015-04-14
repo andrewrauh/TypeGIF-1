@@ -105,6 +105,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSLog(@"prepare for seque called");
+    //need to pass in the array of urls to use
     
 }
 

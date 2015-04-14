@@ -167,7 +167,6 @@
             NSURLResponse *response;
             NSError *Jerror = nil;
             myGif = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&Jerror];
-            
             NSString *str = [NSString stringWithFormat:@"%@", gif.originalImage.url];
             [self writeGifToDisk:myGif withName:str];
         }
@@ -219,6 +218,21 @@
 {
     //You may want to create a divider to scale the size by the way..
     return CGSizeMake(100,100);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 5;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 #pragma mark - Gesture Recognizer Delegate Methods

@@ -15,6 +15,7 @@
 @interface FirstViewController : UIViewController  <UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet UITextField* searchTextField;
+@property (nonatomic, strong) UIBarButtonItem *collectionButton;
 
 @end
 
