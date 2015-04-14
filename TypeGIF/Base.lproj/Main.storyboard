@@ -130,7 +130,7 @@
                                     <navigationItem title="Pick a Collection" id="jOK-2m-zUA">
                                         <barButtonItem key="leftBarButtonItem" title="Close" id="MKW-hH-52S">
                                             <connections>
-                                                <action selector="closeButtonAction:" destination="Lod-bb-uJ5" id="aA6-eT-9no"/>
+                                                <action selector="didPressClose:" destination="Lod-bb-uJ5" id="YvC-Wt-7ze"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>

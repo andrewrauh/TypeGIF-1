@@ -67,6 +67,7 @@
     // TODO : populate tableData with user's saved collection names
     tableData = [NSMutableArray arrayWithObjects:@"Trending",@"test2",@"test3", nil];
     self.db   = [DatabaseManager createDatabaseInstance];
+    //tableData = [self.db getAllCollections];
 }
 
 #pragma mark - UITableViewCell 
