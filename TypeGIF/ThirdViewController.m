@@ -27,7 +27,6 @@
         [self.editCollectionButton setTitle:@"Edit"];
         [self.editCollectionButton setStyle:UIBarButtonItemStylePlain];
     }
-
     [self.favoritesCollectionView setEditing:editing];
 }
 
@@ -40,15 +39,6 @@
 
     self.db   = [DatabaseManager createDatabaseInstance];
     self.collectionData = [NSMutableArray arrayWithArray:[self.db photoUrlsForCollection:self.collectionName]];
-    
-    ///
-    for (NSString* url in self.collectionData) {
-        NSLog(@"url is: %@", url);///
-        if (url == NULL) {
-            
-        }
-    }///
-    
     [self.favoritesCollectionView reloadData];
 }
 
@@ -62,9 +52,6 @@
 - (AXCCollectionViewCell *) collectionView:(GIFCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     AXCCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-//    AXCGiphy * gif = self.collectionData[indexPath.item];
-    
-    NSString *url = self.collectionData[indexPath.item];
     
     CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
     CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
@@ -75,56 +62,17 @@
     [cell.imageView setAnimatedImage:nil];
 
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
-        NSData *myGif;
+        NSData *gif;
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-        
-        NSLog(@"paths size: %lu", (unsigned long)[paths count]);
-        
         NSString *documentsDirectory = [paths objectAtIndex:0];
-//        NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
-//        NSString *str = [NSString stringWithFormat:@"%@", gif.originalImage.url];
-//        NSString *trimmedReplacement = [[str componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
-//        NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
-        NSString *fileName = url;
-        
-        //NSLog(@"fileName is: %@", fileName);
-        
+        NSString *fileName = self.collectionData[indexPath.item];
         NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
         
-        NSError* error = nil;///
-        myGif = [NSData dataWithContentsOfFile:dataPath  options: 0 error: &error];
-//        if (myGif == nil) {
-//            NSLog(@"Failed to read file, error %@", error);
-//        }///
-//        else {
-//            // parse the JSON etc
-//        
-        
-            if (myGif.length == 0) {
-                
-            NSLog(@"here 2");///
-    //            
-    //            NSURLRequest * request = [NSURLRequest requestWithURL:gif.originalImage.url];
-    //            NSURLResponse *response;
-    //            NSError *Jerror = nil;
-    //            myGif = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&Jerror];
-
-    //            NSString *str = [NSString stringWithFormat:@"%@", gif.originalImage.url];
-    //            [self writeGifToDisk:myGif withName:str];
-            }
-            else {
-                
-                        NSLog(@"here 2.5");///
-                NSLog(@"cache hit");
-            }
-//        };
-        
-        
-        FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:myGif];
+        gif = [NSData dataWithContentsOfFile:dataPath];
+        FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:gif];
         
         dispatch_async(dispatch_get_main_queue(), ^(void){
             cell.imageView.animatedImage = image;
-//            [cell setImageURL:str];
             cell.imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
         });
     });
@@ -157,8 +105,6 @@
 - (UIEdgeInsets)collectionView:(GIFCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
-
-
 
 /*
 #pragma mark - Navigation
