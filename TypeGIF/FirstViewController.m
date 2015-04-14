@@ -102,7 +102,7 @@
     
     
     [self.collectionButton setPossibleTitles:[NSSet setWithArray:[self.db getAllCollections]]];
-    [self.resultsCollectionView setBackgroundColor:[UIColor lightGrayColor]];
+    [self.resultsCollectionView setBackgroundColor:[UIColor whiteColor]];
     self.selectedCollectionName = [NSString stringWithFormat:@"favorites"]; //default value
 }
 
@@ -187,7 +187,7 @@
         dispatch_async(dispatch_get_main_queue(), ^(void){
             cell.imageView.animatedImage = image;
             [cell setImageURL:str];
-            cell.imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
+            cell.imageView.frame = CGRectMake(0.0, 0.0, 123.0, 100.0);
         });
     });
     return cell;
@@ -249,7 +249,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    CGSize mElementSize = CGSizeMake(100, 100);
+    CGSize mElementSize = CGSizeMake(123, 100);
     return mElementSize;
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -310,15 +310,10 @@
 }
 
 - (NSString*) buildFilePathFromURL:(NSString*) url {
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
     NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
     NSString *str = [NSString stringWithFormat:@"%@", url];
     NSString *trimmedReplacement = [[str componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
     NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
-//    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
-
-    NSLog(@"\n added file: %@ \n", fileName);///
     return fileName;
 }
 
