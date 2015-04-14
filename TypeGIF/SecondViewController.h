@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ThirdViewController.h"
 #import "GIFCollectionCell.h"
+#import "DatabaseManager.h"
 
 @interface SecondViewController : UIViewController
 

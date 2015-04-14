@@ -115,17 +115,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"CollectionSegue" sender:self];
+    [self performSegueWithIdentifier:@"CollectionSegue" sender:indexPath];
     
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"prepare for seque called");
-    //need to pass in the array of urls to use
-    
+    if ([[segue identifier] isEqualToString:@"CollectionSegue"]) {
+        NSIndexPath *indexPath = (NSIndexPath *)sender;
+        ThirdViewController *vc = [segue destinationViewController];
+        vc.collectionName = tableData[indexPath.row];
+    }
 }
-
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {

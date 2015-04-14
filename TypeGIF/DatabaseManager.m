@@ -120,6 +120,7 @@ static DatabaseManager *databaseInstance = nil;
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"INSERT INTO COLLECTION VALUES (?, ?)", collectionName, photoUrl];
+        NSLog(@"*** INSERTING %@ \n INTO %@", photoUrl, collectionName);
     }];
 }
 
@@ -132,7 +133,7 @@ static DatabaseManager *databaseInstance = nil;
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
     
     [queue inDatabase:^(FMDatabase *db) {
-        NSString *qs = [NSString stringWithFormat:@"select * from COLLECTION where collection_name='%@'", collectionName];
+        NSString *qs = [NSString stringWithFormat:@"select * from COLLECTION where collection_name='%@' and photo_url is not null", collectionName];
         
         FMResultSet *rs = [db executeQuery:qs];
         if (rs == nil) NSLog(@"result set nil");
@@ -148,7 +149,7 @@ static DatabaseManager *databaseInstance = nil;
 
 
 - (NSArray*) getAllCollections {
-    NSLog(@"was called");
+//    NSLog(@"was called");
     NSMutableArray *allCollections = [[NSMutableArray alloc]init];
     __block NSString *collectionName = [[NSString alloc]init];
     if (!_dataBasePath) return nil;
