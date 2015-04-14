@@ -13,6 +13,22 @@
 @end
 
 @implementation ThirdViewController
+@synthesize favoritesCollectionView, collectionData;
+
+- (IBAction)editCollectionAction:(id)sender {
+//    BOOL editing = !self.favoritesCollectionView.editing;
+//    
+//    if (editing) {
+//        [self.editCollectionButton setTitle:@"Done"];
+//        [self.editCollectionButton setStyle:UIBarButtonItemStyleDone];
+//    }
+//    else{
+//        [self.editCollectionButton setTitle:@"Edit"];
+//        [self.editCollectionButton setStyle:UIBarButtonItemStylePlain];
+//    }
+//    
+//    [self.favoritesCollectionView setEditing:editing animated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
