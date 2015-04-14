@@ -31,8 +31,8 @@
 -(void) handleSingleTap:(UITapGestureRecognizer*) tapRecognizer;
 -(void) writeGifToDisk:(NSData * )gif withName:(NSString* ) name;
 
-
 @end
+
 
 @implementation FirstViewController
 @synthesize resultsCollectionView;
@@ -49,12 +49,10 @@
     [self.resultsCollectionView addGestureRecognizer:self.longPressRecognizer];
     [self.resultsCollectionView  addGestureRecognizer:self.doubleTapRecognizer];
 //    [self.resultsCollectionView  addGestureRecognizer:self.singleTap];
-
     
     self.dragG.delegate = self;
     self.imageSelected = NO;
     self.selectedCollectionName = [NSString new];
-    
 }
 
 - (void)showAlertView {
@@ -91,17 +89,21 @@
     [self showAlertView];
     self.db = [DatabaseManager createDatabaseInstance];
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeAnnularDeterminate;
-    hud.labelText = @"Loading";
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    hud.mode = MBProgressHUDModeAnnularDeterminate;
+//    hud.labelText = @"Loading";
     
-    [AXCGiphy trendingGIFsWithlimit:30 offset:0 completion:^(NSArray *results, NSError *error) {
-        self.resultsArray = [NSMutableArray arrayWithArray:results];
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [hud hide:YES];
-            [self.resultsCollectionView reloadData];
-        }];
-    }];
+//    [AXCGiphy trendingGIFsWithlimit:30 offset:0 completion:^(NSArray *results, NSError *error) {
+//        self.resultsArray = [NSMutableArray arrayWithArray:results];
+//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//            [hud hide:YES];
+//            [self.resultsCollectionView reloadData];
+//        }];
+//    }];
+    
+    
+    [self.collectionButton setPossibleTitles:[NSSet setWithArray:[self.db getAllCollections]]];
+    [self.resultsCollectionView setBackgroundColor:[UIColor lightGrayColor]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -146,8 +148,12 @@
 {
     AXCCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     AXCGiphy * gif = self.resultsArray[indexPath.item];
-    
-    [cell setBackgroundColor:[UIColor grayColor]];
+    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
+    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
+    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
+    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:0.2];
+
+    [cell setBackgroundColor:color];
     [cell setImageView:nil];
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
@@ -183,7 +189,6 @@
 }
 
 
-
 -(void) writeGifToDisk:(NSData * )gif withName:(NSString* ) name {
     // Use GCD's background queue
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
@@ -194,7 +199,7 @@
         NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
         NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
         [gif writeToFile:dataPath atomically:YES];
-//        NSLog(@"wrote to %@", dataPath);
+        NSLog(@"wrote to %@", dataPath);
         
     });
 }
@@ -269,7 +274,6 @@
 }
 
 - (void) animateHideBlurView {
-    
     [UIView animateWithDuration:0.3 animations:^{
         [self.blurView setFrame:CGRectMake(0, self.view.frame.size.height+self.blurView.frame.size.height, self.blurView.frame.size.width, self.blurView.frame.size.height)];
 
@@ -402,9 +406,11 @@
 #pragma mark - Change Collection Delegate Method
 // Implement the delegate methods for ChildViewControllerDelegate
 - (void)childViewController:(ChangeCollectionViewController *)viewController didChooseCollection:(NSString *)collection {
-    //hey
+
     self.selectedCollectionName = collection;
     [self.collectionButton setTitle:collection];
+    self.collectionButton.title = collection;
+    
 //    self.tabBarItem = [[UIBarButtonItem alloc] initWithTitle:collection
 //                                     style:UIBarButtonItemStylePlain
 //                                    target:self
