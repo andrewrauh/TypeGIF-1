@@ -199,7 +199,7 @@
         NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
         NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
         [gif writeToFile:dataPath atomically:YES];
-//        NSLog(@"wrote to %@", dataPath);
+        NSLog(@"wrote to %@", dataPath);
         
     });
 }

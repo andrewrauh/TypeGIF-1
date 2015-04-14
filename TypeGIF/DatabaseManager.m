@@ -169,5 +169,13 @@ static DatabaseManager *databaseInstance = nil;
     }];
 }
 
+-(void) removeCollectionWithName:(NSString* ) collectionName {
+    if (!_dataBasePath) return;
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
+    [queue inDatabase:^(FMDatabase *db) {
+        NSString *qs = [NSString stringWithFormat:@"DELETE * from COLLECTION where collection_name='%@'", collectionName];
+        [db executeUpdate:qs];
+    }];
+}
 
 @end
