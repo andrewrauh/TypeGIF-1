@@ -1,0 +1,79 @@
+/*! style.scss */
+
+$darkColor: #000000;
+$lightColor: #FFFFFF;
+
+$xlargeSize: 124px;
+$largeSize: 96px;
+$mediumSize: 48px;
+$smallSize: 24px;
+
+$contentWidth: 1000px;
+
+$verticalMargin: 80px;
+
+* { 
+	margin : 0; 
+	padding : 0; 
+}
+
+body {
+	background : $lightColor;
+	color : $darkColor;	
+	font-size : $smallSize;
+	text-align : center;
+}
+
+section {
+	width : 100%;
+	overflow : auto;
+}
+
+h1, h2, h3, h4 {
+
+}
+
+h1 {
+	font-size : $xlargeSize !important;
+}
+
+h2 {
+	font-size : $mediumSize;
+}
+
+ul, ol {
+	list-style-type : none;
+}
+
+a {
+    text-decoration : none;
+}
+
+.content {
+	margin : $verticalMargin auto;
+	width : $contentWidth;
+	clear : none;
+}
+
+#landing, #info, #demo {
+	min-height : 100vh;
+}
+
+#landing {
+	text-align : center;
+	display : table;
+}
+
+#landing .content {
+	display : table-cell;
+	vertical-align : middle;
+}
+
+#info {
+	background : $darkColor; 
+	color : $lightColor;
+}
+
+#iphone {
+	max-height : 80vh;
+}
