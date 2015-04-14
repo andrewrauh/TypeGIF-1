@@ -88,17 +88,17 @@
     [self showAlertView];
     self.db = [DatabaseManager createDatabaseInstance];
     
-//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    hud.mode = MBProgressHUDModeAnnularDeterminate;
-//    hud.labelText = @"Loading";
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.labelText = @"Loading";
     
-//    [AXCGiphy trendingGIFsWithlimit:30 offset:0 completion:^(NSArray *results, NSError *error) {
-//        self.resultsArray = [NSMutableArray arrayWithArray:results];
-//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//            [hud hide:YES];
-//            [self.resultsCollectionView reloadData];
-//        }];
-//    }];
+    [AXCGiphy trendingGIFsWithlimit:30 offset:0 completion:^(NSArray *results, NSError *error) {
+        self.resultsArray = [NSMutableArray arrayWithArray:results];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [hud hide:YES];
+            [self.resultsCollectionView reloadData];
+        }];
+    }];
     
     
     [self.collectionButton setPossibleTitles:[NSSet setWithArray:[self.db getAllCollections]]];
@@ -148,13 +148,14 @@
 {
     AXCCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     AXCGiphy * gif = self.resultsArray[indexPath.item];
+    
     CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
     CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
     CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
     UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:0.2];
 
     [cell setBackgroundColor:color];
-    [cell setImageView:nil];
+    [cell.imageView setAnimatedImage:nil];
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
         
@@ -176,6 +177,9 @@
             myGif = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&Jerror];
             NSString *str = [NSString stringWithFormat:@"%@", gif.originalImage.url];
             [self writeGifToDisk:myGif withName:str];
+        }
+        else {
+            NSLog(@"cache hit");
         }
 
         FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:myGif];
@@ -200,7 +204,7 @@
         NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
         NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
         [gif writeToFile:dataPath atomically:YES];
-        NSLog(@"wrote to %@", dataPath);
+//        NSLog(@"wrote to %@", dataPath);
         
     });
 }
@@ -334,7 +338,8 @@
                 } completion:^(BOOL finished) {
                     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                     hud.mode = MBProgressHUDModeCustomView;
-                    hud.labelText = @"Saved to Favorites!";
+                    NSString *hudStr = [NSString stringWithFormat:@"Saved to %@", self.selectedCollectionName];
+                    hud.labelText = hudStr;
                     [hud hide:YES afterDelay:1.0f];
                     [self.blurView setHidden:YES];
                     [self.movingCell setImage:nil];
