@@ -30,7 +30,7 @@
     self.collections = [NSMutableArray new];
     self.db = [DatabaseManager createDatabaseInstance];
     self.selectedRow = 0;
-
+    [self.view setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,7 +54,7 @@
     CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
     CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
     CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
-    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:0.2];
+    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:0.5];
     
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -62,6 +62,10 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     [cell.textLabel setText:[self.collections objectAtIndex:indexPath.row]];
+    [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
+    [cell.textLabel setTextColor:[UIColor whiteColor]];
+    [cell.textLabel setFont:[UIFont fontWithName:@"Avenir Next" size:24.0f]];
+
     [cell setBackgroundColor:color];
     return cell;
 }

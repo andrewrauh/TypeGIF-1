@@ -344,7 +344,6 @@
                     [self.blurView setHidden:YES];
                     [self.movingCell setImage:nil];
                     NSLog(@"collection name is!!!!!! %@", self.selectedCollectionName);
-                    
                     [self.db addGifToCollection:self.selectedCollectionName and:[self buildFilePathFromURL:cell.imageURL]];
                 }];
             }];

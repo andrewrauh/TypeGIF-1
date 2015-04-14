@@ -13,7 +13,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.layer.cornerRadius = 10.0f;
+//    self.layer.cornerRadius = 10.0f;
+    [self.nameLabel setTextColor:[UIColor whiteColor]];
+    [self.nameLabel setFont:[UIFont fontWithName:@"Avenir Next" size:30.0f]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

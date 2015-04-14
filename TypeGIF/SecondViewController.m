@@ -69,14 +69,24 @@
     self.db   = [DatabaseManager createDatabaseInstance];
     tableData = [NSMutableArray arrayWithArray:[self.db getAllCollections]];
     [self.collectionsTableView reloadData];
+    [self.collectionsTableView setBackgroundColor:[UIColor whiteColor]];
 }
+
 
 #pragma mark - UITableViewCell 
 
 -(GIFCollectionCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
+    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
+    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
+    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:0.5];
+
     static NSString *cellIdentifier = @"CollectionCell";
     GIFCollectionCell *cell = (GIFCollectionCell *)[collectionsTableView dequeueReusableCellWithIdentifier:cellIdentifier];
     cell.nameLabel.text = tableData[indexPath.row];
+    
+    [cell setBackgroundColor:color];
     return cell;
 }
 
@@ -89,17 +99,17 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60.0f;
+    return 90.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10.; // you can have your own choice, of course
+    return 0.0; // you can have your own choice, of course
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [[UIView alloc] init];
-    headerView.backgroundColor = [UIColor clearColor];
+    headerView.backgroundColor = [UIColor whiteColor];
     return headerView;
 }
 
