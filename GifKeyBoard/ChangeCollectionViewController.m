@@ -18,6 +18,10 @@
 @implementation ChangeCollectionViewController
 
 
+- (IBAction)closeButtonAction:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 -(void)viewWillAppear:(BOOL)animated {
     self.collections = [NSMutableArray arrayWithArray:[self.db getAllCollections]];
     [self.collectionsTableView reloadData];
