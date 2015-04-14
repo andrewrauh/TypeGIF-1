@@ -1,0 +1,51 @@
+/*! style.scss */
+* {
+  margin: 0;
+  padding: 0; }
+
+body {
+  background: #FFFFFF;
+  color: #000000;
+  font-size: 24px;
+  text-align: center; }
+
+section {
+  width: 100%;
+  overflow: auto; }
+
+h1 {
+  font-size: 124px !important; }
+
+h2 {
+  font-size: 48px; }
+
+ul, ol {
+  list-style-type: none; }
+
+a {
+  text-decoration: none; }
+
+.content {
+  margin: 80px auto;
+  width: 1000px;
+  clear: none; }
+
+#landing, #info, #demo {
+  min-height: 100vh; }
+
+#landing {
+  text-align: center;
+  display: table; }
+
+#landing .content {
+  display: table-cell;
+  vertical-align: middle; }
+
+#info {
+  background: #000000;
+  color: #FFFFFF; }
+
+#iphone {
+  max-height: 80vh; }
+
+/*# sourceMappingURL=style.css.map */
