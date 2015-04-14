@@ -4,6 +4,7 @@
 //
 //  Created by Andrew Rauh on 4/13/15.
 //  Copyright (c) 2015 EECS493. All rights reserved.
+
 //http://stackoverflow.com/questions/6168919/how-do-i-set-up-a-simple-delegate-to-communicate-between-two-view-controllers
 
 #import "ChangeCollectionViewController.h"

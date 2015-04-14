@@ -118,7 +118,6 @@ static DatabaseManager *databaseInstance = nil;
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"INSERT OR REPLACE INTO COLLECTION VALUES (?, ?)", collectionName, photoUrl];
     }];
-
 }
 
 - (NSArray*) photoUrlsForCollection:(NSString*) collectionName{
@@ -159,6 +158,14 @@ static DatabaseManager *databaseInstance = nil;
         }
     }];
     return [NSArray arrayWithArray:allCollections];
+}
+
+- (void) addNewCollectionWithName:(NSString*) collectionName {
+    if (!_dataBasePath) return;
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"INSERT OR REPLACE INTO COLLECTION VALUES (?)", collectionName];
+    }];
 }
 
 

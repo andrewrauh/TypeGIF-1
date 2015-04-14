@@ -7,14 +7,16 @@
 //
 
 #import "SecondViewController.h"
+#import "DatabaseManager.h"
 
 @interface SecondViewController () <UITableViewDataSource, UITableViewDelegate>
-
+@property (nonatomic, strong) DatabaseManager *db;
 @end
 
 
 @implementation SecondViewController
 @synthesize collectionsTableView, tableData;
+
 
 - (IBAction)editCollectionsAction:(id)sender {
     BOOL editing = !self.collectionsTableView.editing;
@@ -45,7 +47,8 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         NSString *name = [alertView textFieldAtIndex:0].text;
-
+        [self.db addNewCollectionWithName:name];
+        
         // TODO : save new collection name to backend
         [tableData addObject:name];
         [collectionsTableView reloadData];
@@ -63,6 +66,7 @@
 
     // TODO : populate tableData with user's saved collection names
     tableData = [NSMutableArray arrayWithObjects:@"Trending",@"test2",@"test3", nil];
+    self.db   = [DatabaseManager createDatabaseInstance];
 }
 
 #pragma mark - UITableViewCell 

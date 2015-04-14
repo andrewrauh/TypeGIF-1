@@ -23,6 +23,7 @@
 - (void) addGifToCollection:(NSString *)collectionName and:(NSString *)photoUrl;
 - (NSArray*) photoUrlsForCollection:(NSString*) collectionName;
 - (NSArray*) getAllCollections;
+- (void) addNewCollectionWithName:(NSString*) collectionName;
 
 
 @end
