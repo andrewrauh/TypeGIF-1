@@ -65,7 +65,7 @@ static DatabaseManager *databaseInstance = nil;
             }
             
             sql_stmt =
-            "create table if not exists COLLECTION (collection_name text, photo_url text, UNIQUE(collection_name))";
+            "create table if not exists COLLECTION (collection_name text, photo_url text, UNIQUE(photo_url))";
             if (sqlite3_exec(database, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
                 isSuccess = NO;
                 NSLog(@"Failed to create table b");
@@ -113,10 +113,11 @@ static DatabaseManager *databaseInstance = nil;
 }
 
 - (void) addGifToCollection:(NSString *)collectionName and:(NSString *)photoUrl {
+    
     if (!_dataBasePath) return;
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
     [queue inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"INSERT OR REPLACE INTO COLLECTION VALUES (?, ?)", collectionName, photoUrl];
+        [db executeUpdate:@"INSERT INTO COLLECTION VALUES (?, ?)", collectionName, photoUrl];
     }];
 }
 

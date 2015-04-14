@@ -52,7 +52,7 @@
     
     self.dragG.delegate = self;
     self.imageSelected = NO;
-    self.selectedCollectionName = [NSString new];
+    self.selectedCollectionName = [NSString stringWithFormat:@"favorites"]; //default value
 }
 
 - (void)showAlertView {
@@ -182,6 +182,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^(void){
             cell.imageView.animatedImage = image;
+            [cell setImageURL:str];
             cell.imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
         });
     });
@@ -282,10 +283,20 @@
     } ];
 }
 
+- (NSString*) buildFilePathFromURL:(NSString*) url {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+    NSString *str = [NSString stringWithFormat:@"%@", url];
+    NSString *trimmedReplacement = [[str componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
+    NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
+    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
+    return dataPath;
+}
+
 -(void)handleDoubleTap:(UITapGestureRecognizer *)tapRecognizer {
-    NSLog(@"got here");
-    
     [self animateShowBlurView];
+    
     CGPoint locationPoint = [tapRecognizer locationInView:self.resultsCollectionView];
     CGPoint animationPoint = [tapRecognizer locationInView:self.view];
     animationPoint = CGPointMake(animationPoint.x, animationPoint.y-100);
@@ -293,13 +304,15 @@
     
     AXCCollectionViewCell *cell = (AXCCollectionViewCell*)[self.resultsCollectionView cellForItemAtIndexPath:indexOfClickedCell];
     
+
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
         UIGraphicsBeginImageContext(cell.bounds.size);
         [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
         UIImage *cellImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
+        
+        
         dispatch_async(dispatch_get_main_queue(), ^(void){
-            
             if (self.movingCell.image != nil) {
                 self.movingCell = [[UIImageView alloc] initWithImage:cellImage];
             }
@@ -325,6 +338,7 @@
                     [hud hide:YES afterDelay:1.0f];
                     [self.blurView setHidden:YES];
                     [self.movingCell setImage:nil];
+                    [self.db addGifToCollection:self.selectedCollectionName and:[self buildFilePathFromURL:cell.imageURL]];
                 }];
             }];
         });
