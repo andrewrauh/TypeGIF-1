@@ -317,6 +317,8 @@
     NSString *trimmedReplacement = [[str componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
     NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
 //    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
+
+    NSLog(@"\n added file: %@ \n", fileName);///
     return fileName;
 }
 
