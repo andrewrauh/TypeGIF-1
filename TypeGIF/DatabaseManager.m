@@ -146,8 +146,6 @@ static DatabaseManager *databaseInstance = nil;
     return [NSArray arrayWithArray:photoUrls];
 }
 
-
-
 - (NSArray*) getAllCollections {
 //    NSLog(@"was called");
     NSMutableArray *allCollections = [[NSMutableArray alloc]init];
@@ -179,7 +177,7 @@ static DatabaseManager *databaseInstance = nil;
     if (!_dataBasePath) return;
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
     [queue inDatabase:^(FMDatabase *db) {
-        NSString *qs = [NSString stringWithFormat:@"DELETE * from COLLECTION where collection_name='%@'", collectionName];
+        NSString *qs = [NSString stringWithFormat:@"delete from COLLECTION where collection_name='%@'", collectionName];
         [db executeUpdate:qs];
     }];
 }

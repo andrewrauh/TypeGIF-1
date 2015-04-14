@@ -24,6 +24,6 @@
 - (NSArray*) photoUrlsForCollection:(NSString*) collectionName;
 - (NSArray*) getAllCollections;
 - (void) addNewCollectionWithName:(NSString*) collectionName;
-
+- (void) removeCollectionWithName:(NSString*) collectionName;
 
 @end
