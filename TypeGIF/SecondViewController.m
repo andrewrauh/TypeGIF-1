@@ -67,6 +67,7 @@
     // TODO : populate tableData with user's saved collection names
     tableData = [NSMutableArray arrayWithObjects:@"Trending",@"test2",@"test3", nil];
     self.db   = [DatabaseManager createDatabaseInstance];
+    //tableData = [self.db getAllCollections];
 }
 
 #pragma mark - UITableViewCell 
@@ -117,6 +118,8 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // TODO : delete GIFs owned by collection being deleted
+
         [self.tableData removeObjectAtIndex:indexPath.row];
         [self.collectionsTableView reloadData];
     }

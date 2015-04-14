@@ -17,7 +17,6 @@
 
 @implementation ChangeCollectionViewController
 
-
 -(void)viewWillAppear:(BOOL)animated {
     self.collections = [NSMutableArray arrayWithArray:[self.db getAllCollections]];
     [self.collectionsTableView reloadData];
@@ -41,10 +40,10 @@
 
 - (IBAction)didPressClose:(id)sender {
     id<ChangeDelegate> strongDelegate = self.delegate;
-    if ([strongDelegate respondsToSelector:@selector(childViewController:didChooseCollection:)]) {
+    if ([strongDelegate respondsToSelector:@selector(childViewController:didChooseCollection:)] && [self.collections count] > self.selectedRow) {
         [strongDelegate childViewController:self didChooseCollection:[self.collections objectAtIndex:self.selectedRow]];
     }
-
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITableView Methods
