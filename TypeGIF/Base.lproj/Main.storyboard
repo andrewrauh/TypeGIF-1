@@ -207,7 +207,7 @@
             </objects>
             <point key="canvasLocation" x="750" y="578"/>
         </scene>
-        <!--Third View Controller-->
+        <!--Collection-->
         <scene sceneID="PST-Ja-WG5">
             <objects>
                 <viewController id="l9d-mc-SVR" customClass="ThirdViewController" sceneMemberID="viewController">
@@ -216,11 +216,11 @@
                         <viewControllerLayoutGuide type="bottom" id="j7i-K9-He6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Hg0-DH-cXG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Alw-bi-BZW">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="495"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="e45-HG-EOp">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -232,13 +232,24 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Alw-bi-BZW" firstAttribute="top" secondItem="XKe-1F-oWw" secondAttribute="bottom" id="8Ig-DC-jcW"/>
-                            <constraint firstItem="Alw-bi-BZW" firstAttribute="leading" secondItem="Hg0-DH-cXG" secondAttribute="leading" id="Iew-uI-Cao"/>
-                            <constraint firstAttribute="trailing" secondItem="Alw-bi-BZW" secondAttribute="trailing" id="n81-un-VtL"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="Alw-bi-BZW" secondAttribute="bottom" constant="-8" id="ynn-es-Xft"/>
+                            <constraint firstItem="Alw-bi-BZW" firstAttribute="top" secondItem="XKe-1F-oWw" secondAttribute="bottom" id="HTn-ha-b1b"/>
+                            <constraint firstAttribute="trailing" secondItem="Alw-bi-BZW" secondAttribute="trailing" id="gyA-pJ-sSx"/>
+                            <constraint firstItem="Alw-bi-BZW" firstAttribute="leading" secondItem="Hg0-DH-cXG" secondAttribute="leading" id="r6c-w0-JTB"/>
+                            <constraint firstAttribute="bottom" secondItem="Alw-bi-BZW" secondAttribute="bottom" id="vVS-Ke-756"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Collection" id="T9s-UC-Rgg">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="ap2-lR-F1v">
+                            <connections>
+                                <action selector="editCollectionAction:" destination="l9d-mc-SVR" id="5l1-na-t8x"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="editCollectionButton" destination="ap2-lR-F1v" id="tIf-3p-NkL"/>
                         <outlet property="favoritesCollectionView" destination="Alw-bi-BZW" id="8El-UK-pwh"/>
                     </connections>
                 </viewController>

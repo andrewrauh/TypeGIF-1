@@ -11,5 +11,7 @@
 @interface ThirdViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UICollectionView *favoritesCollectionView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *editCollectionButton;
+@property (nonatomic, strong) NSMutableArray *collectionData;
 
 @end
