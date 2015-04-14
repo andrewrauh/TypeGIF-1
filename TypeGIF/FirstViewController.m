@@ -52,7 +52,6 @@
     
     self.dragG.delegate = self;
     self.imageSelected = NO;
-    self.selectedCollectionName = [NSString new];
 }
 
 - (void)showAlertView {
@@ -104,6 +103,7 @@
     
     [self.collectionButton setPossibleTitles:[NSSet setWithArray:[self.db getAllCollections]]];
     [self.resultsCollectionView setBackgroundColor:[UIColor lightGrayColor]];
+    self.selectedCollectionName = [NSString stringWithFormat:@"favorites"]; //default value
 }
 
 - (void)didReceiveMemoryWarning {
@@ -182,6 +182,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^(void){
             cell.imageView.animatedImage = image;
+            [cell setImageURL:str];
             cell.imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
         });
     });
@@ -282,10 +283,20 @@
     } ];
 }
 
+- (NSString*) buildFilePathFromURL:(NSString*) url {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+    NSString *str = [NSString stringWithFormat:@"%@", url];
+    NSString *trimmedReplacement = [[str componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
+    NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
+    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
+    return dataPath;
+}
+
 -(void)handleDoubleTap:(UITapGestureRecognizer *)tapRecognizer {
-    NSLog(@"got here");
-    
     [self animateShowBlurView];
+    
     CGPoint locationPoint = [tapRecognizer locationInView:self.resultsCollectionView];
     CGPoint animationPoint = [tapRecognizer locationInView:self.view];
     animationPoint = CGPointMake(animationPoint.x, animationPoint.y-100);
@@ -293,13 +304,15 @@
     
     AXCCollectionViewCell *cell = (AXCCollectionViewCell*)[self.resultsCollectionView cellForItemAtIndexPath:indexOfClickedCell];
     
+
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
         UIGraphicsBeginImageContext(cell.bounds.size);
         [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
         UIImage *cellImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
+        
+        
         dispatch_async(dispatch_get_main_queue(), ^(void){
-            
             if (self.movingCell.image != nil) {
                 self.movingCell = [[UIImageView alloc] initWithImage:cellImage];
             }
@@ -325,6 +338,9 @@
                     [hud hide:YES afterDelay:1.0f];
                     [self.blurView setHidden:YES];
                     [self.movingCell setImage:nil];
+                    NSLog(@"collection name is!!!!!! %@", self.selectedCollectionName);
+                    
+                    [self.db addGifToCollection:self.selectedCollectionName and:[self buildFilePathFromURL:cell.imageURL]];
                 }];
             }];
         });
@@ -411,66 +427,13 @@
     [self.collectionButton setTitle:collection];
     self.collectionButton.title = collection;
     
-//    self.tabBarItem = [[UIBarButtonItem alloc] initWithTitle:collection
-//                                     style:UIBarButtonItemStylePlain
-//                                    target:self
-//                                    action:@selector(editButtonPressed:)];
-//
-//    
-    NSLog(@"%@",self.tabBarItem.title);
+    self.selectedCollectionName = collection;
+    NSLog(@"%@",self.selectedCollectionName);
     
 }
 
 /* Experimental Drag + Drop Code */
 
-//-(void)handlePan:(UIPanGestureRecognizer *)panRecognizer {
-//
-//    CGPoint locationPoint = [panRecognizer locationInView:self.view];
-//    self.imageSelected = YES;
-//
-//    if (panRecognizer.state == UIGestureRecognizerStateBegan) {
-////
-////        [self.blurView setHidden:NO];
-////
-////        NSIndexPath *indexPathOfMovingCell = [self.resultsCollectionView indexPathForItemAtPoint:locationPoint];
-////        UICollectionViewCell *cell = [self.resultsCollectionView cellForItemAtIndexPath:indexPathOfMovingCell];
-////
-////        UIGraphicsBeginImageContext(cell.bounds.size);
-////        [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
-////        UIImage *cellImage = UIGraphicsGetImageFromCurrentImageContext();
-////        UIGraphicsEndImageContext();
-////        self.movingCell = [[UIImageView alloc] initWithImage:cellImage];
-////
-////
-////
-//    }
-//
-//    if (panRecognizer.state == UIGestureRecognizerStateChanged) {
-////        [self.movingCell setCenter:locationPoint];
-////        [self.view bringSubviewToFront:self.movingCell];
-////
-////        CGRect intersection = CGRectMake(self.blurView.frame.origin.x, self.blurView.frame.origin.y, self.blurView.frame.size.width, self.blurView.frame.size.height-100);
-////
-////        BOOL methodB = CGRectIntersectsRect(self.movingCell.frame, intersection);
-////        NSLog(@"here1");
-////
-////        if (methodB) {
-////            NSLog(@"%f, %f", self.movingCell.center.x, self.movingCell.center.y);
-////            [self.movingCell setCenter:self.blurView.center];
-////            [self.view bringSubviewToFront:self.movingCell];
-////            [self.blurView.contentView addSubview:self.movingCell];
-////            [self.blurView setHidden:YES];
-////
-////
-////            NSLog(@"here");
-////
-////        }
-//
-//    }
-//    if (panRecognizer.state == UIGestureRecognizerStateEnded) {
-//        self.imageSelected = NO;
-//
-//    }
-//}
+
 
 @end

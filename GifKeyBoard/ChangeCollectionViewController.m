@@ -95,11 +95,13 @@
         [selectedCell setAccessoryType:UITableViewCellAccessoryNone];
     }
     else {
+        UITableViewCell *prevCell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:self.selectedRow inSection:0] ];
+        [prevCell setAccessoryType:UITableViewCellAccessoryNone];
         NSLog(@"cell checkmark");
         UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
         [selectedCell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        self.selectedRow = (int)indexPath.row;
     }
-    
     [self dismissViewControllerAnimated:YES completion:^{
         id<ChangeDelegate> strongDelegate = self.delegate;
         if ([strongDelegate respondsToSelector:@selector(childViewController:didChooseCollection:)]) {

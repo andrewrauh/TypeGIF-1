@@ -11,5 +11,6 @@
 
 @interface AXCCollectionViewCell : UICollectionViewCell
 @property (strong, nonatomic) IBOutlet FLAnimatedImageView * imageView;
+@property (strong, nonatomic) NSString* imageURL;
 
 @end
