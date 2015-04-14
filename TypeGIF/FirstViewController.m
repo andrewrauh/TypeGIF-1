@@ -310,14 +310,14 @@
 }
 
 - (NSString*) buildFilePathFromURL:(NSString*) url {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
     NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
     NSString *str = [NSString stringWithFormat:@"%@", url];
     NSString *trimmedReplacement = [[str componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
     NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
-    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
-    return dataPath;
+//    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
+    return fileName;
 }
 
 -(void)handleDoubleTap:(UITapGestureRecognizer *)tapRecognizer {
