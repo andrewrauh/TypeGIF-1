@@ -187,7 +187,7 @@
         dispatch_async(dispatch_get_main_queue(), ^(void){
             cell.imageView.animatedImage = image;
             [cell setImageURL:str];
-            cell.imageView.frame = CGRectMake(0.0, 0.0, 123.0, 100.0);
+            cell.imageView.frame = CGRectMake(0.0, 0.0, 124.0, 100.0);
         });
     });
     return cell;
@@ -277,6 +277,15 @@
     UICollectionViewCell *cell = [self.resultsCollectionView cellForItemAtIndexPath:indexOfClickedCell];
     AXCCollectionViewCell *curCell = (AXCCollectionViewCell*)cell;
 
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    scaleAnimation.duration = 0.12;
+    scaleAnimation.repeatCount = 2;
+    scaleAnimation.autoreverses = YES;
+    scaleAnimation.fromValue = [NSNumber numberWithFloat:1.0 ];
+    scaleAnimation.toValue = [NSNumber numberWithFloat:1.05];
+    [curCell.layer addAnimation:scaleAnimation forKey:@"scale"];
+    
+    
     UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
     [pasteBoard setData:curCell.imageView.animatedImage.data
       forPasteboardType:@"com.compuserve.gif"];
@@ -328,14 +337,14 @@
     AXCCollectionViewCell *cell = (AXCCollectionViewCell*)[self.resultsCollectionView cellForItemAtIndexPath:indexOfClickedCell];
     
 
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
+//    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
         UIGraphicsBeginImageContext(cell.bounds.size);
         [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
         UIImage *cellImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
         
-        dispatch_async(dispatch_get_main_queue(), ^(void){
+//        dispatch_async(dispatch_get_main_queue(), ^(void){
             if (self.movingCell.image != nil) {
                 self.movingCell = [[UIImageView alloc] initWithImage:cellImage];
             }
@@ -366,8 +375,8 @@
                     [self.db addGifToCollection:self.selectedCollectionName and:[self buildFilePathFromURL:cell.imageURL]];
                 }];
             }];
-        });
-    });
+//        });
+//    });
 }
 
 -(void) handleSingleTap:(UITapGestureRecognizer*) tapRecognizer {
