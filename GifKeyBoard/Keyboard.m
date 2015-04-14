@@ -7,7 +7,9 @@
 //
 
 #import "Keyboard.h"
-//#import "AXCGiphy.h"
+#import "AXCGiphy.h"
+#import <FLAnimatedImage/FLAnimatedImage.h>
+
 @import QuartzCore;
 
 @interface Keyboard () <UICollectionViewDataSource, UICollectionViewDelegate>
