@@ -45,6 +45,7 @@
     self.collectionData = [NSMutableArray arrayWithArray:[self.db photoUrlsForCollection:self.collectionName]];
     [self.favoritesCollectionView reloadData];
     [self.favoritesCollectionView setBackgroundColor:[UIColor whiteColor]];
+    [self.navigationItem setTitle:self.collectionName];
 }
 
 - (void)didReceiveMemoryWarning {
