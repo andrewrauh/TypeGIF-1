@@ -45,7 +45,28 @@ a {
   background: #000000;
   color: #FFFFFF; }
 
-#iphone {
+.view {
+  display: table;
+  width: 1000px;
+  margin-bottom: 80px; }
+
+.iphone {
+  display: table-cell;
+  vertical-align: middle;
+  width: 500px;
+  max-width: 500px; }
+
+.iphone img {
   max-height: 80vh; }
+
+.description {
+  display: table-cell;
+  vertical-align: middle;
+  width: 500px;
+  max-width: 500px;
+  margin: 0 80px; }
+
+.clear {
+  clear: both; }
 
 /*# sourceMappingURL=style.css.map */

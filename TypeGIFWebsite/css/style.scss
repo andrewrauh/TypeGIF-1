@@ -9,6 +9,7 @@ $mediumSize: 48px;
 $smallSize: 24px;
 
 $contentWidth: 1000px;
+$halfContentWidth: 0.5 * $contentWidth;
 
 $verticalMargin: 80px;
 
@@ -74,6 +75,35 @@ a {
 	color : $lightColor;
 }
 
-#iphone {
+#demo {
+
+}
+
+.view {
+	display : table;
+	width : $contentWidth;
+	margin-bottom : $verticalMargin;	
+}
+
+.iphone {
+	display : table-cell;
+	vertical-align : middle;	
+	width : $halfContentWidth;
+	max-width : $halfContentWidth;
+}
+
+.iphone img {
 	max-height : 80vh;
+}
+
+.description {
+	display : table-cell;
+	vertical-align : middle;
+	width : $halfContentWidth;
+	max-width : $halfContentWidth;
+	margin : 0 $verticalMargin;
+}
+
+.clear {
+	clear : both;
 }
