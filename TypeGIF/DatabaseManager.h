@@ -21,6 +21,7 @@
 - (NSData*) _retrieveGifDataWithAssetURL:(NSString*) url;
 //Gif --> Collection
 - (void) addGifToCollection:(NSString *)collectionName and:(NSString *)photoUrl;
+- (void) removeGifFromCollection:(NSString *)collectionName and:(NSString *)photoUrl;
 - (NSArray*) photoUrlsForCollection:(NSString*) collectionName;
 - (NSArray*) getAllCollections;
 - (void) addNewCollectionWithName:(NSString*) collectionName;
