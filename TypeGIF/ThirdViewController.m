@@ -27,6 +27,10 @@
         [self.editCollectionButton setTitle:@"Edit"];
         [self.editCollectionButton setStyle:UIBarButtonItemStylePlain];
     }
+
+    for (AXCCollectionViewCell *cell in [self.favoritesCollectionView visibleCells]) {
+        [cell shake:editing];
+    }
     [self.favoritesCollectionView setEditing:editing];
 }
 
@@ -40,6 +44,8 @@
     self.db   = [DatabaseManager createDatabaseInstance];
     self.collectionData = [NSMutableArray arrayWithArray:[self.db photoUrlsForCollection:self.collectionName]];
     [self.favoritesCollectionView reloadData];
+    [self.favoritesCollectionView setBackgroundColor:[UIColor whiteColor]];
+    [self.navigationItem setTitle:self.collectionName];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,12 +53,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Cell animation
+
+
 #pragma mark - UICollectionView delegate Methods
 
 - (AXCCollectionViewCell *) collectionView:(GIFCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     AXCCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    
+//    [cell addTarget:self action:@selector(delete:) forControlEvents:UIControlEventTouchUpInside];
+
     CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
     CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
     CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
@@ -73,9 +83,9 @@
         
         dispatch_async(dispatch_get_main_queue(), ^(void){
             cell.imageView.animatedImage = image;
-            cell.imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
         });
     });
+    [cell shake:self.favoritesCollectionView.editing];
     return cell;
 }
 
@@ -87,19 +97,27 @@
     return 1;
 }
 
+- (void)collectionView:(GIFCollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.favoritesCollectionView.editing) {
+        [self.db removeGifFromCollection:self.collectionName and:collectionData[indexPath.item]];
+        [self.collectionData removeObjectAtIndex:indexPath.item];
+        [self.favoritesCollectionView reloadData];
+    }
+}
+
 #pragma mark – UICollectionViewDelegateFlowLayout
 
 - (CGSize)collectionView:(GIFCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     //You may want to create a divider to scale the size by the way..
-    return CGSizeMake(100,100);
+    return CGSizeMake(123, 100);
 }
 
 - (CGFloat)collectionView:(GIFCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 0;
+    return 2.0;
 }
 
 - (CGFloat)collectionView:(GIFCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 5;
+    return 2.0;
 }
 
 - (UIEdgeInsets)collectionView:(GIFCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {

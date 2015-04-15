@@ -124,6 +124,15 @@ static DatabaseManager *databaseInstance = nil;
     }];
 }
 
+- (void) removeGifFromCollection:(NSString *)collectionName and:(NSString *)photoUrl {
+    if (!_dataBasePath) return;
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
+    [queue inDatabase:^(FMDatabase *db) {
+        NSString *qs = [NSString stringWithFormat:@"delete from COLLECTION where collection_name='%@' and photo_url='%@'", collectionName, photoUrl];
+        [db executeUpdate:qs];
+    }];
+}
+
 - (NSArray*) photoUrlsForCollection:(NSString*) collectionName{
     NSMutableArray *photoUrls = [[NSMutableArray alloc]init];
     __block NSString *gifData = [[NSString alloc]init];
@@ -145,8 +154,6 @@ static DatabaseManager *databaseInstance = nil;
     }];
     return [NSArray arrayWithArray:photoUrls];
 }
-
-
 
 - (NSArray*) getAllCollections {
 //    NSLog(@"was called");
@@ -179,7 +186,7 @@ static DatabaseManager *databaseInstance = nil;
     if (!_dataBasePath) return;
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
     [queue inDatabase:^(FMDatabase *db) {
-        NSString *qs = [NSString stringWithFormat:@"DELETE * from COLLECTION where collection_name='%@'", collectionName];
+        NSString *qs = [NSString stringWithFormat:@"delete from COLLECTION where collection_name='%@'", collectionName];
         [db executeUpdate:qs];
     }];
 }

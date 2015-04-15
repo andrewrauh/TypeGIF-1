@@ -130,8 +130,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // TODO : delete GIFs owned by collection being deleted
-
+        [self.db removeCollectionWithName:tableData[indexPath.row]];
         [self.tableData removeObjectAtIndex:indexPath.row];
         [self.collectionsTableView reloadData];
     }
