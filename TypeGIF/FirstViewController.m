@@ -187,7 +187,6 @@
         dispatch_async(dispatch_get_main_queue(), ^(void){
             cell.imageView.animatedImage = image;
             [cell setImageURL:str];
-            cell.imageView.frame = CGRectMake(0.0, 0.0, 123.0, 100.0);
         });
     });
     return cell;

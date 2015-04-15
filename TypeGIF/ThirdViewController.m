@@ -44,6 +44,7 @@
     self.db   = [DatabaseManager createDatabaseInstance];
     self.collectionData = [NSMutableArray arrayWithArray:[self.db photoUrlsForCollection:self.collectionName]];
     [self.favoritesCollectionView reloadData];
+    [self.favoritesCollectionView setBackgroundColor:[UIColor whiteColor]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,7 +82,6 @@
         
         dispatch_async(dispatch_get_main_queue(), ^(void){
             cell.imageView.animatedImage = image;
-            cell.imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
         });
     });
     [cell shake:self.favoritesCollectionView.editing];
@@ -108,15 +108,15 @@
 
 - (CGSize)collectionView:(GIFCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     //You may want to create a divider to scale the size by the way..
-    return CGSizeMake(100,100);
+    return CGSizeMake(123, 100);
 }
 
 - (CGFloat)collectionView:(GIFCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 0;
+    return 2.0;
 }
 
 - (CGFloat)collectionView:(GIFCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 5;
+    return 2.0;
 }
 
 - (UIEdgeInsets)collectionView:(GIFCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
