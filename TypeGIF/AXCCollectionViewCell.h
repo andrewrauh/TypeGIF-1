@@ -11,6 +11,7 @@
 
 @interface AXCCollectionViewCell : UICollectionViewCell
 @property (strong, nonatomic) IBOutlet FLAnimatedImageView * imageView;
+@property (strong, nonatomic) UIView *editingView;
 @property (strong, nonatomic) NSString* imageURL;
 
 - (void) shake:(BOOL) editing;

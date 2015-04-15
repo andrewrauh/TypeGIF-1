@@ -16,6 +16,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+//        self.editingView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"editingCell"]];
+        self.editingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+        self.editingView.backgroundColor = [UIColor blackColor];
+        self.editingView.tag = 1234;
+        self.editingView.alpha = 0.5;
+        self.editingView.opaque = YES;
     }
     return self;
 }
@@ -40,15 +46,17 @@
         quiverAnim.fromValue = [NSNumber numberWithFloat:startAngle];
         quiverAnim.toValue = [NSNumber numberWithFloat:3 * stopAngle];
         quiverAnim.autoreverses = YES;
-        quiverAnim.duration = 0.15;
+        quiverAnim.duration = 0.2;
         quiverAnim.repeatCount = HUGE_VALF;
         float timeOffset = (float)(arc4random() % 100)/100 - 0.50;
         quiverAnim.timeOffset = timeOffset;
         CALayer *layer = self.layer;
         [layer addAnimation:quiverAnim forKey:@"shake"];
+        [self addSubview:self.editingView];
     } else {
         CALayer *layer = self.layer;
         [layer removeAnimationForKey:@"shake"];
+        [[self viewWithTag:1234]removeFromSuperview];
     }
 }
 
