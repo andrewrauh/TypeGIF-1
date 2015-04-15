@@ -7,6 +7,7 @@
 //
 
 #import "ThirdViewController.h"
+#import <MBProgressHUD.h>
 
 @interface ThirdViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic, strong) DatabaseManager *db;
@@ -102,6 +103,17 @@
         [self.db removeGifFromCollection:self.collectionName and:collectionData[indexPath.item]];
         [self.collectionData removeObjectAtIndex:indexPath.item];
         [self.favoritesCollectionView reloadData];
+    }
+    else {
+        AXCCollectionViewCell *curcell = (AXCCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
+        [pasteBoard setData:curcell.imageView.animatedImage.data
+          forPasteboardType:@"com.compuserve.gif"];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeCustomView;
+        hud.labelText = @"Copied to Clipboard!";
+        [hud hide:YES afterDelay:1.0f];
+
     }
 }
 
