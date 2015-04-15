@@ -27,6 +27,10 @@
         [self.editCollectionButton setTitle:@"Edit"];
         [self.editCollectionButton setStyle:UIBarButtonItemStylePlain];
     }
+
+    for (AXCCollectionViewCell *cell in [self.favoritesCollectionView visibleCells]) {
+        [cell shake:editing];
+    }
     [self.favoritesCollectionView setEditing:editing];
 }
 
@@ -47,14 +51,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Cell deletion
+#pragma mark - Cell animation
 
-//- (void)delete:(UIButton *)sender {
-//    NSIndexPath *indexPath = [self.favoritesCollectionView indexPathForCell:(AXCCollectionViewCell *)sender.superview.superview];
-//    [self.db removeGifFromCollection:self.collectionName and:collectionData[indexPath.item]];
-//    [self.collectionData removeObjectAtIndex:indexPath.item];
-//    [self.favoritesCollectionView reloadData];
-//}
 
 #pragma mark - UICollectionView delegate Methods
 
@@ -86,6 +84,7 @@
             cell.imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
         });
     });
+    [cell shake:self.favoritesCollectionView.editing];
     return cell;
 }
 

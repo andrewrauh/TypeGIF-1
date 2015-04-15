@@ -13,4 +13,6 @@
 @property (strong, nonatomic) IBOutlet FLAnimatedImageView * imageView;
 @property (strong, nonatomic) NSString* imageURL;
 
+- (void) shake:(BOOL) editing;
+
 @end
