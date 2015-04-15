@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -148,6 +148,40 @@
             </objects>
             <point key="canvasLocation" x="1462" y="-619"/>
         </scene>
+        <!--Collections-->
+        <scene sceneID="AuE-Db-9Uw">
+            <objects>
+                <viewController id="5LL-bm-45u" customClass="CollectionsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="P8u-vc-jvy"/>
+                        <viewControllerLayoutGuide type="bottom" id="KNY-G3-BGg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Jh8-VN-SMW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1av-7C-zvH">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1av-7C-zvH" firstAttribute="leading" secondItem="Jh8-VN-SMW" secondAttribute="leading" id="02U-sb-PXB"/>
+                            <constraint firstItem="1av-7C-zvH" firstAttribute="bottom" secondItem="KNY-G3-BGg" secondAttribute="top" id="JrF-lq-bRF"/>
+                            <constraint firstAttribute="trailing" secondItem="1av-7C-zvH" secondAttribute="trailing" id="Xb2-zh-c0S"/>
+                            <constraint firstItem="1av-7C-zvH" firstAttribute="top" secondItem="Jh8-VN-SMW" secondAttribute="top" id="p4s-cK-bH1"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Collections" id="d4W-ks-wLF"/>
+                    <connections>
+                        <outlet property="collectionsTableView" destination="1av-7C-zvH" id="mKU-LB-WZa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oBy-tS-6hI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-23" y="-765"/>
+        </scene>
         <!--Favorites-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
@@ -197,7 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="578"/>
+            <point key="canvasLocation" x="750" y="754"/>
         </scene>
         <!--Collection-->
         <scene sceneID="PST-Ja-WG5">
@@ -247,7 +281,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DhO-dh-tlJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1592" y="578"/>
+            <point key="canvasLocation" x="1604" y="754"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -262,6 +296,7 @@
                     <connections>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="1zG-hU-O9C" kind="relationship" relationship="viewControllers" id="1D0-6a-0B2"/>
+                        <segue destination="5LL-bm-45u" kind="relationship" relationship="viewControllers" id="LWt-95-Iqv"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>

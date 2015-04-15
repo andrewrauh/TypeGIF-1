@@ -23,6 +23,7 @@
 		EDEFA8221ADDCFD6001DBE09 /* GIFCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEFA8211ADDCFD6001DBE09 /* GIFCollectionView.m */; };
 		F90CAFB11ADCAFED00053916 /* ChangeCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F90CAFB01ADCAFED00053916 /* ChangeCollectionViewController.m */; };
 		F9343BE61ADB578500D38762 /* Keyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9343BE51ADB578500D38762 /* Keyboard.xib */; };
+		F9386FB31ADF0FC0001DDD3A /* CollectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9386FB21ADF0FC0001DDD3A /* CollectionsViewController.m */; };
 		F963E72A1AC468DC00A74FC6 /* AXCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */; };
 		F963E7351AC46FC900A74FC6 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E7341AC46FC900A74FC6 /* KeyboardViewController.m */; };
 		F963E7381AC46FC900A74FC6 /* GifKeyBoard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F963E72F1AC46FC800A74FC6 /* GifKeyBoard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -92,6 +93,8 @@
 		F90CAFAF1ADCAFED00053916 /* ChangeCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangeCollectionViewController.h; path = ../GifKeyBoard/ChangeCollectionViewController.h; sourceTree = "<group>"; };
 		F90CAFB01ADCAFED00053916 /* ChangeCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangeCollectionViewController.m; path = ../GifKeyBoard/ChangeCollectionViewController.m; sourceTree = "<group>"; };
 		F9343BE51ADB578500D38762 /* Keyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Keyboard.xib; sourceTree = "<group>"; };
+		F9386FB11ADF0FC0001DDD3A /* CollectionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionsViewController.h; sourceTree = "<group>"; };
+		F9386FB21ADF0FC0001DDD3A /* CollectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionsViewController.m; sourceTree = "<group>"; };
 		F963E7281AC468DC00A74FC6 /* AXCCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXCCollectionViewCell.h; sourceTree = "<group>"; };
 		F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXCCollectionViewCell.m; sourceTree = "<group>"; };
 		F963E72F1AC46FC800A74FC6 /* GifKeyBoard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GifKeyBoard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,6 +201,8 @@
 				F963E73E1AC5AD4700A74FC6 /* DatabaseManager.m */,
 				F9DA9EEA1ADD6EFE0018C41A /* NSCountedSet+NSCountedSet_Additions.h */,
 				F9DA9EEB1ADD6EFE0018C41A /* NSCountedSet+NSCountedSet_Additions.m */,
+				F9386FB11ADF0FC0001DDD3A /* CollectionsViewController.h */,
+				F9386FB21ADF0FC0001DDD3A /* CollectionsViewController.m */,
 			);
 			path = TypeGIF;
 			sourceTree = "<group>";
@@ -449,6 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9386FB31ADF0FC0001DDD3A /* CollectionsViewController.m in Sources */,
 				F963E72A1AC468DC00A74FC6 /* AXCCollectionViewCell.m in Sources */,
 				F9DA9EEC1ADD6EFE0018C41A /* NSCountedSet+NSCountedSet_Additions.m in Sources */,
 				EDE6485E1AC45F7E002939A0 /* SecondViewController.m in Sources */,

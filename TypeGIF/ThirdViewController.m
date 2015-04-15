@@ -113,7 +113,6 @@
         hud.mode = MBProgressHUDModeCustomView;
         hud.labelText = @"Copied to Clipboard!";
         [hud hide:YES afterDelay:1.0f];
-
     }
 }
 
