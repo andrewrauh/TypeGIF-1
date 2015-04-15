@@ -92,7 +92,7 @@
     hud.mode = MBProgressHUDModeAnnularDeterminate;
     hud.labelText = @"Loading";
     
-    [AXCGiphy trendingGIFsWithlimit:30 offset:0 completion:^(NSArray *results, NSError *error) {
+    [AXCGiphy trendingGIFsWithlimit:100 offset:0 completion:^(NSArray *results, NSError *error) {
         self.resultsArray = [NSMutableArray arrayWithArray:results];
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [hud hide:YES];
