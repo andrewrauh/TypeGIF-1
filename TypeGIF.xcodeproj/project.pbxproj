@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		42AFB7E8E2679A8F19FB6071 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3FB4F5D63C11865A6D5494 /* libPods.a */; };
+		811081FA1ADF3EE400E41C4F /* Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D1A8D21ADC7C7D0012B5ED /* Keyboard.m */; };
+		811081FB1ADF41C900E41C4F /* AXCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */; };
 		817000D71AD48269006F8C4C /* GIFCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 817000D51AD48269006F8C4C /* GIFCollectionCell.m */; };
 		817000D81AD48269006F8C4C /* GIFCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 817000D61AD48269006F8C4C /* GIFCollectionCell.xib */; };
 		817000DB1AD48BAC006F8C4C /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 817000DA1AD48BAC006F8C4C /* ThirdViewController.m */; };
@@ -487,6 +489,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				811081FA1ADF3EE400E41C4F /* Keyboard.m in Sources */,
+				811081FB1ADF41C900E41C4F /* AXCCollectionViewCell.m in Sources */,
 				F963E7351AC46FC900A74FC6 /* KeyboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

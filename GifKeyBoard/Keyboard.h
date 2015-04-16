@@ -15,4 +15,6 @@
 @property (nonatomic, strong) NSMutableArray *favoritesArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *resultsCollectionView;
 
+-(void)loadGifCollection;
+
 @end
