@@ -32,6 +32,7 @@
     }];
 
     [self.mainCollectionView setBackgroundColor:[UIColor whiteColor]];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;  // optional
 }
 
 -(void) writeGifToDisk:(NSData * )gif withName:(NSString* ) name {
@@ -109,7 +110,19 @@
 }
 
 - (void)collectionView:(GIFCollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    
         AXCCollectionViewCell *curcell = (AXCCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    scaleAnimation.duration = 0.12;
+    scaleAnimation.repeatCount = 2;
+    scaleAnimation.autoreverses = YES;
+    scaleAnimation.fromValue = [NSNumber numberWithFloat:1.0 ];
+    scaleAnimation.toValue = [NSNumber numberWithFloat:1.05];
+    [curcell.layer addAnimation:scaleAnimation forKey:@"scale"];
+
         UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
         [pasteBoard setData:curcell.imageView.animatedImage.data
           forPasteboardType:@"com.compuserve.gif"];

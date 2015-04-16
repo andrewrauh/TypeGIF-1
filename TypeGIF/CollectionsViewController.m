@@ -19,7 +19,10 @@
     self.collectionsTableView.delegate = self;
     self.collectionsTableView.dataSource = self;
     self.tableData = @[@"happy", @"sad", @"mad", @"confused", @"rage", @"meme", @"celebrate", @"party"];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;  // optional
+    [self.navigationController.navigationBar setTranslucent:NO];
     
+
     self.selectedTerm = [NSString new];
 }
 
