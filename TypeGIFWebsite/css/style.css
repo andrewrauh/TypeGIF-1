@@ -23,7 +23,9 @@ ul, ol {
   list-style-type: none; }
 
 a {
-  text-decoration: none; }
+  color: #FFFFFF;
+  text-decoration: none;
+  font-weight: bold; }
 
 .content {
   margin: 80px auto;
@@ -45,7 +47,37 @@ a {
   background: #000000;
   color: #FFFFFF; }
 
-#iphone {
+.view {
+  display: table;
+  width: 1000px;
+  margin-bottom: 80px; }
+
+.iphone {
+  display: table-cell;
+  vertical-align: middle;
+  width: 500px;
+  max-width: 500px; }
+
+.iphone img {
   max-height: 80vh; }
+
+.description {
+  display: table-cell;
+  vertical-align: middle;
+  width: 500px;
+  max-width: 500px;
+  margin: 0 80px; }
+
+#contact {
+  background: #000000;
+  color: #FFFFFF;
+  font-size: 80%;
+  font-weight: lighter; }
+
+#contact .content {
+  margin: 40px auto !important; }
+
+.clear {
+  clear: both; }
 
 /*# sourceMappingURL=style.css.map */

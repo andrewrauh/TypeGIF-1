@@ -9,8 +9,10 @@ $mediumSize: 48px;
 $smallSize: 24px;
 
 $contentWidth: 1000px;
+$halfContentWidth: 0.5 * $contentWidth;
 
 $verticalMargin: 80px;
+$halfVerticalMargin: 0.5 * $verticalMargin;
 
 * { 
 	margin : 0; 
@@ -46,7 +48,9 @@ ul, ol {
 }
 
 a {
+	color : $lightColor;
     text-decoration : none;
+    font-weight : bold;
 }
 
 .content {
@@ -74,6 +78,46 @@ a {
 	color : $lightColor;
 }
 
-#iphone {
+#demo {
+
+}
+
+.view {
+	display : table;
+	width : $contentWidth;
+	margin-bottom : $verticalMargin;	
+}
+
+.iphone {
+	display : table-cell;
+	vertical-align : middle;	
+	width : $halfContentWidth;
+	max-width : $halfContentWidth;
+}
+
+.iphone img {
 	max-height : 80vh;
+}
+
+.description {
+	display : table-cell;
+	vertical-align : middle;
+	width : $halfContentWidth;
+	max-width : $halfContentWidth;
+	margin : 0 $verticalMargin;
+}
+
+#contact {
+	background : $darkColor; 
+	color : $lightColor;
+	font-size : 80%;
+	font-weight : lighter;
+}
+
+#contact .content {
+	margin : $halfVerticalMargin 0 !important;
+}
+
+.clear {
+	clear : both;
 }
