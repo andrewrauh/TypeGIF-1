@@ -11,5 +11,6 @@
 @interface CollectionsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) IBOutlet UITableView *collectionsTableView;
 @property (nonatomic,strong)  NSArray *tableData;
+@property (nonatomic, strong) NSString *selectedTerm;
 
 @end
