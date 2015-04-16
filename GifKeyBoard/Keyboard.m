@@ -13,7 +13,6 @@
 #import "DatabaseManager.h"
 #import "ChangeCollectionViewController.h"
 #import <FLAnimatedImage/FLAnimatedImage.h>
-#import "DatabaseManager.h"
 
 @interface Keyboard () <UICollectionViewDataSource, UICollectionViewDelegate>
 

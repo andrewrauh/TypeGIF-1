@@ -12,7 +12,7 @@
 #import "DatabaseManager.h"
 #import "ChangeCollectionViewController.h"
 
-@interface FirstViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate, ChangeDelegate, MFMessageComposeViewControllerDelegate>
+@interface FirstViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate, ChangeDelegate, MFMessageComposeViewControllerDelegate, UINavigationControllerDelegate>
 
 @property BOOL imageSelected;
 @property (nonatomic, strong) NSMutableArray *resultsArray;
@@ -465,8 +465,9 @@
 
 
 -(IBAction)didSelectCompose:(id)sender {
-    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
-    controller.delegate = self;
+    MFMessageComposeViewController *controllerMF = [[MFMessageComposeViewController alloc] init];
+    controllerMF.delegate = self;
+    controllerMF.messageComposeDelegate = self;
     
     if([MFMessageComposeViewController canSendText])
     {
@@ -479,10 +480,10 @@
 //          forPasteboardType:@"com.compuserve.gif"];
         ;
         
-        [controller addAttachmentData:[pasteBoard dataForPasteboardType:@"com.compuserve.gif"] typeIdentifier:@"com.compuserve.gif" filename:@"hey.gif"];
+        [controllerMF addAttachmentData:[pasteBoard dataForPasteboardType:@"com.compuserve.gif"] typeIdentifier:@"com.compuserve.gif" filename:@"hey.gif"];
         
         
-        [self presentViewController:controller animated:YES completion:nil];
+        [self presentViewController:controllerMF animated:YES completion:nil];
     }    
 }
 /* Experimental Drag + Drop Code */
