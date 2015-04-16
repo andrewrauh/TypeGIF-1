@@ -8,6 +8,7 @@
 
 #import "CollectionsViewController.h"
 #import "GIFCollectionCell.h"
+#import "ViewSuggestedCollectionVC.h"
 
 @implementation CollectionsViewController 
 @synthesize collectionsTableView;
@@ -19,7 +20,7 @@
     self.collectionsTableView.dataSource = self;
     self.tableData = @[@"happy", @"sad", @"mad", @"confused", @"rage", @"meme", @"celebrate", @"party"];
     
-    
+    self.selectedTerm = [NSString new];
 }
 
 -(GIFCollectionCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -62,16 +63,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    [self performSegueWithIdentifier:@"CollectionSegue" sender:indexPath];
+    GIFCollectionCell *curCell = (GIFCollectionCell*)[tableView cellForRowAtIndexPath:indexPath];
+    
+    self.selectedTerm = curCell.nameLabel.text;
+    
+    [self performSegueWithIdentifier:@"showCollection" sender:indexPath];
     
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"CollectionSegue"]) {
-        NSIndexPath *indexPath = (NSIndexPath *)sender;
-//        ThirdViewController *vc = [segue destinationViewController];
-//        vc.collectionName = tableData[indexPath.row];
+    if ([[segue identifier] isEqualToString:@"showCollection"]) {
+        ViewSuggestedCollectionVC *vc = [segue destinationViewController];
+        vc.searchTerm = self.selectedTerm;
     }
 }
 
