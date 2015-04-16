@@ -103,7 +103,7 @@
     
     [self.collectionButton setPossibleTitles:[NSSet setWithArray:[self.db getAllCollections]]];
     [self.resultsCollectionView setBackgroundColor:[UIColor whiteColor]];
-    self.selectedCollectionName = [NSString stringWithFormat:@"favorites"]; //default value
+    self.selectedCollectionName = [NSString stringWithFormat:@"Favorites"]; //default value
 }
 
 - (void)didReceiveMemoryWarning {
