@@ -22,18 +22,23 @@
 @synthesize resultsCollectionView;
 @synthesize librarySelector;
 
--(void)layoutSubviews {
-    [self.librarySelector addTarget:self action:@selector(segmentedControlChange:) forControlEvents:UIControlEventValueChanged];
+-(void)awakeFromNib {
     self.db = [DatabaseManager createDatabaseInstance];
-   
     NSArray *collections = [self.db getAllCollections] ;
     NSUInteger index = 0;
-//    self.librarySelector.numberOfSegments
-    
+
     for (NSString *title  in collections) {
         [self.librarySelector insertSegmentWithTitle:title atIndex:index animated:YES];
         index++;
     }
+
+}
+
+-(void)layoutSubviews {
+    [self.librarySelector addTarget:self action:@selector(segmentedControlChange:) forControlEvents:UIControlEventValueChanged];
+   
+//    self.librarySelector.numberOfSegments
+    
     
     
 }
