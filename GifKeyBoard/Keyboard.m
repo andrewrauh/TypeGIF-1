@@ -32,7 +32,7 @@
     
     [self.resultsCollectionView setBackgroundColor:[UIColor clearColor]];
         
-    [AXCGiphy trendingGIFsWithlimit:30 offset:0 completion:^(NSArray *results, NSError *error) {
+    [AXCGiphy trendingGIFsWithlimit:10 offset:0 completion:^(NSArray *results, NSError *error) {
         self.trendingArray = [NSMutableArray arrayWithArray:results];
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self.resultsCollectionView reloadData];
