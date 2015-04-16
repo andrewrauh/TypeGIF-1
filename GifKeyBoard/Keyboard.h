@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DatabaseManager.h"
+
 
 @interface Keyboard : UIView
 @property (weak, nonatomic) IBOutlet UIButton *nextKey;
@@ -15,6 +17,7 @@
 @property (nonatomic, strong) NSMutableArray *trendingArray;
 @property (nonatomic, strong) NSMutableArray *favoritesArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *resultsCollectionView;
+@property (strong, nonatomic) DatabaseManager *db;
 
 -(void)loadGifCollection;
 -(IBAction)segmentedControlChange:(id)sender;
