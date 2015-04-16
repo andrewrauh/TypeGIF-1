@@ -35,7 +35,7 @@
 //            [self.resultsCollectionView reloadData];
 //        }];
 //    }];
-//}
+}
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
     return [self.trendingArray count];
@@ -84,7 +84,5 @@
 ////    return cell;
 //}
 
-
-@end
 @end
 
