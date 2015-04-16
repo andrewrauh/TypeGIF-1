@@ -27,6 +27,8 @@
 		F9343BE61ADB578500D38762 /* Keyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9343BE51ADB578500D38762 /* Keyboard.xib */; };
 		F9386FB31ADF0FC0001DDD3A /* CollectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9386FB21ADF0FC0001DDD3A /* CollectionsViewController.m */; };
 		F9386FB61ADF31BD001DDD3A /* ViewSuggestedCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9386FB51ADF31BD001DDD3A /* ViewSuggestedCollectionVC.m */; };
+		F93870031AE02EEB001DDD3A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F93870021AE02EEB001DDD3A /* Social.framework */; };
+		F93870051AE02F25001DDD3A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F93870041AE02F25001DDD3A /* MessageUI.framework */; };
 		F963E72A1AC468DC00A74FC6 /* AXCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */; };
 		F963E7351AC46FC900A74FC6 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E7341AC46FC900A74FC6 /* KeyboardViewController.m */; };
 		F963E7381AC46FC900A74FC6 /* GifKeyBoard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F963E72F1AC46FC800A74FC6 /* GifKeyBoard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -101,6 +103,8 @@
 		F9386FB41ADF31BD001DDD3A /* ViewSuggestedCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewSuggestedCollectionVC.h; sourceTree = "<group>"; };
 		F9386FB51ADF31BD001DDD3A /* ViewSuggestedCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewSuggestedCollectionVC.m; sourceTree = "<group>"; };
 		F93870011ADF522D001DDD3A /* TypeGIF.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TypeGIF.entitlements; sourceTree = "<group>"; };
+		F93870021AE02EEB001DDD3A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		F93870041AE02F25001DDD3A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F963E7281AC468DC00A74FC6 /* AXCCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXCCollectionViewCell.h; sourceTree = "<group>"; };
 		F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXCCollectionViewCell.m; sourceTree = "<group>"; };
 		F963E72F1AC46FC800A74FC6 /* GifKeyBoard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GifKeyBoard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +122,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F93870051AE02F25001DDD3A /* MessageUI.framework in Frameworks */,
+				F93870031AE02EEB001DDD3A /* Social.framework in Frameworks */,
 				42AFB7E8E2679A8F19FB6071 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +149,8 @@
 		3C91D7E02F6DBC2C1E846DCF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F93870041AE02F25001DDD3A /* MessageUI.framework */,
+				F93870021AE02EEB001DDD3A /* Social.framework */,
 				CB3FB4F5D63C11865A6D5494 /* libPods.a */,
 			);
 			name = Frameworks;

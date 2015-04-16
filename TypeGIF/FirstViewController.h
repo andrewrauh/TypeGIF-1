@@ -11,12 +11,15 @@
 #import <FLAnimatedImage/FLAnimatedImage.h>
 #import "AXCCollectionViewCell.h"
 #import <MBProgressHUD.h>
+#import <MessageUI/MFMessageComposeViewController.h>
 
 @interface FirstViewController : UIViewController  <UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet UITextField* searchTextField;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *collectionButton;
 @property (nonatomic, strong) NSString* selectedCollectionName;
+
+-(IBAction)didSelectCompose:(id)sender;
 
 @end
 
