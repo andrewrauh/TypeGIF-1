@@ -85,7 +85,7 @@
         dispatch_async(dispatch_get_main_queue(), ^(void){
             cell.imageView.animatedImage = image;
             [cell setImageURL:str];
-            cell.imageView.frame = CGRectMake(0.0, 0.0, 50.0, 50.0);
+            cell.imageView.frame = CGRectMake(0.0, 0.0, 70.0, 70.0);
         });
     });
     return cell;
@@ -107,7 +107,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGSize mElementSize = CGSizeMake(50, 50);
+    CGSize mElementSize = CGSizeMake(70, 70);
     return mElementSize;
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
