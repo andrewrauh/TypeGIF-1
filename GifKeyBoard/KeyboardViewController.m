@@ -12,7 +12,6 @@
 
 
 @interface KeyboardViewController ()
-
 @property (strong, nonatomic) Keyboard *keyboard;
 
 @end
@@ -30,6 +29,8 @@
     
     self.keyboard = [[[NSBundle mainBundle] loadNibNamed:@"Keyboard" owner:nil options:nil] objectAtIndex:0];
     [self addGesturesToKeyboard];
+    
+    [self.keyboard loadGifCollection];
     self.inputView = self.keyboard;
     
     

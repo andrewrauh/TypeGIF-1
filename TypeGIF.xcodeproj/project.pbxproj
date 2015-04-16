@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		42AFB7E8E2679A8F19FB6071 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3FB4F5D63C11865A6D5494 /* libPods.a */; };
+		811081FA1ADF3EE400E41C4F /* Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D1A8D21ADC7C7D0012B5ED /* Keyboard.m */; };
+		811081FB1ADF41C900E41C4F /* AXCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */; };
 		817000D71AD48269006F8C4C /* GIFCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 817000D51AD48269006F8C4C /* GIFCollectionCell.m */; };
 		817000D81AD48269006F8C4C /* GIFCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 817000D61AD48269006F8C4C /* GIFCollectionCell.xib */; };
 		817000DB1AD48BAC006F8C4C /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 817000DA1AD48BAC006F8C4C /* ThirdViewController.m */; };
@@ -98,6 +100,7 @@
 		F9386FB21ADF0FC0001DDD3A /* CollectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionsViewController.m; sourceTree = "<group>"; };
 		F9386FB41ADF31BD001DDD3A /* ViewSuggestedCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewSuggestedCollectionVC.h; sourceTree = "<group>"; };
 		F9386FB51ADF31BD001DDD3A /* ViewSuggestedCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewSuggestedCollectionVC.m; sourceTree = "<group>"; };
+		F93870011ADF522D001DDD3A /* TypeGIF.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TypeGIF.entitlements; sourceTree = "<group>"; };
 		F963E7281AC468DC00A74FC6 /* AXCCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXCCollectionViewCell.h; sourceTree = "<group>"; };
 		F963E7291AC468DC00A74FC6 /* AXCCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXCCollectionViewCell.m; sourceTree = "<group>"; };
 		F963E72F1AC46FC800A74FC6 /* GifKeyBoard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GifKeyBoard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +182,7 @@
 		EDE648511AC45F7E002939A0 /* TypeGIF */ = {
 			isa = PBXGroup;
 			children = (
+				F93870011ADF522D001DDD3A /* TypeGIF.entitlements */,
 				F90CAFAF1ADCAFED00053916 /* ChangeCollectionViewController.h */,
 				F90CAFB01ADCAFED00053916 /* ChangeCollectionViewController.m */,
 				EDE648561AC45F7E002939A0 /* AppDelegate.h */,
@@ -331,6 +335,12 @@
 				TargetAttributes = {
 					EDE6484E1AC45F7E002939A0 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = KT3P7U2UTR;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					EDE6486A1AC45F7E002939A0 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -487,6 +497,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				811081FA1ADF3EE400E41C4F /* Keyboard.m in Sources */,
+				811081FB1ADF41C900E41C4F /* AXCCollectionViewCell.m in Sources */,
 				F963E7351AC46FC900A74FC6 /* KeyboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -607,9 +619,13 @@
 			baseConfigurationReference = DCCEB3E2B58B874238F7B84C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TypeGIF/TypeGIF.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TypeGIF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -618,9 +634,13 @@
 			baseConfigurationReference = 060B2D11CC0631635CEF6B50 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TypeGIF/TypeGIF.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TypeGIF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
