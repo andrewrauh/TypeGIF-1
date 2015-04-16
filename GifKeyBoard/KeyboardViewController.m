@@ -60,7 +60,7 @@
 - (void)addGesturesToKeyboard {
     // Change to next keyboard
     [self.keyboard.nextKey addTarget:self action:@selector(advanceToNextInputMode) forControlEvents:UIControlEventTouchUpInside];
-    self.keyboard.nextKey addTarget:self action:<#(SEL)#> forControlEvents:<#(UIControlEvents)#>
+//    self.keyboard.nextKey addTarget:self action:<#(SEL)#> forControlEvents:(UIControlEvents)
     
 }
 
