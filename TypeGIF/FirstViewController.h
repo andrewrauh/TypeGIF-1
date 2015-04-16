@@ -18,7 +18,6 @@
 @property (nonatomic, strong) IBOutlet UITextField* searchTextField;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *collectionButton;
 @property (nonatomic, strong) NSString* selectedCollectionName;
-
 -(IBAction)didSelectCompose:(id)sender;
 
 @end

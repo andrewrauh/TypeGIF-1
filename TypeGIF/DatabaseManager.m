@@ -42,16 +42,31 @@ static DatabaseManager *databaseInstance = nil;
 
 -(BOOL)initializeDatabase {
     // Get the DB directory
-    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains
-    (NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsDir = dirPaths[0];
-    _dataBasePath = [[NSString alloc] initWithString:
-                     [docsDir stringByAppendingPathComponent: @"gif.db"]];
+    NSURL *groupURL = [[NSFileManager defaultManager]
+                       containerURLForSecurityApplicationGroupIdentifier:
+                       @"group.com.umich.typegif"];
     
+    NSLog(@"groupurl is %@", groupURL);
+
+    
+//    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains
+//    (NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *docsDir = dirPaths[0];
+//    _dataBasePath = [[NSString alloc] initWithString:
+//                     [docsDir stringByAppendingPathComponent: @"gif.db"]];
+    
+//        NSArray *dirPaths = NSSearchPathForDirectoriesInDomains
+//        (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [NSString stringWithFormat:@"%@", groupURL];
+    
+        _dataBasePath = [[NSString alloc] initWithString:
+                         [docsDir stringByAppendingPathComponent: @"gif.db"]];
+
     NSLog(@"%@", _dataBasePath);
     
     //Create DB Tables
     BOOL isSuccess = YES;
+    
     NSFileManager *filemgr = [NSFileManager defaultManager];
     if ([filemgr fileExistsAtPath: _dataBasePath] == NO) {
         const char *dbpath = [_dataBasePath UTF8String];
