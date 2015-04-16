@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *resultsCollectionView;
 
 -(void)loadGifCollection;
+-(IBAction)segmentedControlChange:(id)sender;
 
 @end

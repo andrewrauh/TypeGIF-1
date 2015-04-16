@@ -22,7 +22,11 @@
 
 @implementation Keyboard
 @synthesize resultsCollectionView;
+@synthesize librarySelector;
 
+-(void)layoutSubviews {
+    [self.librarySelector addTarget:self action:@selector(segmentedControlChange:) forControlEvents:UIControlEventValueChanged];
+}
 - (void)loadGifCollection {
     self.resultsCollectionView.delegate = self;
     self.resultsCollectionView.dataSource = self;
@@ -34,6 +38,7 @@
         
     [AXCGiphy trendingGIFsWithlimit:10 offset:0 completion:^(NSArray *results, NSError *error) {
         self.trendingArray = [NSMutableArray arrayWithArray:results];
+        self.favoritesArray = [NSMutableArray new];
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self.resultsCollectionView reloadData];
         }];
@@ -41,7 +46,12 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    return [self.trendingArray count];
+    if (self.librarySelector.selectedSegmentIndex == 0) {
+        return [self.trendingArray count];
+    }
+    else {
+        return [self.favoritesArray count];
+    }
 }
 
 #pragma mark - UICollectionView delegate Methods
@@ -49,7 +59,14 @@
 - (AXCCollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     AXCCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    AXCGiphy * gif = self.trendingArray[indexPath.item];
+    
+    AXCGiphy *gif;
+    if (librarySelector.selectedSegmentIndex == 0) {
+        gif = self.trendingArray[indexPath.item];
+    }
+    else {
+        gif = self.favoritesArray[indexPath.item];
+    }
     
     [cell setBackgroundColor:[UIColor grayColor]];
     [cell setImageView:nil];
@@ -119,7 +136,10 @@
 }
 
 
-
+-(IBAction)segmentedControlChange:(id)sender {
+    [self.resultsCollectionView reloadData];
+    
+}
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     AXCCollectionViewCell *curcell = (AXCCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
 
