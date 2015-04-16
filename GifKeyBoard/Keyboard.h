@@ -10,6 +10,7 @@
 
 @interface Keyboard : UIView
 @property (weak, nonatomic) IBOutlet UIButton *nextKey;
+@property (weak, nonatomic) IBOutlet UIButton *deleteKey;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *librarySelector;
 @property (nonatomic, strong) NSMutableArray *trendingArray;
 @property (nonatomic, strong) NSMutableArray *favoritesArray;

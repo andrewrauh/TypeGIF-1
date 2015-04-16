@@ -13,8 +13,7 @@
 #import "DatabaseManager.h"
 #import "ChangeCollectionViewController.h"
 #import <FLAnimatedImage/FLAnimatedImage.h>
-
-@import QuartzCore;
+#import "DatabaseManager.h"
 
 @interface Keyboard () <UICollectionViewDataSource, UICollectionViewDelegate>
 

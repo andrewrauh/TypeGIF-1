@@ -27,19 +27,30 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MkV-vg-MDK">
-                    <rect key="frame" x="117" y="8" width="141" height="29"/>
+                    <rect key="frame" x="8" y="8" width="359" height="29"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.25" colorSpace="calibratedRGB"/>
                     <segments>
                         <segment title="Trending"/>
                         <segment title="Favorites"/>
+                        <segment title="iMessage"/>
+                        <segment title="Funny"/>
+                        <segment title="Animals"/>
                     </segments>
                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </segmentedControl>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWl-9e-MWc">
+                    <rect key="frame" x="321" y="186" width="44" height="30"/>
+                    <state key="normal" title="Delete">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="deleteKey" destination="PWl-9e-MWc" id="Qst-kp-1z8"/>
                 <outlet property="librarySelector" destination="MkV-vg-MDK" id="6su-3O-aVh"/>
                 <outlet property="nextKey" destination="bdj-rt-ouJ" id="pix-xK-Bmq"/>
                 <outlet property="resultsCollectionView" destination="T9w-9C-1VY" id="haH-w2-cKF"/>
