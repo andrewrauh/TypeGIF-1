@@ -14,6 +14,7 @@
 #import "ChangeCollectionViewController.h"
 #import <FLAnimatedImage/FLAnimatedImage.h>
 #import "DatabaseManager.h"
+#import <MBProgressHUD.h>
 
 @interface Keyboard () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -142,9 +143,23 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     AXCCollectionViewCell *curcell = (AXCCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
 
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    scaleAnimation.duration = 0.12;
+    scaleAnimation.repeatCount = 2;
+    scaleAnimation.autoreverses = YES;
+    scaleAnimation.fromValue = [NSNumber numberWithFloat:1.0 ];
+    scaleAnimation.toValue = [NSNumber numberWithFloat:1.05];
+    [curcell.layer addAnimation:scaleAnimation forKey:@"scale"];
+    
     UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
     [pasteBoard setData:curcell.imageView.animatedImage.data
       forPasteboardType:@"com.compuserve.gif"];
+    
+//    Figure out how to make hud work for copied message
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    hud.mode = MBProgressHUDModeCustomView;
+//    hud.labelText = @"Copied";
+//    [hud hide:YES afterDelay:1.0f];
 
 }
 
