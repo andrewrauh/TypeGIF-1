@@ -356,7 +356,7 @@
             [self.movingCell setFrame:cell.frame];
             [self.movingCell setFrame:CGRectMake(cell.frame.origin.x, cell.frame.origin.y+100, cell.frame.size.width, cell.frame.size.height)];
 
-            [UIView animateWithDuration:0.1 animations:^{
+            [UIView animateWithDuration:0.08 animations:^{
                 self.movingCell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1);
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.6f delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -463,6 +463,21 @@
     
 }
 
+
+-(IBAction)didSelectCompose:(id)sender {
+    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+    
+    if([MFMessageComposeViewController canSendText])
+    {
+//        controller.recipients = recipients;
+//        controller.messageComposeDelegate = self;
+//        controller add
+        [controller addAttachmentData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://raphaelschaad.com/static/nyan.gif"]] typeIdentifier:@"com.compuserve.gif" filename:@"hey"];
+        
+        
+        [self presentViewController:controller animated:YES completion:nil];
+    }    
+}
 /* Experimental Drag + Drop Code */
 
 
