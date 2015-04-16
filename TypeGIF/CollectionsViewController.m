@@ -32,7 +32,9 @@
     
     static NSString *cellIdentifier = @"CollectionCell";
     GIFCollectionCell *cell = (GIFCollectionCell *)[collectionsTableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    cell.nameLabel.text = self.tableData[indexPath.row];
+    NSString *cellStr = [NSString stringWithFormat:@"#%@", self.tableData[indexPath.row]];
+    
+    cell.nameLabel.text = cellStr;
     
     [cell setBackgroundColor:color];
     return cell;

@@ -31,7 +31,7 @@
         }];
     }];
 
-    
+    [self.mainCollectionView setBackgroundColor:[UIColor whiteColor]];
 }
 
 -(void) writeGifToDisk:(NSData * )gif withName:(NSString* ) name {
