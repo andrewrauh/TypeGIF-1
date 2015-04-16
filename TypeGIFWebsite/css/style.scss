@@ -6,6 +6,7 @@ $lightColor: #FFFFFF;
 $xlargeSize: 124px;
 $largeSize: 96px;
 $mediumSize: 48px;
+$smallMediumSize: 36px;
 $smallSize: 24px;
 
 $contentWidth: 1000px;
@@ -74,8 +75,27 @@ a {
 }
 
 #info {
+/*	background: url(../img/keyboard.png) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;*/
 	background : $darkColor; 
 	color : $lightColor;
+	display : table;
+}
+
+#info .content {
+	display : table-cell;
+	vertical-align : middle;
+}
+
+#info .content p {
+	width : $contentWidth;
+	max-width : $contentWidth;
+	margin : auto;
+	font-size : $smallMediumSize;
+	line-height : 140%;
 }
 
 #demo {
@@ -115,7 +135,7 @@ a {
 }
 
 #contact .content {
-	margin : $halfVerticalMargin 0 !important;
+	margin : $halfVerticalMargin auto !important;
 }
 
 .clear {

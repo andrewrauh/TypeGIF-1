@@ -44,8 +44,25 @@ a {
   vertical-align: middle; }
 
 #info {
+  /*	background: url(../img/keyboard.png) no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;*/
   background: #000000;
-  color: #FFFFFF; }
+  color: #FFFFFF;
+  display: table; }
+
+#info .content {
+  display: table-cell;
+  vertical-align: middle; }
+
+#info .content p {
+  width: 1000px;
+  max-width: 1000px;
+  margin: auto;
+  font-size: 36px;
+  line-height: 140%; }
 
 .view {
   display: table;
