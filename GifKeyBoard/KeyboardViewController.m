@@ -60,8 +60,12 @@
 - (void)addGesturesToKeyboard {
     // Change to next keyboard
     [self.keyboard.nextKey addTarget:self action:@selector(advanceToNextInputMode) forControlEvents:UIControlEventTouchUpInside];
-//    self.keyboard.nextKey addTarget:self action:<#(SEL)#> forControlEvents:(UIControlEvents)
+    [self.keyboard.deleteKey addTarget:self action:@selector(backSpace:) forControlEvents:UIControlEventTouchUpInside];
     
+}
+
+-(IBAction)backSpace:(id)sender {
+    [self.textDocumentProxy deleteBackward];
 }
 
 @end
