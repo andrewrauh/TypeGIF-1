@@ -104,6 +104,20 @@
     [self.collectionButton setPossibleTitles:[NSSet setWithArray:[self.db getAllCollections]]];
     [self.resultsCollectionView setBackgroundColor:[UIColor whiteColor]];
     self.selectedCollectionName = [NSString stringWithFormat:@"Favorites"]; //default value
+    
+    self.selectedCollectionName = [self getNameOfSelectedCollection];
+    [self.collectionButton setTitle:self.selectedCollectionName];
+}
+
+-(NSString *) getNameOfSelectedCollection {
+    NSString *strCollection = [NSString new];
+    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+    strCollection = [userdefaults objectForKey:@"selected_collection"];
+    
+    if (strCollection.length == 0) {
+        self.selectedCollectionName = [NSString stringWithFormat:@"Favorites"]; //default value
+    }
+    return strCollection;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -132,7 +146,7 @@
     hud.mode = MBProgressHUDModeAnnularDeterminate;
     hud.labelText = @"Loading";
     
-    [AXCGiphy searchGiphyWithTerm:textField.text limit:90 offset:0 completion:^(NSArray *results, NSError *error) {
+    [AXCGiphy searchGiphyWithTerm:textField.text limit:30 offset:0 completion:^(NSArray *results, NSError *error) {
         self.resultsArray = [NSMutableArray arrayWithArray:results];
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [hud hide:YES];
@@ -460,6 +474,11 @@
     
     self.selectedCollectionName = collection;
     NSLog(@"%@",self.selectedCollectionName);
+    
+    //Save selected collection
+    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+    [userdefaults setObject:collection forKey:@"selected_collection"];
+    [userdefaults synchronize];
     
 }
 
