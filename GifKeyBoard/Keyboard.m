@@ -34,17 +34,14 @@
         index++;
     }
     [self.resultsCollectionView setPagingEnabled:YES];
-
+    [self.librarySelector addTarget:self action:@selector(segmentedControlChange:) forControlEvents:UIControlEventValueChanged];
+    [self.librarySelector setSelectedSegmentIndex:0];
+    
 }
 
 -(void)layoutSubviews {
-    [self.librarySelector addTarget:self action:@selector(segmentedControlChange:) forControlEvents:UIControlEventValueChanged];
-   
-//    self.librarySelector.numberOfSegments
-    
-    
-    
 }
+
 - (void)loadGifCollection {
     self.resultsCollectionView.delegate = self;
     self.resultsCollectionView.dataSource = self;
@@ -73,11 +70,9 @@
 }
 
 #pragma mark - UICollectionView delegate Methods
-
 - (AXCCollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     AXCCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    
     AXCGiphy *gif;
     if (librarySelector.selectedSegmentIndex == 0) {
         gif = self.trendingArray[indexPath.item];
@@ -112,11 +107,10 @@
             [self writeGifToDisk:myGif withName:str];
         }
         else {
-            //NSLog(@"cache hit");
+            NSLog(@"cache hit");
         }
         
         FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:myGif];
-        
         dispatch_async(dispatch_get_main_queue(), ^(void){
             cell.imageView.animatedImage = image;
             [cell setImageURL:str];
@@ -136,12 +130,27 @@
         NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
         NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
         [gif writeToFile:dataPath atomically:YES];
-        //        NSLog(@"wrote to %@", dataPath);
-        
     });
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    AXCCollectionViewCell *curcell = (AXCCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    scaleAnimation.duration = 0.12;
+    scaleAnimation.repeatCount = 2;
+    scaleAnimation.autoreverses = YES;
+    scaleAnimation.fromValue = [NSNumber numberWithFloat:1.0 ];
+    scaleAnimation.toValue = [NSNumber numberWithFloat:1.25];
+    [curcell.layer addAnimation:scaleAnimation forKey:@"scale"];
+    
+//copy to clipboard
+    UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
+    [pasteBoard setData:curcell.imageView.animatedImage.data
+      forPasteboardType:@"com.compuserve.gif"];
+}
 
+#pragma mark - UICollectionViewLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGSize mElementSize = CGSizeMake(90, 70);
     return mElementSize;
@@ -154,35 +163,9 @@
     return 2.0;
 }
 
-
+#pragma mark - UI Methods  + IBactions
 -(IBAction)segmentedControlChange:(id)sender {
     [self.resultsCollectionView reloadData];
-    
-}
-
-
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    AXCCollectionViewCell *curcell = (AXCCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-
-    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    scaleAnimation.duration = 0.12;
-    scaleAnimation.repeatCount = 2;
-    scaleAnimation.autoreverses = YES;
-    scaleAnimation.fromValue = [NSNumber numberWithFloat:1.0 ];
-    scaleAnimation.toValue = [NSNumber numberWithFloat:1.35];
-    [curcell.layer addAnimation:scaleAnimation forKey:@"scale"];
-    
-    UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
-    [pasteBoard setData:curcell.imageView.animatedImage.data
-      forPasteboardType:@"com.compuserve.gif"];
-    
-//    Figure out how to make hud work for copied message
-//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    hud.mode = MBProgressHUDModeCustomView;
-//    hud.labelText = @"Copied";
-//    [hud hide:YES afterDelay:1.0f];
-
 }
 
 

@@ -11,6 +11,7 @@
 
 
 @interface Keyboard : UIView
+
 @property (weak, nonatomic) IBOutlet UIButton *nextKey;
 @property (weak, nonatomic) IBOutlet UIButton *deleteKey;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *librarySelector;
@@ -18,7 +19,9 @@
 @property (nonatomic, strong) NSMutableArray *favoritesArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *resultsCollectionView;
 @property (strong, nonatomic) DatabaseManager *db;
+@property (strong, nonatomic) NSMutableArray* curResults;
 
+//methods
 -(void)loadGifCollection;
 -(IBAction)segmentedControlChange:(id)sender;
 
