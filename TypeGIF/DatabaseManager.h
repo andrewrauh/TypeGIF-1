@@ -26,6 +26,11 @@
 - (NSArray*) getAllCollections;
 - (void) addNewCollectionWithName:(NSString*) collectionName;
 - (void) removeCollectionWithName:(NSString*) collectionName;
+//Save location url
+
+-(void) addGiphyLocationUrl:(NSString*)urlString forCollectionName:(NSString*)collectionName;
+-(NSArray*) getGiphyLocationUrlsForCollectionName:(NSString*)collectionName;
+
 //Disk Caching
 -(void) writeGifToAppGroupContainer:(NSData * )gif withName:(NSString* ) name;
 
