@@ -17,7 +17,7 @@
 #import <MBProgressHUD.h>
 
 @interface Keyboard () <UICollectionViewDataSource, UICollectionViewDelegate>
-
+@property (nonatomic, strong) NSString* selectedCollectionName;
 @end
 
 @implementation Keyboard
@@ -25,20 +25,42 @@
 @synthesize librarySelector;
 
 -(void)awakeFromNib {
+    self.selectedCollectionName = [NSString new];
+    
     self.db = [DatabaseManager createDatabaseInstance];
     NSArray *collections = [self.db getAllCollections] ;
     NSUInteger index = 0;
 
-    for (NSString *title  in collections) {
-        [self.librarySelector insertSegmentWithTitle:title atIndex:index animated:YES];
-        index++;
-    }
-    [self.resultsCollectionView setPagingEnabled:YES];
+    //update this to only be the selected one
+    self.selectedCollectionName = [self getNameOfSelectedCollection];
+//    [self.librarySelector insertSegmentWithTitle:self.selectedCollectionName atIndex:self.librarySelector.numberOfSegments animated:YES];
+    [self.librarySelector setTitle:self.selectedCollectionName forSegmentAtIndex:1];
+    
+    
+//    self.librarySelector inse
+//    for (NSString *title  in collections) {
+//        [self.librarySelector insertSegmentWithTitle:title atIndex:index animated:YES];
+//        index++;
+//    }
+//    [self.resultsCollectionView setPagingEnabled:YES];
+    
     [self.librarySelector addTarget:self action:@selector(segmentedControlChange:) forControlEvents:UIControlEventValueChanged];
     [self.librarySelector setSelectedSegmentIndex:0];
-    
+    self.favoritesArray = [NSMutableArray new];
+    self.favoritesArray = [NSMutableArray arrayWithArray:[self.db photoUrlsForCollection:self.selectedCollectionName]];
+
 }
 
+-(NSString *) getNameOfSelectedCollection {
+    NSString *strCollection = [NSString new];
+    NSUserDefaults *userdefaults =  [[NSUserDefaults alloc] initWithSuiteName:@"group.com.umich.typegif"];
+    strCollection = [userdefaults objectForKey:@"selected_collection"];
+    
+    if (strCollection.length == 0) {
+        self.selectedCollectionName = [NSString stringWithFormat:@"Favorites"]; //default value
+    }
+    return strCollection;
+}
 -(void)layoutSubviews {
 }
 
@@ -53,7 +75,6 @@
         
     [AXCGiphy trendingGIFsWithlimit:30 offset:0 completion:^(NSArray *results, NSError *error) {
         self.trendingArray = [NSMutableArray arrayWithArray:results];
-        self.favoritesArray = [NSMutableArray new];
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self.resultsCollectionView reloadData];
         }];
@@ -67,6 +88,14 @@
     else {
         return [self.favoritesArray count];
     }
+}
+
+-(void) loadGifsSelectedCollection {
+    NSMutableArray *arrayResults = [self.db photoUrlsForCollection:self.selectedCollectionName];
+    
+    //read from mem
+    
+//    check to see if asset is cached, if not 
 }
 
 #pragma mark - UICollectionView delegate Methods
@@ -89,6 +118,12 @@
         NSData *myGif;
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
+//        NSURL *groupURL = [[NSFileManager defaultManager]
+//                           containerURLForSecurityApplicationGroupIdentifier:
+//                           @"group.com.umich.typegif"];
+//        NSString *docsDir = [NSString stringWithFormat:@"%@", groupURL];
+
+        
         NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
         NSString *str = [NSString stringWithFormat:@"%@", gif.originalImage.url];
         NSString *trimmedReplacement = [[str componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
@@ -104,7 +139,7 @@
             myGif = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&Jerror];
             
             NSString *str = [NSString stringWithFormat:@"%@", gif.originalImage.url];
-            [self writeGifToDisk:myGif withName:str];
+            [self writeGifToDisk:myGif withName:str];            
         }
         else {
             NSLog(@"cache hit");

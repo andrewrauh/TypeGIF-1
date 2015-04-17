@@ -206,4 +206,30 @@ static DatabaseManager *databaseInstance = nil;
     }];
 }
 
+#pragma mark - disk caching 
+
+-(void) writeGifToAppGroupContainer:(NSData * )gif withName:(NSString* ) name {
+    // Use GCD's background queue
+    NSURL *groupURL = [[NSFileManager defaultManager]
+                       containerURLForSecurityApplicationGroupIdentifier:
+                       @"group.com.umich.typegif"];
+    NSString *docsDir = [NSString stringWithFormat:@"%@", groupURL];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
+        NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+        NSString *trimmedReplacement = [[name componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
+        NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
+        NSString *dataPath = [docsDir stringByAppendingPathComponent:fileName];
+        BOOL didWrite =  [gif writeToFile:dataPath atomically:YES];
+        NSLog(@"wrote to app group%@", dataPath);
+        if (didWrite) {
+            NSLog(@"yes wrote");
+        }
+        else {
+            NSLog(@"no didnt");
+        }
+    });
+}
+
 @end

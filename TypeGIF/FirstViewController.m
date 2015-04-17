@@ -105,13 +105,13 @@
     [self.resultsCollectionView setBackgroundColor:[UIColor whiteColor]];
     self.selectedCollectionName = [NSString stringWithFormat:@"Favorites"]; //default value
     
-    self.selectedCollectionName = [self getNameOfSelectedCollection];
-    [self.collectionButton setTitle:self.selectedCollectionName];
+//    self.selectedCollectionName = [self getNameOfSelectedCollection];
+//    [self.collectionButton setTitle:self.selectedCollectionName];
 }
 
 -(NSString *) getNameOfSelectedCollection {
     NSString *strCollection = [NSString new];
-    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *userdefaults =  [[NSUserDefaults alloc] initWithSuiteName:@"group.com.umich.typegif"];
     strCollection = [userdefaults objectForKey:@"selected_collection"];
     
     if (strCollection.length == 0) {
@@ -191,9 +191,12 @@
             myGif = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&Jerror];
             NSString *str = [NSString stringWithFormat:@"%@", gif.originalImage.url];
             [self writeGifToDisk:myGif withName:str];
+//            [self.db writeGifToAppGroupContainer:myGif withName:str];
+//            [self writeGifToAppGroupContainer:myGif withName:str];
+            
         }
         else {
-            //NSLog(@"cache hit");
+            NSLog(@"cache hit");
         }
 
         FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:myGif];
@@ -217,11 +220,41 @@
         NSString *trimmedReplacement = [[name componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
         NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
         NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
-        [gif writeToFile:dataPath atomically:YES];
+        BOOL didWrite =        [gif writeToFile:dataPath atomically:YES];
 //        NSLog(@"wrote to %@", dataPath);
         
     });
 }
+
+
+-(void) writeGifToAppGroupContainer:(NSData * )gif withName:(NSString* ) name {
+    // Use GCD's background queue
+    NSURL *groupURL = [[NSFileManager defaultManager]
+                       containerURLForSecurityApplicationGroupIdentifier:
+                       @"group.com.umich.typegif"];
+    NSString *docsDir = [NSString stringWithFormat:@"%@", groupURL];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
+        NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+        NSString *trimmedReplacement = [[name componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
+        NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
+        NSString *dataPath = [docsDir stringByAppendingPathComponent:fileName];
+        BOOL didWrite =  [gif writeToFile:dataPath atomically:YES];
+        NSError *error;
+        [gif writeToFile:dataPath options:0 error:&error];
+        
+        NSLog(@"wrote to app group%@ %@", dataPath, error);
+        if (didWrite) {
+            NSLog(@"yes wrote");
+        }
+        else {
+            NSLog(@"no didnt");
+        }
+    });
+}
+
+
 // 1
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
     return [self.resultsArray count];
@@ -476,7 +509,7 @@
     NSLog(@"%@",self.selectedCollectionName);
     
     //Save selected collection
-    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *userdefaults =  [[NSUserDefaults alloc] initWithSuiteName:@"group.com.umich.typegif"];
     [userdefaults setObject:collection forKey:@"selected_collection"];
     [userdefaults synchronize];
     

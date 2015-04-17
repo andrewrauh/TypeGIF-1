@@ -24,5 +24,7 @@
 //methods
 -(void)loadGifCollection;
 -(IBAction)segmentedControlChange:(id)sender;
+-(void) loadGifsSelectedCollection;
+
 
 @end

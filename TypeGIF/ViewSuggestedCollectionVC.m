@@ -88,7 +88,7 @@
             [self writeGifToDisk:myGif withName:str];
         }
         else {
-            //NSLog(@"cache hit");
+            NSLog(@"cache hit");
         }
         FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:myGif];
         

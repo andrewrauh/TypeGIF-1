@@ -26,5 +26,9 @@
 - (NSArray*) getAllCollections;
 - (void) addNewCollectionWithName:(NSString*) collectionName;
 - (void) removeCollectionWithName:(NSString*) collectionName;
+//Disk Caching
+-(void) writeGifToAppGroupContainer:(NSData * )gif withName:(NSString* ) name;
 
 @end
+
+
