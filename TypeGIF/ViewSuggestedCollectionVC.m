@@ -23,7 +23,7 @@
     self.mainCollectionView.delegate = self;
     self.mainCollectionView.dataSource = self;
 
-    [AXCGiphy searchGiphyWithTerm:self.searchTerm limit:50 offset:0 completion:^(NSArray *results, NSError *error) {
+    [AXCGiphy searchGiphyWithTerm:self.searchTerm limit:100 offset:0 completion:^(NSArray *results, NSError *error) {
         self.results = [NSMutableArray arrayWithArray:results];
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [hud hide:YES];

@@ -33,6 +33,7 @@
         [self.librarySelector insertSegmentWithTitle:title atIndex:index animated:YES];
         index++;
     }
+    [self.resultsCollectionView setPagingEnabled:YES];
 
 }
 
@@ -53,7 +54,7 @@
     
     [self.resultsCollectionView setBackgroundColor:[UIColor clearColor]];
         
-    [AXCGiphy trendingGIFsWithlimit:10 offset:0 completion:^(NSArray *results, NSError *error) {
+    [AXCGiphy trendingGIFsWithlimit:30 offset:0 completion:^(NSArray *results, NSError *error) {
         self.trendingArray = [NSMutableArray arrayWithArray:results];
         self.favoritesArray = [NSMutableArray new];
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -119,7 +120,7 @@
         dispatch_async(dispatch_get_main_queue(), ^(void){
             cell.imageView.animatedImage = image;
             [cell setImageURL:str];
-            cell.imageView.frame = CGRectMake(0.0, 0.0, 70.0, 70.0);
+            cell.imageView.frame = CGRectMake(0.0, 0.0, 90.0, 70.0);
         });
     });
     return cell;
@@ -140,8 +141,9 @@
     });
 }
 
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGSize mElementSize = CGSizeMake(70, 70);
+    CGSize mElementSize = CGSizeMake(90, 70);
     return mElementSize;
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -157,6 +159,9 @@
     [self.resultsCollectionView reloadData];
     
 }
+
+
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     AXCCollectionViewCell *curcell = (AXCCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
 
@@ -165,7 +170,7 @@
     scaleAnimation.repeatCount = 2;
     scaleAnimation.autoreverses = YES;
     scaleAnimation.fromValue = [NSNumber numberWithFloat:1.0 ];
-    scaleAnimation.toValue = [NSNumber numberWithFloat:1.05];
+    scaleAnimation.toValue = [NSNumber numberWithFloat:1.35];
     [curcell.layer addAnimation:scaleAnimation forKey:@"scale"];
     
     UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];

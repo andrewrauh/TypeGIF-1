@@ -18,7 +18,7 @@
     [self.collectionsTableView registerNib:[UINib nibWithNibName:@"GIFCollectionCell" bundle:nil] forCellReuseIdentifier:@"CollectionCell"];
     self.collectionsTableView.delegate = self;
     self.collectionsTableView.dataSource = self;
-    self.tableData = @[@"happy", @"sad", @"mad", @"confused", @"rage", @"meme", @"celebrate", @"party"];
+    self.tableData = @[@"happy", @"sad", @"mind blown", @"cute", @"mad",@"vintage" , @"confused", @"rage", @"meme",@"worried", @"celebrate", @"party",@"excited", @"90s"];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;  // optional
     [self.navigationController.navigationBar setTranslucent:NO];
     
@@ -48,7 +48,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 8;
+    return self.tableData.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

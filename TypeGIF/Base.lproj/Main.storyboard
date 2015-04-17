@@ -193,11 +193,11 @@
             </objects>
             <point key="canvasLocation" x="97" y="-1526"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="YdA-Cp-Ldq">
             <objects>
                 <navigationController id="Miv-Zp-MDj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="osK-de-Jlg"/>
+                    <tabBarItem key="tabBarItem" systemItem="featured" id="osK-de-Jlg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7qP-sc-gzU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
