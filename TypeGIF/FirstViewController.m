@@ -106,7 +106,7 @@
     
     self.selectedCollectionName = [NSString stringWithFormat:@"Favorites"]; //default value
     self.selectedCollectionName = [self getNameOfSelectedCollection];
-    [self.collectionButton setTitle:self.selectedCollectionName];
+//    [self.collectionButton setTitle:self.selectedCollectionName];
 }
 
 -(NSString *) getNameOfSelectedCollection {
@@ -419,6 +419,8 @@
                     [self.movingCell setImage:nil];
                     NSLog(@"collection name is!!!!!! %@", self.selectedCollectionName);
                     [self.db addGifToCollection:self.selectedCollectionName and:[self buildFilePathFromURL:cell.imageURL]];
+                    [self.db addGiphyLocationUrl:cell.imageURL forCollectionName:self.selectedCollectionName];
+                    
                 }];
             }];
 //        });

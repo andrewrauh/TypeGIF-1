@@ -86,6 +86,13 @@ static DatabaseManager *databaseInstance = nil;
                 isSuccess = NO;
                 NSLog(@"Failed to create table b");
             }
+            
+            sql_stmt =
+            "create table if not exists GIF_URLS (collection_name text, image_url text, UNIQUE(image_url))";
+            if (sqlite3_exec(database, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
+                isSuccess = NO;
+                NSLog(@"Failed to create table c");
+            }
 
             sqlite3_close(database);
         }
@@ -168,6 +175,41 @@ static DatabaseManager *databaseInstance = nil;
         }
     }];
     return [NSArray arrayWithArray:photoUrls];
+}
+
+//url
+
+- (NSArray*) getGiphyLocationUrlsForCollectionName:(NSString*) collectionName{
+    NSMutableArray *photoUrls = [[NSMutableArray alloc]init];
+    __block NSString *gifData = [[NSString alloc]init];
+    
+    if (!_dataBasePath) return nil;
+    
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
+    
+    [queue inDatabase:^(FMDatabase *db) {
+        NSString *qs = [NSString stringWithFormat:@"select * from GIF_URLS where collection_name='%@' and image_url is not null", collectionName];
+        
+        FMResultSet *rs = [db executeQuery:qs];
+        if (rs == nil) NSLog(@"result set nil");
+        
+        while ([rs next]) {
+            gifData = [rs objectForColumnIndex:1];
+            [photoUrls addObject:gifData];
+        }
+    }];
+    return [NSArray arrayWithArray:photoUrls];
+}
+
+- (void)addGiphyLocationUrl:(NSString *)urlString forCollectionName:(NSString *)collectionName {
+    
+    if (!_dataBasePath) return;
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:_dataBasePath];
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"INSERT INTO GIF_URLS VALUES (?, ?)", collectionName, urlString];
+        NSLog(@"*** INSERTING %@ \n INTO %@", urlString, collectionName);
+    }];
+
 }
 
 - (NSArray*) getAllCollections {

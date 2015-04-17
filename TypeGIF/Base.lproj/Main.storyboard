@@ -36,7 +36,7 @@
                                                 <action selector="didSelectCompose:" destination="9pv-A4-QxB" id="FaK-MM-lOB"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Favorites" id="EgD-9V-KLi">
+                                        <barButtonItem key="rightBarButtonItem" title="Collections" id="EgD-9V-KLi">
                                             <connections>
                                                 <segue destination="Lod-bb-uJ5" kind="presentation" identifier="collections_segue" id="QT5-8c-9FN"/>
                                             </connections>
@@ -95,7 +95,7 @@
                             <constraint firstItem="4Cr-be-cjE" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="xEx-Nh-hYm"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="search" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" systemItem="recents" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="blurView" destination="VkL-3X-XkT" id="s0O-Ah-a11"/>
                         <outlet property="collectionButton" destination="EgD-9V-KLi" id="Elp-a2-85i"/>
@@ -156,7 +156,7 @@
             </objects>
             <point key="canvasLocation" x="1462" y="-619"/>
         </scene>
-        <!--Collections-->
+        <!--Featured Collections-->
         <scene sceneID="AuE-Db-9Uw">
             <objects>
                 <viewController id="5LL-bm-45u" customClass="CollectionsViewController" sceneMemberID="viewController">
@@ -182,7 +182,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Collections" id="d4W-ks-wLF"/>
-                    <navigationItem key="navigationItem" id="YEa-NT-tnU"/>
+                    <navigationItem key="navigationItem" title="Featured Collections" id="YEa-NT-tnU"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
                         <outlet property="collectionsTableView" destination="1av-7C-zvH" id="mKU-LB-WZa"/>

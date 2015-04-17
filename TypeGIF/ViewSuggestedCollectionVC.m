@@ -33,7 +33,15 @@
 
     [self.mainCollectionView setBackgroundColor:[UIColor whiteColor]];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;  // optional
+    [self showAlertView];
+    
 }
+
+- (void)showAlertView {
+    UIAlertView *intro = [[UIAlertView alloc]initWithTitle:@"Hello!" message:@"Tap a gif to make pastable, or go home and press the compose button" delegate:self cancelButtonTitle:@"Go away" otherButtonTitles:@"Okay", nil];
+    [intro show];
+}
+
 
 -(void) writeGifToDisk:(NSData * )gif withName:(NSString* ) name {
     // Use GCD's background queue

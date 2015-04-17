@@ -31,6 +31,8 @@
     self.db = [DatabaseManager createDatabaseInstance];
     self.selectedRow = 0;
     [self.view setBackgroundColor:[UIColor clearColor]];
+    [self setTitle:@"Collections"];
+    
 }
 
 - (void)didReceiveMemoryWarning {

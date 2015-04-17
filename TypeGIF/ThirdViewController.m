@@ -47,6 +47,12 @@
     [self.favoritesCollectionView reloadData];
     [self.favoritesCollectionView setBackgroundColor:[UIColor whiteColor]];
     [self.navigationItem setTitle:self.collectionName];
+    [self showAlertView];
+}
+
+- (void)showAlertView {
+    UIAlertView *intro = [[UIAlertView alloc]initWithTitle:@"Hello!" message:@"Tap a gif to make pastable, or go home and press the compose button" delegate:self cancelButtonTitle:@"Go away" otherButtonTitles:@"Okay", nil];
+    [intro show];
 }
 
 - (void)didReceiveMemoryWarning {

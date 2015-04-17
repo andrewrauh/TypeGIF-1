@@ -28,26 +28,18 @@
     self.selectedCollectionName = [NSString new];
     
     self.db = [DatabaseManager createDatabaseInstance];
-    NSArray *collections = [self.db getAllCollections] ;
-    NSUInteger index = 0;
-
     //update this to only be the selected one
     self.selectedCollectionName = [self getNameOfSelectedCollection];
-//    [self.librarySelector insertSegmentWithTitle:self.selectedCollectionName atIndex:self.librarySelector.numberOfSegments animated:YES];
+    //assuming two collections
     [self.librarySelector setTitle:self.selectedCollectionName forSegmentAtIndex:1];
-    
-    
-//    self.librarySelector inse
-//    for (NSString *title  in collections) {
-//        [self.librarySelector insertSegmentWithTitle:title atIndex:index animated:YES];
-//        index++;
-//    }
-//    [self.resultsCollectionView setPagingEnabled:YES];
-    
+    [self.resultsCollectionView setPagingEnabled:YES];
     [self.librarySelector addTarget:self action:@selector(segmentedControlChange:) forControlEvents:UIControlEventValueChanged];
     [self.librarySelector setSelectedSegmentIndex:0];
     self.favoritesArray = [NSMutableArray new];
-    self.favoritesArray = [NSMutableArray arrayWithArray:[self.db photoUrlsForCollection:self.selectedCollectionName]];
+    
+    self.favoritesArray = [NSMutableArray arrayWithArray:[self.db getGiphyLocationUrlsForCollectionName:self.selectedCollectionName]];
+    
+//    self.favoritesArray = [NSMutableArray arrayWithArray:[self.db photoUrlsForCollection:self.selectedCollectionName]];
 
 }
 
@@ -93,9 +85,6 @@
 -(void) loadGifsSelectedCollection {
     NSMutableArray *arrayResults = [self.db photoUrlsForCollection:self.selectedCollectionName];
     
-    //read from mem
-    
-//    check to see if asset is cached, if not 
 }
 
 #pragma mark - UICollectionView delegate Methods
@@ -118,6 +107,8 @@
         NSData *myGif;
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
+        
+        //Attempt at using app group container for read/write
 //        NSURL *groupURL = [[NSFileManager defaultManager]
 //                           containerURLForSecurityApplicationGroupIdentifier:
 //                           @"group.com.umich.typegif"];
