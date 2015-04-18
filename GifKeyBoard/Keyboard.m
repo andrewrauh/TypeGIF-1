@@ -34,13 +34,15 @@
     [self.librarySelector setTitle:self.selectedCollectionName forSegmentAtIndex:1];
     [self.resultsCollectionView setPagingEnabled:YES];
     [self.librarySelector addTarget:self action:@selector(segmentedControlChange:) forControlEvents:UIControlEventValueChanged];
-    [self.librarySelector setSelectedSegmentIndex:0];
+    [self.librarySelector setSelectedSegmentIndex:1];
     self.favoritesArray = [NSMutableArray new];
     
     self.favoritesArray = [NSMutableArray arrayWithArray:[self.db getGiphyLocationUrlsForCollectionName:self.selectedCollectionName]];
     
 //    self.favoritesArray = [NSMutableArray arrayWithArray:[self.db photoUrlsForCollection:self.selectedCollectionName]];
-
+    NSLog(@"%@", self.favoritesArray);
+    [self.resultsCollectionView registerClass:[AXCCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [AXCGiphy setGiphyAPIKey:kGiphyPublicAPIKey];
 }
 
 -(NSString *) getNameOfSelectedCollection {
@@ -60,8 +62,6 @@
     self.resultsCollectionView.delegate = self;
     self.resultsCollectionView.dataSource = self;
     
-    [self.resultsCollectionView registerClass:[AXCCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
-    [AXCGiphy setGiphyAPIKey:kGiphyPublicAPIKey];
     
     [self.resultsCollectionView setBackgroundColor:[UIColor clearColor]];
         
@@ -82,65 +82,63 @@
     }
 }
 
--(void) loadGifsSelectedCollection {
-    NSMutableArray *arrayResults = [self.db photoUrlsForCollection:self.selectedCollectionName];
-    
-}
-
 #pragma mark - UICollectionView delegate Methods
 - (AXCCollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     AXCCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    
     AXCGiphy *gif;
+    NSString *gifUrl = [NSString new];
+    
     if (librarySelector.selectedSegmentIndex == 0) {
         gif = self.trendingArray[indexPath.item];
+        gifUrl = [NSString stringWithFormat:@"%@",gif.originalImage.url] ;
     }
     else {
-        gif = self.favoritesArray[indexPath.item];
+        gifUrl = self.favoritesArray[indexPath.item];
     }
     
     [cell setBackgroundColor:[UIColor grayColor]];
-    [cell setImageView:nil];
+//    [cell setImageView:nil];
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
         
         NSData *myGif;
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+//        NSString *documentsDirectory = [paths objectAtIndex:0];
+//        
+//        NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+        NSString *str = gifUrl;
+//        NSString *trimmedReplacement = [[str componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
+//        NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
+//        NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
+//        
+//        myGif = [NSData dataWithContentsOfFile:dataPath];
         
-        //Attempt at using app group container for read/write
-//        NSURL *groupURL = [[NSFileManager defaultManager]
-//                           containerURLForSecurityApplicationGroupIdentifier:
-//                           @"group.com.umich.typegif"];
-//        NSString *docsDir = [NSString stringWithFormat:@"%@", groupURL];
-
-        
-        NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
-        NSString *str = [NSString stringWithFormat:@"%@", gif.originalImage.url];
-        NSString *trimmedReplacement = [[str componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
-        NSString* fileName = [NSString stringWithFormat:@"%@.gif", trimmedReplacement];
-        NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
-        
-        myGif = [NSData dataWithContentsOfFile:dataPath];
-        
-        if (myGif.length == 0) {
-            NSURLRequest * request = [NSURLRequest requestWithURL:gif.originalImage.url];
+//        if (myGif.length == 0) {
+            NSURL *url = [NSURL URLWithString:gifUrl];
+            NSURLRequest * request = [NSURLRequest requestWithURL:url];
             NSURLResponse *response;
             NSError *Jerror = nil;
             myGif = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&Jerror];
-            
-            NSString *str = [NSString stringWithFormat:@"%@", gif.originalImage.url];
-            [self writeGifToDisk:myGif withName:str];            
-        }
-        else {
-            NSLog(@"cache hit");
-        }
+            NSLog(@"grabbing %@ ", gifUrl);
+            NSLog(@"error %@", Jerror);
         
-        FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:myGif];
+//            NSString *str = [NSString stringWithFormat:@"%@", gif.originalImage.url];
+//            [self writeGifToDisk:myGif withName:gifUrl];
+//        }
+//        else {
+//            NSLog(@"cache hit");
+//        }
+        
         dispatch_async(dispatch_get_main_queue(), ^(void){
-            cell.imageView.animatedImage = image;
+//            NSLog(@"%@", image);
+//            NSLog(@"%@", myGif);
+            
+            cell.imageView.animatedImage =  [FLAnimatedImage animatedImageWithGIFData:myGif];
             [cell setImageURL:str];
             cell.imageView.frame = CGRectMake(0.0, 0.0, 90.0, 70.0);
+//            [collectionView reloadData];
         });
     });
     return cell;
@@ -193,7 +191,6 @@
 -(IBAction)segmentedControlChange:(id)sender {
     [self.resultsCollectionView reloadData];
 }
-
 
 @end
 

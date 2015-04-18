@@ -39,6 +39,8 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated
+    NSLog(@"did receive memory");
+    
 }
 
 - (void)textWillChange:(id<UITextInput>)textInput {

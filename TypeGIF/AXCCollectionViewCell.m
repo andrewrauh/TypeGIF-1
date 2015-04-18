@@ -16,6 +16,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        self.imageView = [[FLAnimatedImageView alloc]initWithFrame:self.contentView.frame];
+
         self.imageView.frame = CGRectMake(0.0, 0.0, 123.0, 100.0);
         self.editingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 123.0, 100.0)];
         self.editingView.backgroundColor = [UIColor blackColor];
