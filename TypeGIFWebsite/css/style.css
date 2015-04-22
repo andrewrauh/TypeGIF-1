@@ -44,11 +44,6 @@ a {
   vertical-align: middle; }
 
 #info {
-  /*	background: url(../img/keyboard.png) no-repeat center center fixed; 
-  	-webkit-background-size: cover;
-  	-moz-background-size: cover;
-  	-o-background-size: cover;
-  	background-size: cover;*/
   background: #000000;
   color: #FFFFFF;
   display: table; }
